@@ -1,0 +1,30 @@
+{
+	"name": "picasso",
+	"version": "0.0.1",
+	"description": "picasso",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+	},
+	"author": "picasso",
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"gitHead": "22263bfe493ebc74437c80fc4b4d37c24d1aa6f4",
+	"devDependencies": {
+		"karma-script-launcher": "~0.1.0",
+		"karma-chrome-launcher": "~0.1.0",
+		"karma-firefox-launcher": "~0.1.0",
+		"karma-html2js-preprocessor": "~0.1.0",
+		"karma-jasmine": "~0.1.3",
+		"karma-requirejs": "~0.1.0",
+		"karma-coffee-preprocessor": "~0.1.0",
+		"karma-phantomjs-launcher": "~0.1.0",
+		"karma": "~0.10.4",
+		"karma-ng-scenario": "~0.1.0"
+	}
+}
