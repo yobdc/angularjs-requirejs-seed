@@ -8,5 +8,5 @@ REM - NodeJS (http://nodejs.org/)
 REM - Karma (npm install -g karma)
 
 set BASE_DIR=%~dp0
-REM karma start "%BASE_DIR%\..\config\karma-e2e.conf.js" %*
+
 protractor "%BASE_DIR%\..\config\protractor-e2e.conf.js"

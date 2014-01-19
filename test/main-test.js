@@ -18,8 +18,8 @@ require.config({
 		text: '/base/libs/requirejs-text/text',
 		fixtures: '/base/test/unit/fixtures',
 		jquery: '/base/libs/jquery/jquery',
-		bootstrap: '/base/libs/bootstrap/dist/js/bootstrap'
-
+		bootstrap: '/base/libs/bootstrap/dist/js/bootstrap',
+		angularBootstrap: '/base/libs/angular-bootstrap/ui-bootstrap-tpls'
 	},
 	baseUrl: '/base/app/js',
 	shim: {
@@ -31,7 +31,8 @@ require.config({
 		},
 		'angularResource': ['angular'],
 		'angularScenario': ['angular'],
-		'bootstrap': ['jquery']
+		'bootstrap': ['jquery'],
+		'angularBootstrap': ['angular', 'bootstrap']
 	},
 	deps: tests,
 	callback: window.__karma__.start

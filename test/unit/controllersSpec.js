@@ -7,21 +7,17 @@ define([
 ], function(angular, mocks, app) {
 	'use strict';
 
-	describe('MyCtrl1', function(){
-		var MyCtrl1, scope;
+	describe('SupplierCtrl', function(){
+		var SupplierCtrl, scope;
 
 		beforeEach(function() {
 			mocks.module('myApp.controllers');
 			mocks.inject(function($rootScope, $controller) {
 				scope = $rootScope.$new();
-				MyCtrl1 = $controller('MyCtrl1', {
+				SupplierCtrl = $controller('SupplierCtrl', {
 					$scope: scope
 				});
 			});
 		});
-	});
-
-	describe('MyCtrl2', function(){
-		//...
 	});
 });
