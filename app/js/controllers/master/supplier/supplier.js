@@ -1,5 +1,5 @@
 define([], function() {
-	return ['$scope', '$timeout', function($scope, $timeout) {
+	return ['$scope', '$timeout', '$modal', '$log', function($scope, $timeout, $modal, $log) {
 		// You can access the scope of the controller from here
 		$scope.welcomeMessage = 'zzzzzzz!';
 
@@ -9,5 +9,22 @@ define([], function() {
 		$timeout(function() {
 			$scope.$apply();			
 		});
+		$scope.open = function () {
+		    var modalInstance = $modal.open({
+		      templateUrl: 'myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      resolve: {
+		        items: function () {
+		          return ['aaa','bbb','ccc'];
+		        }
+		      }
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		      $scope.selected = selectedItem;
+		    }, function () {
+		      $log.info('Modal dismissed at: ' + new Date());
+		    });
+		};
 	}];
 });

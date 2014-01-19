@@ -6,7 +6,8 @@ require.config({
 		angularResource: '../../libs/angular-resource/angular-resource',
 		text: '../../libs/requirejs-text/text',
 		jquery: '../../libs/jquery/jquery',
-		bootstrap: '../../libs/bootstrap/dist/js/bootstrap'
+		bootstrap: '../../libs/bootstrap/dist/js/bootstrap',
+		angularBootstrap: '../../libs/angular-bootstrap/ui-bootstrap-tpls'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
@@ -16,7 +17,8 @@ require.config({
 		// 	'exports':'angular.mock'
 		// },
 		'angularResource': ['angular'],
-		'bootstrap': ['jquery']
+		'bootstrap': ['jquery'],
+		'angularBootstrap': ['angular', 'bootstrap']
 	},
 	priority: [
 		"angular"
@@ -35,9 +37,6 @@ require( [
 	var $html = angular.element(document.getElementsByTagName('html')[0]);
 
 	angular.element().ready(function() {
-		if(!$html.hasClass('ng-scope')) {
-			console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
-			angular.resumeBootstrap([app['name']]);
-		}
+		angular.resumeBootstrap([app['name']]);	
 	});
 });
