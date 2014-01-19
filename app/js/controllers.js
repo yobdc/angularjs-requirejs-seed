@@ -8,7 +8,8 @@ define(['angular', 'services','jquery','angularBootstrap'], function (angular) {
 		.controller('SupplierCtrl', ['$scope',
 			'$injector',
 			'$modal',
-			function($scope, $injector, $modal) {
+			'$routeParams',
+			function($scope, $injector, $modal, $routeParams) {
 				require(['controllers/master/supplier/supplier'], function(controller) {
 					// injector method takes an array of modules as the first argument
 					// if you want your controller to be able to use components from
@@ -16,7 +17,8 @@ define(['angular', 'services','jquery','angularBootstrap'], function (angular) {
 					// Furthermore we need to pass on the $scope as it's unique to this controller
 					$injector.invoke(controller, this, {
 						'$scope': $scope,
-						'$modal': $modal
+						'$modal': $modal,
+						'$routeParams': $routeParams
 					});
 				});
 			}])
