@@ -5,8 +5,10 @@ REM You have to run server and capture some browser first
 REM
 REM Requirements:
 REM - NodeJS (http://nodejs.org/)
-REM - Karma (npm install -g karma)
+REM - Protractor (npm install -g protractor)
+REM - webdriver-manager start
 
 set BASE_DIR=%~dp0
 
-protractor "%BASE_DIR%\..\config\protractor-e2e.conf.js"
+start cmd /k "webdriver-manager start"
+start cmd /k "protractor %BASE_DIR%\..\config\protractor-e2e.conf.js"
