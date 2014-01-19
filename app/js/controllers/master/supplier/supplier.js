@@ -3,6 +3,10 @@ define([], function() {
 	function($scope, $timeout, $modal, $log, $routeParams) {
 		// You can access the scope of the controller from here
 		$scope.welcomeMessage = 'zzzzzzz!';
+		$scope.tabs = [
+		{ title:"Dynamic Title 1", content:"Dynamic content 1" },
+		{ title:"Dynamic Title 2", content:"Dynamic content 2", disabled: true }
+		];
 
 		// because this has happened asynchroneusly we've missed
 		// Angular's initial call to $apply after the controller has been loaded
