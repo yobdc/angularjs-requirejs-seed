@@ -14,6 +14,7 @@ require.config({
 		angularRoute: '/base/libs/angular-route/angular-route',
 		angularMocks: '/base/libs/angular-mocks/angular-mocks',
 		angularResource: '/base/libs/angular-resource/angular-resource',
+		angularScenario: '/base/libs/angular-scenario/angular-scenario',
 		text: '/base/libs/requirejs-text/text',
 		fixtures: '/base/test/unit/fixtures',
 		jquery: '/base/libs/jquery/jquery',
@@ -29,6 +30,7 @@ require.config({
 			'exports':'angular.mock'
 		},
 		'angularResource': ['angular'],
+		'angularScenario': ['angular'],
 		'bootstrap': ['jquery']
 	},
 	deps: tests,

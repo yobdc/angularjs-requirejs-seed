@@ -2,7 +2,7 @@ require.config({
 	paths: {
 		angular: '../../libs/angular/angular',
 		angularRoute: '../../libs/angular-route/angular-route',
-		angularMocks: '../../libs/angular-mocks/angular-mocks',
+		// angularMocks: '../../libs/angular-mocks/angular-mocks',
 		angularResource: '../../libs/angular-resource/angular-resource',
 		text: '../../libs/requirejs-text/text',
 		jquery: '../../libs/jquery/jquery',
@@ -11,10 +11,10 @@ require.config({
 	shim: {
 		'angular' : {'exports' : 'angular'},
 		'angularRoute': ['angular'],
-		'angularMocks': {
-			deps:['angular'],
-			'exports':'angular.mock'
-		},
+		// 'angularMocks': {
+		// 	deps:['angular'],
+		// 	'exports':'angular.mock'
+		// },
 		'angularResource': ['angular'],
 		'bootstrap': ['jquery']
 	},
@@ -35,6 +35,9 @@ require( [
 	var $html = angular.element(document.getElementsByTagName('html')[0]);
 
 	angular.element().ready(function() {
-		angular.resumeBootstrap([app['name']]);
+		if(!$html.hasClass('ng-scope')) {
+			console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+			angular.resumeBootstrap([app['name']]);
+		}
 	});
 });
