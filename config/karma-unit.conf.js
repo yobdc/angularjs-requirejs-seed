@@ -19,7 +19,7 @@ module.exports = function (config) {
 
         browsers: ['Chrome'],
 
-        singleRun: true,
+        singleRun: false,
 
         junitReporter: {
             outputFile: 'test_out/unit.xml',

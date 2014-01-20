@@ -19,7 +19,7 @@ require.config({
 		fixtures: '/base/test/unit/fixtures',
 		jquery: '/base/libs/jquery/jquery',
 		bootstrap: '/base/libs/bootstrap/dist/js/bootstrap',
-		angularBootstrap: '/base/libs/angular-bootstrap/ui-bootstrap-tpls'
+		angularBootstrap: '/base/libs/angular-bootstrap/ui-bootstrap-tpls',
 	},
 	baseUrl: '/base/app/js',
 	shim: {

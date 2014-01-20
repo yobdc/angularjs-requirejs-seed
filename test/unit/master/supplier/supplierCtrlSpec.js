@@ -3,8 +3,9 @@
 define([
 	'angular',
 	'angularMocks',
-	'app'
-], function(angular, mocks, app) {
+	'app',
+	'models/master/supplier'
+], function(angular, mocks, app, supplierModel) {
 	'use strict';
 
 	describe('SupplierCtrl', function(){
@@ -18,6 +19,16 @@ define([
 					$scope: scope
 				});
 			});
+		});
+	});
+
+	describe('SupplierProvider', function(){
+		beforeEach(function() {
+		});
+		it('should validate email successfully', function() {
+			var supplier = new supplierModel();
+			console.log(supplier.toPostData());
+			expect(supplier.toPostData()).not.toBe(null);
 		});
 	});
 });
