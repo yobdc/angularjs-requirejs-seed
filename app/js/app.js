@@ -2,11 +2,11 @@ define([
 	'angular',
 	'filters',
 	'services',
-	'providers',
+	'models',
 	'directives',
 	'controllers',
 	'angularRoute'
-	], function (angular, filters, services, providers, directives, controllers) {
+	], function (angular, filters, services, models, directives, controllers) {
 		'use strict';
 
 		// Declare app level module which depends on filters, and services
@@ -16,7 +16,7 @@ define([
 			'myApp.controllers',
 			'myApp.filters',
 			'myApp.services',
-			'myApp.providers',
+			'myApp.models',
 			'myApp.directives'
 		]);
 });

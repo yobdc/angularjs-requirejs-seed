@@ -1,4 +1,4 @@
-define(['providers'], function (providers) {
+define(['models'], function (providers) {
     providers.service('Supplier', ['ValidatorService', function (ValidatorService) {
         this.getFunction = function () {
             function Supplier(json) {
@@ -9,7 +9,7 @@ define(['providers'], function (providers) {
             return Supplier;
         };
     }]);
-    var injector = angular.injector(['myApp.providers']);
+    var injector = angular.injector(['myApp.models']);
     var service = injector.get('Supplier');
     return service.getFunction();
 });
