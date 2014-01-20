@@ -46,7 +46,7 @@ define(['angular', 'angularResource'], function (angular) {
                     }
                 }
             });
-        }]);
+        }])
     // -- Master Restful api definitions end
     // - Restful api definitions end
 });
