@@ -10,7 +10,10 @@ define(['angular', 'services','jquery','angularBootstrap'], function (angular) {
 			'$modal',
 			'$routeParams',
 			function($scope, $injector, $modal, $routeParams) {
-				require(['controllers/master/supplier/supplier'], function(controller) {
+				require([
+                    'controllers/master/supplier/supplier',
+                    'models/master/supplier'
+                ], function(controller, Supplier) {
 					// injector method takes an array of modules as the first argument
 					// if you want your controller to be able to use components from
 					// any of your other modules, make sure you include it together with 'ng'
@@ -18,7 +21,8 @@ define(['angular', 'services','jquery','angularBootstrap'], function (angular) {
 					$injector.invoke(controller, this, {
 						'$scope': $scope,
 						'$modal': $modal,
-						'$routeParams': $routeParams
+						'$routeParams': $routeParams,
+                        'Supplier': Supplier
 					});
 				});
 			}])
@@ -29,7 +33,9 @@ define(['angular', 'services','jquery','angularBootstrap'], function (angular) {
 			'$modalInstance',
 			'items',
 			function($scope, $injector, $modalInstance, items) {
-				require(['controllers/master/supplier/dlg'], function(controller) {
+				require([
+                    'controllers/master/supplier/dlg',
+                ], function(controller) {
 					$injector.invoke(controller, this, {
 						'$scope': $scope,
 						'$modalInstance': $modalInstance,

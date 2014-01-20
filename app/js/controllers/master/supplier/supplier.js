@@ -1,6 +1,6 @@
 define([], function() {
-	return ['$scope', '$timeout', '$modal', '$log', '$routeParams',
-	function($scope, $timeout, $modal, $log, $routeParams) {
+	return ['$scope', '$timeout', '$modal', '$log', '$routeParams', 'Supplier',
+	function($scope, $timeout, $modal, $log, $routeParams, Supplier) {
 		// You can access the scope of the controller from here
 		$scope.welcomeMessage = 'zzzzzzz!';
 		$scope.tabs = [

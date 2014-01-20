@@ -1,6 +1,6 @@
 describe('angularjs homepage', function() {
   var ptor = protractor.getInstance();
-  var targetUrl = 'http://localhost:8000/#/supplier/create';
+  var targetUrl = 'http://localhost:8080/web/app/index.html#/supplier/create';
 
   beforeEach(function() {
     ptor.ignoreSynchronization = true;

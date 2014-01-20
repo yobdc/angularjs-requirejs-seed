@@ -16,156 +16,143 @@
         </div>
     </div>
     <hr>
-    <tabset>
-        <tab heading="Static title">Static content</tab>
-        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
-          {{tab.content}}
-        </tab>
-        <tab select="alertMe()">
-          <tab-heading>
-            <i class="glyphicon glyphicon-bell"></i> Alert!
-          </tab-heading>
-          I've got an HTML heading, and a select callback. Pretty cool!
-        </tab>
-    </tabset>
-    <div class="row panel panel-default">
-        <div class="form-horizontal">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label input-required">Email1</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
+    <div class="row panel panel-default form-horizontal">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label input-required">Email1</label>
+                <div class="col-md-9 col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email2</label>
-                    <div class="col-sm-3">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                    <div class="col-sm-3">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                    <div class="col-sm-3">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email3</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email4</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <a>联系方式</a>
             </div>
         </div>
+        <div class="col-md-2 vertical_dotted_line visible-lg visible-md">
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label input-required">Email2</label>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email3</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 vertical_dotted_line visible-lg visible-md">
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email4</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 vertical_dotted_line visible-lg visible-md">
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 vertical_dotted_line visible-lg visible-md">
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <accordion>
+            <accordion-group is-open="isopen">
+                <accordion-heading>
+                    联系方式<i class="fa" ng-class="{'fa-angle-double-up': isopen, 'fa-angle-double-down': !isopen}"></i>
+                </accordion-heading>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
     </div>
-    <ul class="nav nav-pills">
-        <li class=""><a href="#home" data-toggle="tab">Home</a></li>
-        <li class=""><a href="#profile" data-toggle="tab">Profile</a></li>
-        <li><a href="#messages" data-toggle="tab">Messages</a></li>
-    </ul>
-    <div id='content' class="tab-content">
-        <div class="tab-pane active" id="home">
-            honme
-        </div>
-        <div class="tab-pane" id="profile">
-            profile
-        </div>
-        <div class="tab-pane" id="messages">
-        </div>
-    </div>    
-    <div class="row panel panel-default">
-        <div class="panel-heading">
-            <a><i class="fa fa-location-arrow"></i></a>
-            <a><i class="fa fa-gbp"></i></a>
-            <a><i class="fa fa-dollar"></i></a>
-            <a><i class="fa fa-align-justify"></i></a>
-        </div>
-        <div class="panel-body">
-            <div class="form-horizontal">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-md-9">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-md-9">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-md-9">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                        <div class="col-md-9">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-primary carousel-inner"><i class="fa fa-plus"></i></button>
+    <div class="row">
+        <tabset>
+            <tab>
+                <tab-heading>
+                    <i class="fa fa-location-arrow"></i>
+                </tab-heading>
+                location
+            </tab>
+            <tab>
+                <tab-heading>
+                    <i class="fa fa-group"></i>
+                </tab-heading>
+                group
+            </tab>
+            <tab>
+                <tab-heading>
+                    <i class="fa fa-gbp"></i>
+                </tab-heading>
+                gbp
+            </tab>
+            <tab>
+                <tab-heading>
+                    <i class="fa fa-dollar"></i>
+                </tab-heading>
+                dollar
+            </tab>
+            <tab>
+                <tab-heading>
+                    <i class="fa fa-align-justify"></i>
+                </tab-heading>
+                justify
+            </tab>
+        </tabset>
     </div>
-</div>
 <br>
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
     <div class="nav navbar-right">
