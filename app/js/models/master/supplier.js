@@ -40,7 +40,36 @@ define(['models'], function (providers) {
                         'ContactInfo.Mail',
                         'ContactInfo.URL'
                     ])).then(function (values) {
-                        console.log(values);
+                        $self.dds = values;
+                        for(var i=0;i<values.length;i++){
+                            var dds = values[i];
+                            if(dds.keyword==='ContactInfo.Telephone') {
+                                $self.telephones.push({
+                                    type: dds.options[0].code,
+                                    value: null 
+                                });
+                            } else if(dds.keyword==='ContactInfo.Mobile') {  
+                                $self.mobiles.push({
+                                    type: dds.options[0].code,
+                                    value: null
+                                });                              
+                            } else if(dds.keyword==='ContactInfo.Fax') {  
+                                $self.faxes.push({
+                                    type: dds.options[0].code,
+                                    value: null
+                                });                              
+                            } else if(dds.keyword==='ContactInfo.Mail') { 
+                                $self.emails.push({
+                                    type: dds.options[0].code,
+                                    value: null
+                                });                               
+                            } else if(dds.keyword==='ContactInfo.URL') { 
+                                $self.urls.push({
+                                    type: dds.options[0].code,
+                                    value: null
+                                });                               
+                            }
+                        }
                         q.resolve(values);
                     }, function(values){
                         q.reject(values);

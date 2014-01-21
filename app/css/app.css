@@ -30,7 +30,7 @@
 }
 
 body {
-  padding-top: 70px;
+  padding: 70px 0px;
   background-color: #eeeeee;
 }
 .navbar {
@@ -58,7 +58,7 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.navbar-blue {
+.navbar-blue, .btn-blue, fa-blue {
   background: #007aff;
 }
 .fa-white {
@@ -87,6 +87,12 @@ input.form-control {
     background-color: #fff;
     border: none;
     border-color: transparent;
+}
+.i-checked{
+    color: #1e9e49 !important;
+}
+.i-unchecked{
+    color:#a9a9a9;
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 

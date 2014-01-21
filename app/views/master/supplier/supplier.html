@@ -127,11 +127,45 @@
                 </tab-heading>
                 location
             </tab>
-            <tab>
+            
+            <!--tab for contact-->
+            <tab ng-controller="SupplierContactCtrl">
                 <tab-heading>
                     <i class="fa fa-group"></i>
                 </tab-heading>
-                group
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-show="supplier.contacts.length == 0">
+                            <td colspan="7">暂无联系人信息，点击添加</td>
+                        </tr>
+                        <tr ng-repeat="c in supplier.contacts" ng-class="{true:'active-row',false:''}[activeItem.id == r.id]">
+                            <td>
+                                <a title="主联系人" bs-tooltip ng-click="c.primary = !c.primary" 
+                                   ng-class="{true:'i-checked', false:'i-unchecked'}[c.primary]">
+                                    <i class="fa fa-foursquare"></i>
+                                </a>
+                            </td>
+                            <td><i class="fa fa-user fa-blue"></i></td>
+                            <td>{{c.firstName + c.lastName}}</td>
+                            <td>{{c.honorlficSuffix}}</td>
+                            <td>{{c.mobile}}</td>
+                            <td>{{c.mail}}</td>
+                            <td>
+                                <a title="编辑联系人" bs-tooltip href="/supplier/create/addOrEditContact/{{c.contactId}}">
+                                    <i class="fa fa-pencil fa-blue"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a title="删除联系人" bs-tooltip ng-click="removeContact(c)">
+                                    <i class="fa fa-trash-o fa-blue"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button ng-click="$window.location.href = '/supplier/create/addOrEditContact'" class="btn btn-lg btn-block btn-blue">
+                    <i class="fa fa-plus fa-white"></i>
+                </button>
             </tab>
             <tab>
                 <tab-heading>
@@ -153,28 +187,28 @@
             </tab>
         </tabset>
     </div>
-<br>
-<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
-    <div class="nav navbar-right">
-        <button class="btn navbar-blue fa-white">保存</button>
-        <span class="fa-white">|</span>
-        <button class="btn navbar-blue fa-white">取消</button>
-    </div>
-</nav>
-<script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
+    <br>
+    <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+        <div class="nav navbar-right">
+            <button class="btn navbar-blue fa-white">保存</button>
+            <span class="fa-white">|</span>
+            <button class="btn navbar-blue fa-white">取消</button>
+        </div>
+    </nav>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
         <h3>I'm a modal!</h3>
-    </div>
-    <div class="modal-body">
+        </div>
+        <div class="modal-body">
         <ul>
-            <li ng-repeat="item in items">
-                <a ng-click="selected.item = item">{{ item }}</a>
-            </li>
+        <li ng-repeat="item in items">
+        <a ng-click="selected.item = item">{{ item }}</a>
+        </li>
         </ul>
         Selected: <b>{{ selected.item }}</b>
-    </div>
-    <div class="modal-footer">
+        </div>
+        <div class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
+        </div>
+    </script>
