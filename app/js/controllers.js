@@ -11,7 +11,7 @@ define(['angular', 'services','jquery','angularBootstrap'], function (angular) {
 			'$routeParams',
 			function($scope, $injector, $modal, $routeParams) {
 				require([
-                    'controllers/master/supplier/supplier',
+                    'controllers/master/supplier/supplierCtrl',
                     'models/master/supplier'
                 ], function(controller, Supplier) {
 					// injector method takes an array of modules as the first argument

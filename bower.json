@@ -15,6 +15,7 @@
     "angular-mocks": "1.2.9",
     "angular-resource": "1.2.9",
     "angular-bootstrap": "0.10.0",
+    "angular-strap": "2.0.*",
     "requirejs": "2.0.*",
     "requirejs-text": "2.0.*",
     "bootstrap": "3.0.*",

@@ -27,7 +27,6 @@ define([
 		});
 		it('should validate email successfully', function() {
 			var supplier = new supplierModel();
-			console.log(supplier.toPostData());
 			expect(supplier.toPostData()).not.toBe(null);
 		});
 	});

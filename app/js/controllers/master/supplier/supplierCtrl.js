@@ -1,6 +1,6 @@
 define([], function() {
-	return ['$scope', '$timeout', '$modal', '$log', '$routeParams', 'Supplier',
-	function($scope, $timeout, $modal, $log, $routeParams, Supplier) {
+	return ['$scope', '$timeout', '$modal', '$log', '$routeParams', 'Supplier', '$q',
+	function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q) {
 		// You can access the scope of the controller from here
 		$scope.welcomeMessage = 'zzzzzzz!';
 		$scope.tabs = [
@@ -31,5 +31,9 @@ define([], function() {
 		      $log.info('Modal dismissed at: ' + new Date());
 		    });
 		};
+        var a = new Supplier();
+        $q.when(a.loadDds(['OrderStatus'])).then(function(values){
+            var n = 0;
+        });
 	}];
 });

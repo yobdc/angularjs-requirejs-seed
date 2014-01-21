@@ -5,8 +5,10 @@ define(['angular', 'angularResource'], function (angular) {
 
     // Demonstrate how to register services
     // In this case it is a simple value service.
+    var urlPrefix = '../';
     return angular.module('myApp.services', ['ngResource'])
         .value('version', '0.0.1')
+        .constant('URL_PREFIX', urlPrefix)
         // - Common util api definitions start
         .factory('ValidatorService', [function () {
             return {
@@ -38,7 +40,7 @@ define(['angular', 'angularResource'], function (angular) {
         // -- Common Restful api definitions end
         // -- Master Restful api definitions start
         .factory('DDService', ['$resource', function ($resource) {
-            return $resource('resources/dds/:key', {}, {
+            return $resource(urlPrefix + 'resources/dds/:key', {}, {
                 get: {
                     method: 'GET',
                     params: {
@@ -47,6 +49,35 @@ define(['angular', 'angularResource'], function (angular) {
                 }
             });
         }])
+        // --- Get dds array
+        .factory('DdsFactory', ['DDService', '$q', function(DDService, $q){
+            return {
+                get: function (list) {
+                    var promises = [];
+                    if (angular.isArray(list)) {
+                        for (var i = 0; i < list.length; i++) {
+                            var dds = list[i];
+                            if(angular.isString(dds)){
+                                var q = $q.defer();
+                                DDService.get({
+                                    key: dds
+                                }, function (data) {
+                                    q.resolve(data);
+                                }, function (data) {
+                                    q.resolve();
+                                });
+                                promises.push(q.promise);
+                            } else {
+                                throw Error('all array member should be string');
+                            }
+                        }
+                    } else {
+                        throw Error('param0 is not Array');
+                    }
+                    return promises;
+                }
+            };
+        }]);
     // -- Master Restful api definitions end
     // - Restful api definitions end
 });
