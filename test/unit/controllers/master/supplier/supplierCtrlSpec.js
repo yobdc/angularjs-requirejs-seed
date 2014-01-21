@@ -4,7 +4,8 @@ define([
 	'angular',
 	'angularMocks',
 	'app',
-	'models/master/supplier'
+	'models/master/supplier',
+	'angularRoute'
 ], function(angular, mocks, app, supplierModel) {
 	'use strict';
 
@@ -13,13 +14,17 @@ define([
 
 		beforeEach(function() {
 			mocks.module('myApp.controllers');
-			mocks.inject(function($rootScope, $controller) {
+			mocks.module('ngRoute');
+			mocks.inject(function($rootScope, $controller, $routeParams) {
 				scope = $rootScope.$new();
 				SupplierCtrl = $controller('SupplierCtrl', {
-					$scope: scope
+					$scope: scope,
+					$routeParams: $routeParams
 				});
 			});
 		});
+        it('should ok', mocks.inject(function() {
+        }));
 	});
 
 	describe('SupplierProvider', function(){

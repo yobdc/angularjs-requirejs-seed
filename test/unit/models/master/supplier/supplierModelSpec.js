@@ -52,7 +52,7 @@ define([
             });
 
             var supplier = new supplierModel();
-//            $httpBackend.flush();
+            // $httpBackend.flush();
             expect(supplier.firstName).toBe(null);
             expect(supplier.lastName).toBe(null);
             expect(angular.isArray(supplier.telephones)).toBe(true);
