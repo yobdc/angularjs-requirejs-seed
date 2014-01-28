@@ -299,11 +299,14 @@ a[disabled] > .fa
 .slide-right.ng-enter,
 .slide-right.ng-leave {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background: inherit;
-    -ms-transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
-    transition:  .25s ease-in-out;
+    -ms-transition: 0.3s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    transition:  0.3s ease-in-out;
 }
 
 
