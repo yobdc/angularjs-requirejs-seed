@@ -19,10 +19,16 @@ define([
             function() {
                 var $dataMap = {};
                 return {
-                    set: function(name, value) {
-                        if (angular.isString(name)) {
-                            $dataMap[name] = value;
+                    set: function(key, value) {
+                        if (angular.isString(key)) {
+                            $dataMap[key] = value;
                         }
+                    },
+                    get: function(key) {
+                        return $dataMap[key];
+                    },
+                    remove: function(key) {
+                        delete $dataMap[key];
                     }
                 };
             }

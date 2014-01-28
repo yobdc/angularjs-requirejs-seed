@@ -8,7 +8,8 @@ define([], function() {
 		'Supplier',
 		'$q',
 		'CommonService',
-		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService) {
+		'ControllerDataService',
+		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, ControllerDataService) {
 			$scope.accountingInfo = {
 				ledgerCatalog: '',
 				creditInfo: '',
@@ -43,13 +44,18 @@ define([], function() {
 			}
 
 			$scope.init = function() {
-				$scope.$data = {};
-				$scope.$data.supplier = new Supplier();
-				$scope.$data.supplier.load().then(function(value) {
-					$timeout(function() {
-						$scope.$apply();
-					});
-				})
+				if (ControllerDataService.get('SupplierCtrl')) {
+					$scope.$data = ControllerDataService.get('SupplierCtrl');
+				} else {
+					$scope.$data = {};
+					ControllerDataService.set('SupplierCtrl', $scope.$data);
+					$scope.$data.supplier = new Supplier();
+					$scope.$data.supplier.load().then(function(value) {
+						$timeout(function() {
+							$scope.$apply();
+						});
+					})
+				}
 			};
 			$scope.validateCompanyName = function(name) {
 				$q.when($scope.$data.supplier.validateCompanyName(name)).then(function(result) {});
