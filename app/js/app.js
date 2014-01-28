@@ -5,7 +5,9 @@ define([
 	'models',
 	'directives',
 	'controllers',
-	'angularRoute'
+	'angularRoute',
+    'angularAnimate',
+    'angularTouch'
 	], function (angular, filters, services, models, directives, controllers) {
 		'use strict';
 
@@ -13,6 +15,8 @@ define([
 		
 		return angular.module('myApp', [
 			'ngRoute',
+			'ngTouch',
+			'ngAnimate',
 			'myApp.controllers',
 			'myApp.filters',
 			'myApp.services',

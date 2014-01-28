@@ -8,8 +8,9 @@ define([], function() {
 		'Supplier',
 		'$q',
 		'CommonService',
-		'ControllerDataService',
-		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, ControllerDataService) {
+		'ShareDataService',
+		'$location',
+		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, ShareDataService, $location) {
 			$scope.accountingInfo = {
 				ledgerCatalog: '',
 				creditInfo: '',
@@ -44,11 +45,11 @@ define([], function() {
 			}
 
 			$scope.init = function() {
-				if (ControllerDataService.get('SupplierCtrl')) {
-					$scope.$data = ControllerDataService.get('SupplierCtrl');
+				if (ShareDataService.get('SupplierCtrl')) {
+					$scope.$data = ShareDataService.get('SupplierCtrl');
 				} else {
 					$scope.$data = {};
-					ControllerDataService.set('SupplierCtrl', $scope.$data);
+					ShareDataService.set('SupplierCtrl', $scope.$data);
 					$scope.$data.supplier = new Supplier();
 					$scope.$data.supplier.load().then(function(value) {
 						$timeout(function() {
@@ -65,6 +66,10 @@ define([], function() {
 			};
 			$scope.removeContactPoint = function(index) {
 				$scope.$data.supplier.removeContactPoint(index);
+			};
+			$scope.editContact = function(){};
+			$scope.addContact = function(){
+				$location.path('/supplier/create/addOrEditContact');
 			};
 			$scope.save = function() {
 				try {

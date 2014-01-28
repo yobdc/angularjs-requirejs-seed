@@ -6,7 +6,8 @@ define(['models'], function(providers) {
         'DdsFactory',
         '$q',
         'SupplierService',
-        function($timeout, $log, ValidatorService, DdsFactory, $q, SupplierService) {
+        'UidService', 
+        function($timeout, $log, ValidatorService, DdsFactory, $q, SupplierService, UidService) {
             this.$get = function() {
                 var $self;
 
@@ -44,6 +45,7 @@ define(['models'], function(providers) {
                 Supplier.prototype.loadFromId = function(id) {};
                 Supplier.prototype.loadFromJSON = function(json) {};
                 Supplier.prototype.loadNew = function() {
+                    $self.uid = UidService.get();
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         CONTACTINFO_TYPE,

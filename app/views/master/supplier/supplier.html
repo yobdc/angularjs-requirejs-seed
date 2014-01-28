@@ -136,7 +136,7 @@
             </tab>
 
             <!--tab for contact-->
-            <tab ng-controller="SupplierContactCtrl"> 
+            <tab> 
                 <tab-heading>
                     <i class="fa fa-group"></i>
                     <div class="bottom-arrow"></div>
@@ -173,9 +173,9 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="#/supplier/create/addOrEditContact/" class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;">
+                <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="go('/supplier/create/addOrEditContact')">
                     <i class="fa fa-plus"></i>
-                </a>
+                </button>
             </tab>
             <tab>
                 <tab-heading>

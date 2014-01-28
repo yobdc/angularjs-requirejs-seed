@@ -21,7 +21,7 @@ define([], function() {
                 markAsNew: true
             }];
             $scope.save = function() {
-                $window.location.href = '#/supplier/create';
+                $scope.back();
             };
             
             $scope.cancel = function() {

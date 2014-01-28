@@ -3,9 +3,6 @@ define([
     'services',
     'jquery',
     'angularBootstrap',
-    // 'angularStrap',
-    // 'angularStrapTpl',
-    // 'bootstrap3DatePicker'
 ], function(angular) {
     'use strict';
 
@@ -16,6 +13,17 @@ define([
         'ui.bootstrap',
         // 'mgcrea.ngStrap'
     ])
+    .controller('MainCtrl', ['$scope', '$rootScope', '$window', '$location', function ($scope, $rootScope, $window, $location) {
+        $scope.slide = '';
+        $rootScope.back = function() {
+          $scope.slide = 'slide-right';
+          $window.history.back();
+        }
+        $rootScope.go = function(path){
+          $scope.slide = 'slide-left';
+          $location.url(path);
+        }
+    }])
     // More involved example where controller is required from an external file
     .controller('SupplierCtrl', ['$scope',
         '$injector',

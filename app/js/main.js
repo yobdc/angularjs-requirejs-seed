@@ -3,12 +3,14 @@ require.config({
 		angular: '../../libs/angular/angular',
 		angularRoute: '../../libs/angular-route/angular-route',
 		angularResource: '../../libs/angular-resource/angular-resource',
+		angularAnimate: '../../libs/angular-animate/angular-animate',
+		angularTouch: '../../libs/angular-touch/angular-touch',
 		text: '../../libs/requirejs-text/text',
 		jquery: '../../libs/jquery/jquery',
 		bootstrap: '../../libs/bootstrap/dist/js/bootstrap',
 		angularBootstrap: '../../libs/angular-bootstrap/ui-bootstrap-tpls',
-        angularStrap: '../../libs/angular-strap/dist/angular-strap',
-        angularStrapTpl: '../../libs/angular-strap/dist/angular-strap.tpl'
+        // angularStrap: '../../libs/angular-strap/dist/angular-strap',
+        // angularStrapTpl: '../../libs/angular-strap/dist/angular-strap.tpl'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
@@ -17,7 +19,7 @@ require.config({
 		'bootstrap': ['jquery'],
 		'angularBootstrap': ['angular', 'bootstrap'],
         'angularStrap': ['angular', 'bootstrap'],
-        'angularStrapTpl': ['angularStrap']
+        // 'angularStrapTpl': ['angularStrap']
 	},
 	priority: [
 		"angular"

@@ -14,8 +14,10 @@ define([
             .value('version', '0.0.1')
             .constant('URL_PREFIX', urlPrefix)
         // - Common util api definitions start
-        // --- ControllerDataService
-        .factory('ControllerDataService', [
+        
+        // --- ShareDataService
+        .factory('ShareDataService', [
+
             function() {
                 var $dataMap = {};
                 return {
@@ -29,8 +31,28 @@ define([
                     },
                     remove: function(key) {
                         delete $dataMap[key];
+                    },
+                    contain: function(key) {
+                        return (key in $dataMap);
                     }
                 };
+            }
+        ])
+        // --- UidService
+        .factory('UidService', [
+
+            function() {
+                return {
+                    get: function() {
+                        var d = new Date().getTime();
+                        var uid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                            var r = (d + Math.random() * 16) % 16 | 0;
+                            d = Math.floor(d / 16);
+                            return (c == 'x' ? r : (r & 0x7 | 0x8)).toString(16);
+                        });
+                        return uid;
+                    }
+                }
             }
         ])
         // --- ValidatorService
