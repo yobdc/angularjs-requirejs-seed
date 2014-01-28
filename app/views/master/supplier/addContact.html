@@ -1,21 +1,100 @@
-<nav style="text-align: center" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-title" role="navigation">
     <span>新增联系人</span>
 </nav>
 
 <div class="container">
-    <div class="row" style="vertical-align: middle">
+    <div class="row">
         <div class="col-md-1 col-sm-2 col-xs-2">
-            <i class="fa fa-user fa-4x"></i>
+            <i class="fa fa-user fa-4x hidden-xs"></i>
+            <i class="fa fa-user fa-2x visible-xs"></i>
         </div>
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <p>支持jpg、gif、png、bmp格式</p>
         </div>
-        <div class="col-md-1">
-            <button type="button" class="btn btn-primary" ng-click="open()"><i class="fa fa-upload"></i>&nbsp;上传照片</button>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-blue" ng-click="upload()"><i class="fa fa-upload"></i> 上传照片</button>
         </div>
     </div>
-    <hr>
-    <div class="row panel panel-default form-horizontal">
+    <hr class="hr-dashed">
+    <div class="row panel panel-default form-horizontal" style="position: relative;">
+        
+        <div class="dashed-divider visible-lg visible-md"></div>
+        
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">名称</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="name" ng-model="contact.firstName" placeholder="姓...">
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="name" ng-model="contact.lastName" placeholder="名...">
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="name" ng-model="contact.honorlficSuffix" placeholder="称谓...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="dept" class="col-sm-3 control-label">部门</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="dept" ng-model="contact.dept" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="position" class="col-sm-3 control-label">职位</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="position" ng-model="contact.position" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="primary" class="col-sm-3 control-label">主联系人</label>
+                <div class="col-sm-9">
+                    <div ng-switcher class="form-control" ng-model="contact.primary" id="primary"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <contactinfo title-key="ContactInfo.Telephone" contact-model="contact.telephones" link-name="添加电话号码"></contactinfo>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <contactinfo title-key="ContactInfo.Mail" contact-model="contact.mails" link-name="添加电子邮件"></contactinfo>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <selectarea country-model="contact.country" area-model="contact.area" province-model="contact.province"
+                    city-model="contact.city" district-model="contact.district" change-event="areaChange()"></selectarea>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="postcode" class="col-sm-3 control-label">邮编</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="postcode" ng-model="contact.postcode" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="address" class="col-sm-3 control-label">地址</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="address" ng-model="contact.address" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+    <div class="nav navbar-right">
+        <button class="btn navbar-blue fa-white" ng-click="save()">确定</button>
+        <span class="fa-white">|</span>
+        <button class="btn navbar-blue fa-white" ng-click="cancel()">取消</button>
+    </div>
+</nav>

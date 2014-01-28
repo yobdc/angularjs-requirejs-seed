@@ -1,39 +1,73 @@
 define([], function() {
-	return ['$scope', '$timeout', '$modal', '$log', '$routeParams', 'Supplier', '$q',
-	function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q) {
-		// You can access the scope of the controller from here
-		$scope.welcomeMessage = 'zzzzzzz!';
-		$scope.tabs = [
-		{ title:"Dynamic Title 1", content:"Dynamic content 1" },
-		{ title:"Dynamic Title 2", content:"Dynamic content 2", disabled: true }
-		];
+	return [
+		'$scope',
+		'$timeout',
+		'$modal',
+		'$log',
+		'$routeParams',
+		'Supplier',
+		'$q',
+		'CommonService',
+		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService) {
+			$scope.accountingInfo = {
+				ledgerCatalog: '',
+				creditInfo: '',
+				accountDate: null,
+				paymentType: '',
+				defaultCurrency: '',
+				paymentTerms: '',
+				settlementType: '',
+				accountAlert: '',
+				paymentTo: '',
+				isCustomer: false
+			};
 
-		// because this has happened asynchroneusly we've missed
-		// Angular's initial call to $apply after the controller has been loaded
-		// hence we need to explicityly call it at the end of our Controller constructor
-		$timeout(function() {
-			$scope.$apply();			
-		});
-		$scope.open = function () {
-		    var modalInstance = $modal.open({
-		      templateUrl: 'myModalContent.html',
-		      controller: 'ModalInstanceCtrl',
-		      resolve: {
-		        items: function () {
-		          return ['aaa','bbb','ccc'];
-		        }
-		      }
-		    });
+			$scope.accountDateOpen = function() {
+				$timeout(function() {
+					$scope.accountDateOpenFlag = true;
+				});
+			}
 
-		    modalInstance.result.then(function (selectedItem) {
-		      $scope.selected = selectedItem;
-		    }, function () {
-		      $log.info('Modal dismissed at: ' + new Date());
-		    });
-		};
-        var a = new Supplier();
-        $q.when(a.loadDds(['OrderStatus'])).then(function(values){
-            var n = 0;
-        });
-	}];
+			$scope.ledgerCatalogs = [{
+				name: 'bbc'
+			}, {
+				name: 'aaa'
+			}, {
+				name: 'abc'
+			}, {
+				name: 'ccc'
+			}];
+			$scope.autoLedgerCatalog = function(term) {
+				var aaa = CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
+				return CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
+			}
+
+			$scope.init = function() {
+				$scope.$data = {};
+				$scope.$data.supplier = new Supplier();
+				$scope.$data.supplier.load().then(function(value) {
+					$timeout(function() {
+						$scope.$apply();
+					});
+				})
+			};
+			$scope.validateCompanyName = function(name) {
+				$q.when($scope.$data.supplier.validateCompanyName(name)).then(function(result) {});
+			};
+			$scope.addContactPoint = function() {
+				$scope.$data.supplier.addContactPoint();
+			};
+			$scope.removeContactPoint = function(index) {
+				$scope.$data.supplier.removeContactPoint(index);
+			};
+			$scope.save = function() {
+				try {
+					$scope.$data.supplier.validate();
+				} catch (ex) {
+					$log.warn(ex);
+				}
+			};
+			$scope.cancel = function() {};
+			$scope.init();
+		}];
 });

@@ -1,17 +1,23 @@
 define(['angular', 'app'], function(angular, app) {
     'use strict';
 
-    return app.config(['$routeProvider', function($routeProvider) {
+    return app.config(['$routeProvider',
+        function($routeProvider) {
             $routeProvider.when('/supplier/create', {
                 templateUrl: 'app/views/master/supplier/supplier.html',
                 controller: 'SupplierCtrl'
-            }).when('/supplier/create/addOrEditContact/:contactId', {
+            }).when('/supplier/create/addOrEditContact', {
                 templateUrl: 'app/views/master/supplier/addContact.html',
-                controller: 'SupplierContactCtrl'
+                controller: 'SupplierAddContactCtrl'
             }).when('/position/create', {
-			templateUrl: 'app/views/master/position/position.html',
-			controller: 'PositionCtrl'
+                templateUrl: 'app/views/master/position/position.html',
+                controller: 'PositionCtrl'
+            }).when('/organization', {
+                templateUrl: 'app/views/master/organization/organizationStructure.html',
+                controller: 'organizationStructureCtrl'
+            }).otherwise({
+                redirectTo: '/supplier/create'
             });
-            $routeProvider.otherwise({redirectTo: '/supplier/create'});
-        }]);
+        }
+    ]);
 });

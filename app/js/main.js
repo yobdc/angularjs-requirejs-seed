@@ -6,14 +6,18 @@ require.config({
 		text: '../../libs/requirejs-text/text',
 		jquery: '../../libs/jquery/jquery',
 		bootstrap: '../../libs/bootstrap/dist/js/bootstrap',
-		angularBootstrap: '../../libs/angular-bootstrap/ui-bootstrap-tpls'
+		angularBootstrap: '../../libs/angular-bootstrap/ui-bootstrap-tpls',
+        angularStrap: '../../libs/angular-strap/dist/angular-strap',
+        angularStrapTpl: '../../libs/angular-strap/dist/angular-strap.tpl'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
 		'angularRoute': ['angular'],
 		'angularResource': ['angular'],
 		'bootstrap': ['jquery'],
-		'angularBootstrap': ['angular', 'bootstrap']
+		'angularBootstrap': ['angular', 'bootstrap'],
+        'angularStrap': ['angular', 'bootstrap'],
+        'angularStrapTpl': ['angularStrap']
 	},
 	priority: [
 		"angular"

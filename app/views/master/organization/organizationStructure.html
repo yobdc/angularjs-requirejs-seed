@@ -1,0 +1,129 @@
+
+
+<style>
+        
+    </style>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a href="/web/index.html#/master"><i class="fa fa-home fa-white fa-3"></i></a>
+    </div>
+         <div style=" text-align: center; color: #fff;  line-height: 2;"> {{title}}</div>
+</nav>
+<div class="container" ng-show="canDisplayed">
+
+    <div class="row panel panel-default form-horizontal">
+        <div class="col-md-6 line-div">           
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label input-required">名称</label>
+                    <div class="col-md-9 col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                </div>           
+        </div>
+        <div class="col-md-6 line-div">           
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label input-required">日期</label>
+                    <div class="col-sm-3">
+                        <input type="email" class="form-control col-sm-3" id="inputEmail3" placeholder="Email">
+                         <!--<a href="/web/index.html#/master" class="col-sm-1"><i class="fa fa-calendar"></i></a>-->
+                    </div>
+                    <div class="col-sm-1">
+                         <a href="/web/index.html#/master" class="col-sm-1"><i class="fa fa-calendar"></i></a>
+                    </div>
+                    <div class="col-sm-1">
+                        <label>zhi</label>
+                    </div>
+<!--                    <label for="inputEmail3" class="col-sm-1 control-label ">至</label>-->
+                    <div class="col-sm-3">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                         <!--<a href="/web/index.html#/master"><i class="fa fa-calendar 3"></i></a>-->
+                    </div>
+                    <div class="col-sm-1">
+                         <a href="/web/index.html#/master" class="col-sm-1"><i class="fa fa-calendar"></i></a>
+                    </div>
+                </div>           
+        </div> 
+        <div class="col-md-6 line-div">           
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label input-required">版本</label>
+                    <div class="col-md-9 col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                </div>           
+        </div>
+    </div>
+    
+
+
+    <div class="row panel panel-default form-horizontal" style="margin-top:15px ">
+
+        <div class="contentdiv">
+            <div style="margin-left: 8px; color:gainsboro;">
+                <a type="button" class="re-time" ng-click="justifyList()" ><i class="fa fa-align-justify"></i></a> |
+                <a type="button" class="re-time" ng-click="indentList()" ><i class="fa fa-indent"></i></a>
+            </div>
+            <div class="listContainer Ck">
+                <div class="row" style="margin-left:5px;margin-top:5px">
+                    <table  class="table table-hover table-condensed" style="width:98%">
+                        <thead>
+
+                        <th>&nbsp;&nbsp;名称</th>
+                        <th>日期(从)</th>
+                        <th>日期(到)</th>
+                        <th>地点</th>
+                        <th>分类</th>
+                        <th>操作</th>
+
+                        </thead>
+                        <tr ng-repeat="o in organizationStructure.root.children" ng-click="editLocation(o)" ng-class="{true:'active-row', false:''}[location==l]">
+                            <td data-title="'名称'">
+                                <span ng-repeat="n in getNumber(o.layerNumber)"  ng-show="isIndent">&nbsp;</span>
+                                <span ng-show="o.children && o.children.length > 0">
+                                <a title="展开" ng-click="extend(o)" ng-hide="o.isextend">+</a>
+                                <a title="收起" ng-click="retract(o)" ng-show="o.isextend">-</a>
+                                </span>
+                                <span ng-hide="o.children && o.children.length > 0">&nbsp;</span>
+                                {{o.name}}
+                            </td>
+                            <td data-title="'日期(从)'">
+                                {{o.startdate}}
+                            </td>
+                            <td data-title="'日期(到)'">
+                                {{o.enddate}}
+                            </td>
+                            <td data-title="'地点'">
+                                {{o.location.name}}
+                            </td>
+                            <td data-title="'分类'">
+                                <span ng-repeat="c in o.classes">
+                                    {{c.name}}<span ng-show="!$last">|</span>
+                               </span>
+                            </td>
+                            <td data-title="'操作'">
+                                <a title="添加" ng-click="addOrganization(o)"><i class="icon-plus-sign" style="color: inherit"/> </a>
+                                <a title="编辑" ng-click="editOrganization(o)"><i class="icon-edit-sign" style="color: inherit"/> </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="(!!organizationStructure.organizations)==false || organizationStructure.organizations.length == 0"><td colspan="7">暂无数据</td></tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+   
+    <div style="background: #007aff; height: 28px;text-align: center;margin-top:5px" ng-click="addOrganization()"><i class="fa fa-plus fa-lg" style=" color: #fff; line-height: 1.5;"></i>
+    </div>
+</div>
+ <div>
+           
+ </div>
+<!--<div class="operationdiv foot" style=" "><a ng-click="saveOrganizationStruction(organizationStructure)">保存</a> |<a ng-click="cancel()">取消</a>   </div>
+</div>-->
+ <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+        <div class="nav navbar-right">
+            <button class="btn navbar-blue fa-white">保存</button>
+            <span class="fa-white">|</span>
+            <button class="btn navbar-blue fa-white">取消</button>
+        </div>
+    </nav>

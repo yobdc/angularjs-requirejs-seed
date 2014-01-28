@@ -1,0 +1,18 @@
+<div class="form-group" ng-repeat="c in contactModel" ng-hide="!!c.markAsDelete">
+    <label for="mobile" class="col-sm-3 control-label">
+        <a tooltip="{{linkName}}" style="text-decoration: none; cursor: pointer;" ng-click="addContactInfo($index)" disabled>
+            <i class="fa fa-plus-circle fa-blue"></i>
+        </a>
+        <select class="form-control label-select" ng-model="c.pointName" ng-options="o.code as o.name for o in infoTitles">
+        </select>
+    </label>
+    <div class="col-sm-9">
+        <div class="input-group">
+            <input type="text" class="form-control" id="mobile" ng-model="c.value" ng-focus="c.focus=true" ng-blur="c.focus=false" placeholder="请输入...">        
+            <span class="input-group-addon" style="background: transparent; border-color: transparent;">
+                <a tooltip="删除" ng-click="removeContactInfo($index)" ng-show="c.focus"> <i class="fa fa-trash-o fa-blue"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>

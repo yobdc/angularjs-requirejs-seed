@@ -1,53 +1,26 @@
 /*global describe beforeEach it expect */
 
 define([
-	'angular',
-	'angularMocks',
-	'app',
-	'models/master/supplier'
+    'angular',
+    'angularMocks',
+    'app',
+    'models/master/supplier'
 ], function(angular, mocks, app, supplierModel) {
-	'use strict';
+    'use strict';
 
-	describe('SupplierCtrl', function(){
-		var SupplierCtrl, scope;
-
-		beforeEach(function() {
-            mocks.module('myApp.controllers');
+    describe('SupplierProvider', function() {
+        beforeEach(function() {
             mocks.module('myApp.services');
-			mocks.inject(function($rootScope, $controller) {
-				scope = $rootScope.$new();
-				SupplierCtrl = $controller('SupplierCtrl', {
-					$scope: scope
-				});
-			});
-		});
-	});
-
-	describe('SupplierProvider', function(){
-		beforeEach(function() {
-            mocks.module('myApp.services');
-		});
-		it('should toPostData', function() {
-			var supplier = new supplierModel();
-			expect(supplier.toPostData()).not.toBe(null);
-		});
+        });
+        it('should toPostData', function() {
+            var supplier = new supplierModel();
+            expect(supplier.toPostData()).not.toBe(null);
+        });
         it('should construct loadNew', mocks.inject(function(URL_PREFIX, _$httpBackend_, $q) {
             var $httpBackend;
-            $httpBackend =_$httpBackend_;
+            $httpBackend = _$httpBackend_;
             expect(URL_PREFIX).not.toBe(null);
-            $httpBackend.expect("GET",URL_PREFIX+'resources/dds/ContactInfo.Telephone').respond({
-                name: '1'
-            });
-            $httpBackend.expect("GET",URL_PREFIX+'resources/dds/ContactInfo.Mobile').respond({
-                name: '2'
-            });
-            $httpBackend.expect("GET",URL_PREFIX+'resources/dds/ContactInfo.Fax').respond({
-                name: '3'
-            });
-            $httpBackend.expect("GET",URL_PREFIX+'resources/dds/ContactInfo.Mail').respond({
-                name: '4'
-            });
-            $httpBackend.expect("GET",URL_PREFIX+'resources/dds/ContactInfo.URL').respond({
+            $httpBackend.when("GET", '/resources/dds/ContactInfo.Type').respond({
                 name: '5'
             });
 
@@ -55,7 +28,33 @@ define([
             // $httpBackend.flush();
             expect(supplier.firstName).toBe(null);
             expect(supplier.lastName).toBe(null);
-            expect(angular.isArray(supplier.telephones)).toBe(true);
+            expect(angular.isArray(supplier.contactInfo)).toBe(true);
         }));
-	});
+        it('should add contact info', mocks.inject(function(URL_PREFIX, _$httpBackend_, DDService) {
+            var $httpBackend;
+            $httpBackend = _$httpBackend_;
+            expect(URL_PREFIX).not.toBe(null);
+            $httpBackend.when("GET", URL_PREFIX+'resources/dds/ContactInfo.Type').respond({
+                keyword: 'ContactInfo.Type',
+                options: [{
+                    code: 'A',
+                    name: 'A'
+                }, {
+                    code: 'B',
+                    name: 'B'
+                }]
+            });
+            // DDService.get({
+            //     key: 'ContactInfo.Type'
+            // }, function(data) {
+            //     console.log(data);
+            // }, function(data) {
+            //     console.log(data);
+            // });
+            var s = new supplierModel();
+            // $httpBackend.flush();
+            // var result = s.addContactInfo();
+            // console.log(result);
+        }));
+    });
 });

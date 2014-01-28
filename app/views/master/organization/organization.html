@@ -1,0 +1,274 @@
+<div style="width: 100%;  background-color:rgb(236, 236, 236); " >
+    <ng-form name="dialogForm">
+    <style>
+         .listItem span{
+         float: right;
+         margin-right: 10px;
+         font-size: 20px;
+         font-weight: bold;
+         }
+         .listItem
+         {
+             height: 25px;
+             margin: 0 auto;
+             border-bottom: 1px solid #ccc;
+             padding-top: 14px;
+             padding-left:15px;
+             cursor: pointer;
+         }
+         .listItem:hover
+         {
+             height: 25px;
+             margin: 0 auto;
+             border-bottom: 1px solid #ccc;
+             background: #ddd;
+         }
+         .leftList{
+         float: left; width: 50%; border-right: 1px dashed #ccc
+         }
+         .rightList{width: 49%; float: right}
+         div.switchOn
+         {
+             margin-top: 10px;
+             margin-left: 18%;
+             margin-bottom: 10px;
+             width: 36px;
+             border: 1px solid #fff;
+             height: 20px;
+             background: #4dd963;
+             border-radius: 15px;
+         }
+         div.switchOn > div
+         {
+             width: 50%;
+             height: 80%;
+             margin-top: 1px;
+             top: inherit;
+             background: #fff;
+             border-radius: 15px;
+             border: 1px solid #e6e6e6;
+             box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+             cursor: pointer;
+             float: right;
+         }
+
+         div.switchOff
+         {   margin-top: 10px;
+             margin-left: 18%;
+             margin-bottom: 10px;
+             width: 36px;
+             border: 1px solid #ccc;
+             height: 20px;
+             background: #fff;
+             border-radius: 15px;
+         }
+         div.switchOff > div
+         {
+             width: 50%;
+             height: 80%;
+             margin-top: 1px;
+             top: inherit;
+             background: #fff;
+             border-radius: 15px;
+             border: 1px solid #e6e6e6;
+             box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+             cursor: pointer;
+
+         }
+         .re-btn{
+             color: #000;
+             margin-left: -18px !important;
+         }
+         .inputWidth{
+             width: 75%;
+             vertical-align: middle;
+         }
+         .caret{
+             vertical-align: middle;
+         }
+         .inputInDialog{
+             margin-top: 10px;
+             margin-left: 10px; 
+         }
+     </style>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+           <div style=" text-align: center; color: #fff;  line-height: 2;">选择类别</div>
+           <div style=" text-align: center; color: #fff;  line-height: 2;">创建{{class.name}}</div>   
+</nav>
+    <div class="pageblock" ng-show="!hasClass">
+        <div>
+         
+                <li class="listItem" ng-repeat="c in classes" ng-click="selectClass(c)" ng-show="c.enabled == true">
+                {{c.name}}<span> > </span>
+                </li>
+         
+        </div>
+        </div>
+    
+    <div class="pageblock" ng-show="hasClass">
+         <div>
+             <div style="background: #fff;">
+                 <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                     <div class="inputrow inputInDialog left-border-bottom" >
+                         <label>名称</label>
+                         <input type="text" name="name" id="Name" ng-model="organization.name" />
+                     </div>
+                 </div>
+                 <div style="width: 49%; float: right" >
+                     <div class="inputrow inputInDialog right-border-bottom">
+                         <div  style="float: left; width: 50%;">
+                             <label  style="width: 60px;">日期</label>
+                             <input name="startdate" data-date-format="yyyy/mm/dd" bs-datepicker type="text" style="width: 50%;"  placeholder="2014/01/09"
+                                    ng-model="organization.startdate" />
+                             <a type="button" class="re-time" data-toggle="datepicker"><i class="icon-calendar"></i></a>
+                         </div>
+                         <div>
+                             <label  style=" width:30px ">至</label>
+                             <input name="enddate" data-date-format="yyyy/mm/dd" bs-datepicker type="text"  placeholder="2014/01/09" style="width: 20%;"
+                                    ng-model="organization.enddate"/>
+                             <a type="button" class="re-time" data-toggle="datepicker"><i class="icon-calendar"></i></a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div style="background: #fff;">
+                 <div style="float: left; width: 50%; border-right: 1px dashed #ccc;">
+                     <div class="inputrow inputInDialog left-border-bottom" style=" height: 38px;">
+                        <label>内部地点</label>
+                        <div class="switchOn" ng-show="organization.changeInnerLoction">
+                            <div ng-click="changeInnerLocation()" ></div>
+                        </div>
+                        <div class="switchOff" ng-show="!organization.changeInnerLoction">
+                            <div ng-click="changeInnerLocation()" ></div>
+                        </div>
+                     </div>
+                 </div>
+                 <div style="width: 49%; float: right" >
+<!--                     <div class="inputrow right-border-bottom" >
+                         <label>地点</label>
+                         <select id="location" placeholder="num / str" ng-model="dds.dataType.value"
+                                 ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                         </select>
+                     </div>-->
+                     <div class="inputrow inputInDialog right-border-bottom" >
+                         <label>地点</label>
+                            <input  type="text" ng-model="organization.location.name"/>             
+                            <a ng-click="getAllLocation(0)" href="#popupBottom" role="button" id="chooseLocation" class="re-btn" data-toggle="modal-popover" data-placement="bottom" backdrop="true">
+                                <span class="caret"></span>
+                            </a>
+                     </div>
+                     
+                 </div>
+             </div>
+         </div>
+        <div ng-show="class.code=='LE'">
+          <div style="background: #fff;">
+            <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                <div class="inputrow inputInDialog left-border-bottom">
+                    <label>类型</label>
+                    <select id="type" placeholder="请选择..." ng-model="dds.dataType.value"
+                            ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                    </select>
+                </div>
+            </div>
+            <div ng-repeat="s in organization.segments" ng-class-odd="'rightList'" ng-class-even="'leftList'" >
+                  <div class="inputrow inputInDialog" ng-class-odd="'right-border-bottom'" ng-class-even="'left-border-bottom'">
+                      <label>
+                          <a title="删除" ng-click="delSegment(s)" ng-show="!$first"><i class="icon-minus-sign" style="color: inherit"/> </a>
+                          <a title="添加" ng-click="addSegment()"  ng-show="$first"><i class="icon-plus-sign" style="color: inherit"/> </a>
+                          段值
+                      </label>
+                      <input type="text" ng-model="s" />
+                   </div>
+            </div>
+         </div>
+        </div>
+        <div ng-show="class.code=='BMU'">
+             <div style="background: #fff;">
+                 <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                     <div class="inputrow inputInDialog left-border-bottom">
+                         <label>类型</label>
+                         <select id="type" placeholder="请选择..." ng-model="dds.dataType.value"
+                                 ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                         </select>
+                     </div>
+                 </div>
+                 <div style="width: 49%; float: right" >
+                     <div class="inputrow inputInDialog right-border-bottom">
+                         <label>公司</label>
+                         <input type="text" />
+                     </div>
+                 </div>
+             </div>
+        </div>
+        <div ng-show="class.code=='PLANT'">
+            <div style="background: #fff;">
+                 <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                     <div class="inputrow inputInDialog left-border-bottom">
+                         <label style="width:25%">类型</label>
+                         <select id="type" placeholder="请选择..." ng-model="dds.dataType.value"
+                                 ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                         </select>
+                     </div>
+                 </div>
+                 <div style="width: 49%; float: right" >
+                     <div class="inputrow inputInDialog right-border-bottom">
+                         <label>公司</label>
+                         <input type="text" class="inputWidth" ng-model="organization.com"/>
+                     </div>
+                 </div>
+             </div>
+            <div style="background: #fff;">
+                 <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                     <div class="inputrow inputInDialog left-border-bottom" >
+                         <label style="width:25%">业务管理单元</label>
+                         <select id="location" placeholder="num / str" ng-model="dds.dataType.value"
+                                 ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                         </select>
+                     </div>
+                 </div
+             </div>
+        </div>
+        </div>
+        <div ng-show="class.code=='CC'">
+          <div style="background: #fff;">
+            <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                <div class="inputrow inputInDialog left-border-bottom">
+                    <label>类型</label>
+                    <select id="type" placeholder="请选择..." ng-model="dds.dataType.value"
+                            ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                    </select>
+                </div>
+            </div>
+            <div ng-repeat="s in organization.segments" ng-class-odd="'rightList'" ng-class-even="'leftList'" >
+                  <div class="inputrow inputInDialog" ng-class-odd="'right-border-bottom'" ng-class-even="'left-border-bottom'">
+                      <label>
+                          <a title="删除" ng-click="delSegment(s)" ng-show="!$first"><i class="icon-minus-sign" style="color: inherit"/> </a>
+                          <a title="添加" ng-click="addSegment()"  ng-show="$first"><i class="icon-plus-sign" style="color: inherit"/> </a>
+                          段值
+                      </label>
+                      <input type="text" ng-model="s" />
+                   </div>
+            </div>
+          </div>
+        </div>
+        <div ng-show="class.code=='HR'">
+            <div style="background: #fff;">
+                 <div style="float: left; width: 50%; border-right: 1px dashed #ccc">
+                     <div class="inputrow inputInDialog left-border-bottom">
+                         <label>类型</label>
+                         <select id="type" placeholder="请选择..." ng-model="dds.dataType.value"
+                                 ng-Options="t.name for t in dds.dataType.options" ng-disabled="isReadOnly()">
+                         </select>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    </ng-form>
+     <div style="clear: both" />
+     <div class="operationdiv" ng-show="hasClass">
+         <a ng-click="saveOrg(organization)">确定</a> |<a ng-click="cancelAddOrg()">取消</a><span>&nbsp</span>
+    </div>
+    </div>
+</div>

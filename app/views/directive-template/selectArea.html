@@ -1,0 +1,45 @@
+<div class="col-md-5">
+    <div class="form-group">
+        <label for="country" class="col-sm-3 control-label">国家</label>
+        <div class="col-sm-9">
+            <select class="form-control" id="country" ng-options="a.name for a in countries" 
+                    ng-model="countryModel" ng-change="onChange()">
+                <option value="" style="display: none;">请选择...</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="col-md-5 col-md-offset-2">
+    <div class="form-group">
+        <label for="province" class="col-sm-3 control-label">省/州</label>
+        <div class="col-sm-9">
+            <select class="form-control" id="province" ng-options="a.name for a in provinces" 
+                    ng-model="provinceModel" ng-change="onProvinceChange(provinceModel.code)">
+                <option value="" style="display: none;">请选择...</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-5">
+    <div class="form-group">
+        <label for="city" class="col-sm-3 control-label">市</label>
+        <div class="col-sm-9">
+            <select class="form-control" id="city" ng-options="a.name for a in cities" 
+                    ng-model="cityModel" ng-change="onCityChange(cityModel.code)">
+                <option value="" style="display: none;">请选择...</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="col-md-5 col-md-offset-2">
+    <div class="form-group">
+        <label for="district" class="col-sm-3 control-label">区/县</label>
+        <div class="col-sm-9">
+            <select class="form-control" id="district" ng-options="a.name for a in districts"
+                    ng-model="districtModel" ng-change="onChange()">
+                <option value="" style="display: none;">请选择...</option>
+            </select>
+        </div>
+    </div>
+</div>

@@ -1,83 +1,440 @@
-define(['angular', 'angularResource'], function (angular) {
-    'use strict';
+define([
+        'angular',
+        'angularResource'
+    ],
+    function(angular) {
+        'use strict';
 
-    /* Services */
+        /* Services */
 
-    // Demonstrate how to register services
-    // In this case it is a simple value service.
-    var urlPrefix = '../';
-    return angular.module('myApp.services', ['ngResource'])
-        .value('version', '0.0.1')
-        .constant('URL_PREFIX', urlPrefix)
+        // Demonstrate how to register services
+        // In this case it is a simple value service.
+        var urlPrefix = '../';
+        return angular.module('myApp.services', ['ngResource'])
+            .value('version', '0.0.1')
+            .constant('URL_PREFIX', urlPrefix)
         // - Common util api definitions start
-        .factory('ValidatorService', [function () {
-            return {
-                email: function email(str) {
-                    if (typeof str === 'string') {
-                        return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(str);
+        // --- ControllerDataService
+        .factory('ControllerDataService', [
+            function() {
+                var $dataMap = {};
+                return {
+                    set: function(name, value) {
+                        if (angular.isString(name)) {
+                            $dataMap[name] = value;
+                        }
                     }
-                },
-                phone: function phone(str) {
-                    if (typeof str === 'string') {
-                        return /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/.test(str);
+                };
+            }
+        ])
+        // --- ValidatorService
+        .factory('ValidatorService', [
+
+            function() {
+                return {
+                    email: function email(str) {
+                        if (typeof str === 'string') {
+                            return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(str);
+                        }
+                    },
+                    phone: function phone(str) {
+                        if (typeof str === 'string') {
+                            return /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/.test(str);
+                        }
+                    },
+                    url: function url(str) {
+                        if (typeof str === 'string') {
+                            return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(str);
+                        }
+                    },
+                    fax: function fax(str) {
+                        if (typeof str === 'string') {
+                            return /^\+?[0-9]+$/.test(str);
+                        }
                     }
-                },
-                url: function url(str) {
-                    if (typeof str === 'string') {
-                        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(str);
+                };
+            }
+        ])
+        // --- CommonService
+        .service('CommonService', ['$q', 'limitToFilter', '$timeout', 'DDService',
+            function($q, limitToFilter, $timeout, DDService) {
+                return {
+                    getAutoData: function(items, term, attr) {
+                        var deferred = $q.defer(),
+                            result = [];
+                        if (items != undefined) {
+                            for (var i = 0; i < items.length; i++) {
+                                if (items[i][attr] != undefined && (term != '.' && items[i][attr].indexOf(term) != -1 || term == '.' || term[attr] != undefined)) {
+                                    result.push(items[i]);
+                                }
+                            }
+                        }
+                        result = limitToFilter(result, 10);
+                        $timeout(function() {
+                            deferred.resolve(result);
+                        })
+                        return deferred.promise;
+                    },
+
+                    getSelectDds: function(code, arr) {
+                        for (var i = 0; i < arr.length; i++) {
+                            if ( !! arr[i]) {
+                                //真是个坑啊，customer后台数据字典类型保存的是DDField（只保存code），order后台数据字典类型直接保存的code
+                                //为了通用只能这样写了，重构的话，把下面的判断条件去掉一个就OK了
+                                if (arr[i].code == code || arr[i].code == code.code) {
+                                    return arr[i];
+                                };
+                            };
+                        };
+                        if (arr.length > 0 && !! arr[0]) {
+                            return arr[0];
+                        };
+                    },
+                    getDictData: function(dictKey, dictItem) {
+                        var self = this;
+                        var deferred = $q.defer();
+                        var dictData = {
+                            selectedDD: {},
+                            options: []
+                        };
+                        DDService.get({
+                            key: dictKey
+                        }, function(data) {
+                            if ( !! data.options && !! data.options.length && data.options.length > 0) {
+                                dictData.options = data;
+                                if (!dictItem) {
+                                    dictData.selectedDD = data.options[0];
+                                } else {
+                                    dictData.selectedDD = self.getSelectDds(dictItem ? dictItem : undefined, data.options);
+                                };
+                                deferred.resolve(dictData);
+                            };
+                        });
+                        return deferred.promise;
                     }
-                },
-                fax: function fax(str) {
-                    if (typeof str === 'string') {
-                        return /^\+?[0-9]+$/.test(str);
-                    }
-                }
+                };
+            }
+        ])
+        // --- MessageService
+        .service('MessageService', function() {
+
+            this.show = false;
+
+            // angular strap alert directive supports multiple alerts. 
+            // Usually this is a distraction to user. 
+            //Let us limit the messages to one    
+            this.messages = [];
+
+            this.showError = function(msg) {
+                this.setMessage(msg, 'error', '����');
             };
-        }])
+
+            this.showSuccess = function(msg) {
+                this.setMessage(msg, 'success', '�ɹ���');
+            };
+
+            this.showInfo = function(msg) {
+                this.setMessage(msg, 'info', '��Ϣ��');
+            };
+
+            this.showWarn = function(msg) {
+                this.setMessage(msg, 'warn', '���棺');
+            };
+
+            this.setMessage = function(content, type, title) {
+                var message = {
+                    type: type,
+                    title: title,
+                    content: content
+                };
+                this.messages[0] = message;
+
+                this.show = true;
+            };
+
+            this.close = function() {
+                this.messages = [];
+
+                this.show = false;
+            };
+        })
+        // --- DialogService
+        .service('DialogService', function($dialog) {
+            /*
+             *
+             * @param {string} title
+             *         - The title of the message box
+             * @param {string} msg
+             *         - The content of the message box
+             * @param {function} resultCallback
+             *         - The call back function, will be invoked when message box is dismissed
+             * @returns {undefined}
+             *         - No return value
+             */
+            this.showMessageBox = function(title, msg, resultCallback) {
+                var btns = [{
+                    result: 'cancel',
+                    label: 'ȡ��'
+                }, {
+                    result: 'ok',
+                    label: 'ȷ��',
+                    cssClass: 'btn-primary'
+                }];
+                $dialog.messageBox(title, msg, btns).open().then(resultCallback);
+            };
+
+            /*
+             *
+             * @param {string} url
+             *         - The url of the html to display
+             * @param {string} ctrl
+             *         - The corresponding controlller
+             * @param {function} resultCallback
+             *         - The call back function, will be invoked when dialog is dismissed
+             * @returns {undefined}
+             *         - No return value
+             */
+            this.showDialog = function(url, ctrl, resultCallback) {
+                this.showDialogWithParams(url, ctrl, '', {}, resultCallback);
+            };
+
+            /*
+             *
+             * @param {string} url
+             *         - The url of the html to display
+             * @param {string} ctrl
+             *         - The corresponding controlller
+             * @param {string} css
+             *         - The dialog css
+             *         - Note: Specify '' to use default dialog css
+             * @param {object} argument
+             *         - The additional parameter
+             *         - Note: The format of the argument shall be like {key:value,key:value,...,key:value}
+             *                 To get the parameter in dialog controller, inject 'param' in controller function arguments list
+             * @param {function} resultCallback, will be invoked when dialog is dismissed
+             *         - The call back function
+             * @returns {undefined}
+             *         - No return value
+             */
+            this.showDialogWithParams = function(url, ctrl, css, argument, resultCallback) {
+
+                var opts = {
+                    templateUrl: url,
+                    controller: ctrl
+                };
+
+                // Append css
+                if (css !== '') {
+                    opts['dialogClass'] = css;
+                }
+
+                // Append resolve item
+                opts['resolve'] = {
+                    param: function() {
+                        return argument;
+                    }
+                };
+
+                // Show the dialog
+                $dialog.dialog(opts).open().then(resultCallback);
+            };
+        })
         // - Common util api definitions end
         // - Restful api definitions start
         // -- Common Restful api definitions start
+        .factory('DDService', ['$resource',
+            function($resource) {
+                return $resource(urlPrefix + 'resources/dds/:key', {}, {
+                    get: {
+                        method: 'GET',
+                        params: {
+                            key: 'key'
+                        }
+                    }
+                });
+            }
+        ])
+        // --- Get dds array
+        .factory('DdsFactory', ['DDService', '$q',
+            function(DDService, $q) {
+                function createPromise(dds) {
+                    var q = $q.defer();
+                    DDService.get({
+                        key: dds
+                    }, function(data) {
+                        q.resolve(data);
+                    }, function(data) {
+                        q.resolve();
+                    });
+                    return q.promise;
+                };
+                return {
+                    get: function(list) {
+                        var promises = [];
+                        var resultPromise = $q.defer();
+                        if (angular.isArray(list)) {
+                            for (var i = 0; i < list.length; i++) {
+                                var dds = list[i];
+                                if (angular.isString(dds)) {
+                                    promises.push(createPromise(dds));
+                                } else {
+                                    throw Error('all array member should be string');
+                                }
+                            }
+                            $q.all(promises)
+                                .then(function(values) {
+                                    var result = {};
+                                    if (angular.isArray(values)) {
+                                        for (var i = 0; i < values.length; i++) {
+                                            var v = values[i];
+                                            result[v.keyword] = v;
+                                        }
+                                    }
+                                    resultPromise.resolve(result);
+                                });
+                        } else {
+                            throw Error('param0 is not Array');
+                        }
+                        return resultPromise.promise;
+                    }
+                };
+            }
+        ])
+        // ---AreaService
+        .factory('AreaService', ['$resource',
+            function($resource) {
+                return $resource(urlPrefix + 'resources/areas/:path/', {}, {
+                    getAreas: {
+                        method: 'GET',
+                        params: {
+                            path: 'findChilds'
+                        },
+                        isArray: true
+                    },
+                    findByCode: {
+                        method: 'GET',
+                        params: {
+                            path: 'findByCode',
+                            code: ''
+                        }
+                    }
+                });
+
+            }
+        ])
+        // ---TerritoryService
+        .factory('TerritoryService', ['$resource',
+            function($resource) {
+                return $resource(urlPrefix + 'resources/territorys/:path/', {}, {
+                    findAll: {
+                        method: 'GET',
+                        params: {
+                            path: 'findAll'
+                        },
+                        isArray: true
+                    },
+                    findByCode: {
+                        method: 'GET',
+                        params: {
+                            path: 'findByCode',
+                            code: ''
+                        }
+                    }
+                });
+
+            }
+        ])
         // -- Common Restful api definitions end
         // -- Master Restful api definitions start
-        .factory('DDService', ['$resource', function ($resource) {
-            return $resource(urlPrefix + 'resources/dds/:key', {}, {
-                get: {
+        // --- OrganizationStructureService
+        .factory('OrganizationStructureService', function($resource) {
+            return $resource(urlPrefix + 'resources/organizationStructure/:path/:id', {}, {
+                getPrimaryStructure: {
                     method: 'GET',
                     params: {
-                        key: 'key'
+                        path: 'getPrimaryStructure',
+                        id: ''
+                    }
+                },
+                addStructure: {
+                    method: 'POST',
+                    params: {
+                        path: 'addStructure'
+                    }
+                },
+                updateStructure: {
+                    method: 'POST',
+                    params: {
+                        path: 'updateStructure'
                     }
                 }
             });
-        }])
-        // --- Get dds array
-        .factory('DdsFactory', ['DDService', '$q', function(DDService, $q){
-            return {
-                get: function (list) {
-                    var promises = [];
-                    if (angular.isArray(list)) {
-                        for (var i = 0; i < list.length; i++) {
-                            var dds = list[i];
-                            if(angular.isString(dds)){
-                                var q = $q.defer();
-                                DDService.get({
-                                    key: dds
-                                }, function (data) {
-                                    q.resolve(data);
-                                }, function (data) {
-                                    q.resolve();
-                                });
-                                promises.push(q.promise);
-                            } else {
-                                throw Error('all array member should be string');
-                            }
-                        }
-                    } else {
-                        throw Error('param0 is not Array');
+        })
+        // --- OrganizationService
+        .factory('OrganizationService', function($resource) {
+            return $resource(urlPrefix + 'resources/organizations/:path', {}, {
+                getMaster: {
+                    method: 'GET',
+                    params: {
+                        path: 'getMaster'
                     }
-                    return promises;
+                },
+                addOrganization: {
+                    method: 'POST',
+                    params: {
+                        path: 'addOrganization'
+                    }
+                },
+                updateOrganization: {
+                    method: 'POST',
+                    params: {
+                        path: 'updateOrganization'
+                    }
                 }
-            };
-        }]);
-    // -- Master Restful api definitions end
-    // - Restful api definitions end
-});
+            });
+        })
+        // --- OrganizationClassService
+        .factory('OrganizationClassService', function($resource) {
+            return $resource(urlPrefix + 'resources/organizationClass/getClassDescriptors', {}, {
+                getClassDescriptors: {
+                    method: 'GET'
+                }
+            });
+        })
+        // --- SupplierService
+        .factory('SupplierService', ['$resource',
+            function($resource) {
+                return $resource(urlPrefix + 'resources/supplier/:path', {}, {
+                    validateName: {
+                        method: 'GET',
+                        params: {
+                            path: 'validatename',
+                            name: ''
+                        }
+                    }
+                });
+            }
+        ])
+        // --- DictQueryService
+        .factory('DictQueryService', ['$resource',
+            function($resource) {
+                return $resource(urlPrefix + 'resources/dictQuery/:path/:key', {}, {
+                    getAll: {
+                        method: 'GET',
+                        params: {
+                            path: 'getAll'
+                        },
+                        isArray: true
+                    },
+                    fetch: {
+                        method: 'GET',
+                        params: {
+                            path: 'fetch'
+                        }
+                    }
+                });
+            }
+        ])
+        // -- Master Restful api definitions end
+        ;
+    });
