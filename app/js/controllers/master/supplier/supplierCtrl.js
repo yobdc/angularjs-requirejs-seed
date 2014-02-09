@@ -51,7 +51,7 @@ define([], function() {
 					if (CommandService.get('SupplierCtrl')) {
 						$scope.$data = CommandService.get('SupplierCtrl');
 						if (command.action === 'AddContact') {
-							$scope.$data.supplier.contacts = $scope.$data.contacts || [];
+							$scope.$data.supplier.contacts = $scope.$data.supplier.contacts || [];
 							$scope.$data.supplier.contacts.push(command.result);
 						} else if (command.action === 'EditContact') {}
 					}
@@ -65,7 +65,7 @@ define([], function() {
 						});
 					});
 				}
-				CommandService.setCommand();
+				// CommandService.setCommand();
 			};
 			$scope.validateCompanyName = function(name) {
 				$q.when($scope.$data.supplier.validateCompanyName(name)).then(function(result) {});

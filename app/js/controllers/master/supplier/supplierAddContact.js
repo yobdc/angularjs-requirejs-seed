@@ -42,7 +42,7 @@ define([], function() {
                 if($scope.command.action==='EditContact'){
                     angular.extend($scope.originalContact, $scope.contact);
                 }
-                $scope.back();
+                $window.location.href = '#/supplier/create';
             };
 
             $scope.cancel = function() {
