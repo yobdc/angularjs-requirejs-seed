@@ -52,15 +52,13 @@ define([
         '$scope',
         '$injector',
         '$modalInstance',
-        'items',
-        function($scope, $injector, $modalInstance, items) {
+        function($scope, $injector, $modalInstance) {
             require([
                 'controllers/master/supplier/dlg',
             ], function(controller) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
-                    '$modalInstance': $modalInstance,
-                    'items': items
+                    '$modalInstance': $modalInstance
                 });
             });
         }

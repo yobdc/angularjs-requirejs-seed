@@ -147,7 +147,7 @@
                             <tr ng-show="supplier.contacts.length == 0">
                                 <td colspan="7">暂无联系人信息，点击添加</td>
                             </tr>
-                            <tr ng-repeat="c in supplier.contacts">
+                            <tr ng-repeat="c in $data.supplier.contacts">
                                 <td>
                                     <a tooltip="主联系人" href="javascript:void(0)" ng-click="c.primary = !c.primary" 
                                        ng-class="{true:'i-checked', false:'i-unchecked'}[c.primary]">
@@ -160,7 +160,7 @@
                                 <td>{{c.mobile}}</td>
                                 <td>{{c.mail}}</td>
                                 <td>
-                                    <a tooltip="编辑联系人" href="#/supplier/create/addOrEditContact?contactId={{c.contactId}}">
+                                    <a tooltip="编辑联系人" href="javascript:void(0)" ng-click="editContact(c)">
                                         <i class="fa fa-pencil fa-blue"></i>
                                     </a>
                                 </td>
@@ -173,7 +173,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="go('/supplier/create/addOrEditContact')">
+                <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="addContact()">
                     <i class="fa fa-plus"></i>
                 </button>
             </tab>

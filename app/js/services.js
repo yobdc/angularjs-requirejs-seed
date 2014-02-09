@@ -15,11 +15,12 @@ define([
             .constant('URL_PREFIX', urlPrefix)
         // - Common util api definitions start
         
-        // --- ShareDataService
-        .factory('ShareDataService', [
+        // --- CommandService
+        .factory('CommandService', [
 
             function() {
                 var $dataMap = {};
+                var $command = {};
                 return {
                     set: function(key, value) {
                         if (angular.isString(key)) {
@@ -34,6 +35,12 @@ define([
                     },
                     contain: function(key) {
                         return (key in $dataMap);
+                    },
+                    getCommand: function(){
+                        return $command;
+                    },
+                    setCommand: function(command){
+                        $command = command;
                     }
                 };
             }

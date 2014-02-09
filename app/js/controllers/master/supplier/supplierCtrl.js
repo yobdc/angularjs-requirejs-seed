@@ -8,9 +8,9 @@ define([], function() {
 		'Supplier',
 		'$q',
 		'CommonService',
-		'ShareDataService',
+		'CommandService',
 		'$location',
-		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, ShareDataService, $location) {
+		function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, CommandService, $location) {
 			$scope.accountingInfo = {
 				ledgerCatalog: '',
 				creditInfo: '',
@@ -45,18 +45,27 @@ define([], function() {
 			}
 
 			$scope.init = function() {
-				if (ShareDataService.get('SupplierCtrl')) {
-					$scope.$data = ShareDataService.get('SupplierCtrl');
+				$scope.command = CommandService.getCommand();
+				var command = $scope.command;
+				if (command && (command.receiver === 'SupplierCtrl' || command.sender === 'SupplierCtrl')) {
+					if (CommandService.get('SupplierCtrl')) {
+						$scope.$data = CommandService.get('SupplierCtrl');
+						if (command.action === 'AddContact') {
+							$scope.$data.supplier.contacts = $scope.$data.contacts || [];
+							$scope.$data.supplier.contacts.push(command.result);
+						} else if (command.action === 'EditContact') {}
+					}
 				} else {
 					$scope.$data = {};
-					ShareDataService.set('SupplierCtrl', $scope.$data);
+					CommandService.set('SupplierCtrl', $scope.$data);
 					$scope.$data.supplier = new Supplier();
 					$scope.$data.supplier.load().then(function(value) {
 						$timeout(function() {
 							$scope.$apply();
 						});
-					})
+					});
 				}
+				CommandService.setCommand();
 			};
 			$scope.validateCompanyName = function(name) {
 				$q.when($scope.$data.supplier.validateCompanyName(name)).then(function(result) {});
@@ -67,8 +76,24 @@ define([], function() {
 			$scope.removeContactPoint = function(index) {
 				$scope.$data.supplier.removeContactPoint(index);
 			};
-			$scope.editContact = function(){};
-			$scope.addContact = function(){
+			$scope.editContact = function(contact) {
+				if (contact) {
+					CommandService.setCommand({
+						receiver: 'SupplierAddContactCtrl',
+						sender: 'SupplierCtrl',
+						action: 'EditContact',
+						result: contact
+					});
+					$location.path('/supplier/create/addOrEditContact');
+				}
+			};
+			$scope.addContact = function() {
+				CommandService.setCommand({
+					receiver: 'SupplierAddContactCtrl',
+					sender: 'SupplierCtrl',
+					action: 'AddContact'
+				});
+				// $scope.go('/supplier/create/addOrEditContact')
 				$location.path('/supplier/create/addOrEditContact');
 			};
 			$scope.save = function() {

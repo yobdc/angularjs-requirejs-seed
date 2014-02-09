@@ -5,7 +5,7 @@ define(['angular', 'app'], function(angular, app) {
         function($routeProvider) {
             $routeProvider.when('/supplier/create', {
                 templateUrl: 'app/views/master/supplier/supplier.html',
-                controller: 'SupplierCtrl'
+                controller: 'SupplierCtrl',
             }).when('/supplier/create/addOrEditContact', {
                 templateUrl: 'app/views/master/supplier/addContact.html',
                 controller: 'SupplierAddContactCtrl'
