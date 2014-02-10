@@ -293,7 +293,7 @@
                     <div class="bottom-arrow"></div>
                 </tab-heading>
                 <div class="nav-circle-tab">
-                    dollar
+                    zz
                 </div>
             </tab>
             <tab>
@@ -301,8 +301,9 @@
                     <i class="fa fa-align-justify"></i>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
-                <div class="nav-circle-tab">
-                    <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="dt" placeholder="zzz"/>
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/personalInfo.html'" ng-if="$data.supplier.type=='C'">
+                </div>
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/companyInfo.html'" ng-if="$data.supplier.type=='B'">
                 </div>
             </tab>
         </tabset>

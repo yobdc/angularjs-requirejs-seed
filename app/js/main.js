@@ -16,6 +16,8 @@ require.config({
 		'angular' : {'exports' : 'angular'},
 		'angularRoute': ['angular'],
 		'angularResource': ['angular'],
+		'angularAnimate': ['angular'],
+		'angularTouch': ['angular'],
 		'bootstrap': ['jquery'],
 		'angularBootstrap': ['angular', 'bootstrap'],
         'angularStrap': ['angular', 'bootstrap'],
