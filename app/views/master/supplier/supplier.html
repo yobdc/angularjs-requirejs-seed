@@ -185,9 +185,9 @@
                 <div class="row panel panel-default form-horizontal">
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">总账分类</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.ledgerCatalog" id="inputEmail3" placeholder="请选择...">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">总账分类</label>
+                            <div class="col-xs-9 col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-md-9 col-xs-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.ledgerCatalog" id="inputEmail3" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
@@ -195,17 +195,17 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">付款条件</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" id="inputEmail3" placeholder="请选择...">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">付款条件</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" id="inputEmail3" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">信用信息</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" ng-model="accountingInfo.creditInfo" class="form-control" placeholder="请输入...">
+                            <label for="inputEmail3" class="col-xs-3 col-md-3 col-sm-3 control-label">信用信息</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" ng-model="accountingInfo.creditInfo" class="col-xs-9 col-md-9 col-sm-9 form-control" placeholder="请输入...">
                             </div>
                         </div>
                     </div>
@@ -213,18 +213,18 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">结算类型</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.settlementType" id="inputEmail3" placeholder="请选择...">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">结算类型</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.settlementType" id="inputEmail3" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">账期</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" datepicker-popup="yyyy-MM-dd" class="col-md-9 col-sm-9 form-control" ng-model="accountingInfo.accountDate" is-open="accountDateOpenFlag" placeholder="请选择...">
-                                <div class="col-md-1 col-sm-1 icon-in-input" >
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">账期</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" datepicker-popup="yyyy-MM-dd" class="col-xs-9 col-md-9 col-sm-9 form-control" ng-model="accountingInfo.accountDate" is-open="accountDateOpenFlag" placeholder="请选择...">
+                                <div class="col-md-1 col-xs-1 col-sm-1 icon-in-input" >
                                     <i class="fa fa-calendar" ng-click="accountDateOpen()" ></i>
                                 </div>
                             </div>
@@ -235,10 +235,10 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">账期提醒</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control"  ng-model="accountingInfo.accountAlert" placeholder="请输入...">
-                                <div class="col-md-1 col-sm-1 icon-in-input">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">账期提醒</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control"  ng-model="accountingInfo.accountAlert" placeholder="请输入...">
+                                <div class="col-md-1 col-xs-1 col-sm-1 icon-in-input">
                                     天
                                 </div>
                             </div>
@@ -247,9 +247,9 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">付款方式</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" placeholder="请选择...">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">付款方式</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
@@ -257,17 +257,17 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">付款对象</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTo" placeholder="请选择...">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">付款对象</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTo" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-md-3 col-sm-3 control-label">缺省币种</label>
-                            <div class="col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.defaultCurrency" placeholder="请选择...">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">缺省币种</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.defaultCurrency" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
@@ -275,8 +275,8 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">同时为客户</label>
-                            <div class="col-md-9 col-sm-9">
+                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">同时为客户</label>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
                                 <div ng-switcher class="form-control" ng-model="accountingInfo.isCustomer"></div>
                             </div>
                         </div>

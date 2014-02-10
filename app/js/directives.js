@@ -23,6 +23,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     return updateModel();
                 };
                 return ngModel.$render = function() {
+                    ngModel.$setViewValue(!!ngModel.$viewValue);
                     return updateModel();
                 };
             }
@@ -160,7 +161,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                 templateUrl: 'app/views/directive-template/contactInfo.html',
                 controller: function($scope, $element, $attrs, $transclude) {
                     DictQueryService.fetch({
-                        key: $attrs.titleKey
+                        keyword: $attrs.titleKey
                     }, function(data) {
                         $scope.infoTitles = data.options;
                         if ($scope.contactModel && $scope.contactModel.length > 0) {
@@ -531,7 +532,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                         element.after($popup);
                     }
                     if (withBtn) {
-                        var btn = angular.element('<a class="col-md-1 col-sm-1 dropdown-toggle icon-in-input" data-toggle="dropdown" href="#"><i class="fa fa-chevron-down"></i></a>');
+                        var btn = angular.element('<a class="col-xs-1 col-md-1 col-sm-1 dropdown-toggle icon-in-input" data-toggle="dropdown" href="#"><i class="fa fa-chevron-down"></i></a>');
                         btn.bind('click', function() {
                             resetMatches();
                             modelCtrl.$viewValue = modelCtrl.$viewValue || '.';
@@ -547,45 +548,16 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
 
         }
     ])
-    //from bootstrap-ui typeahead parser
-    .factory('optionParser', ['$parse',
-        function($parse) {
+    .directive('multiselect', ['$parse', '$document', '$compile', 'typeaheadParser',
 
-            //                      00000111000000000000022200000000000000003333333333333330000000000044000
-            var TYPEAHEAD_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+(.*)$/;
-
-            return {
-                parse: function(input) {
-
-                    var match = input.match(TYPEAHEAD_REGEXP),
-                        modelMapper, viewMapper, source;
-                    if (!match) {
-                        throw new Error(
-                            "Expected typeahead specification in form of '_modelValue_ (as _label_)? for _item_ in _collection_'" +
-                            " but got '" + input + "'.");
-                    }
-
-                    return {
-                        itemName: match[3],
-                        source: $parse(match[4]),
-                        viewMapper: $parse(match[2] || match[1]),
-                        modelMapper: $parse(match[1])
-                    };
-                }
-            };
-        }
-    ])
-
-    .directive('multiselect', ['$parse', '$document', '$compile', 'optionParser',
-
-        function($parse, $document, $compile, optionParser) {
+        function($parse, $document, $compile, typeaheadParser) {
             return {
                 restrict: 'E',
                 require: 'ngModel',
                 link: function(originalScope, element, attrs, modelCtrl) {
 
                     var exp = attrs.options,
-                        parsedResult = optionParser.parse(exp),
+                        parsedResult = typeaheadParser.parse(exp),
                         isMultiple = attrs.multiple ? true : false,
                         required = false,
                         scope = originalScope.$new(),
