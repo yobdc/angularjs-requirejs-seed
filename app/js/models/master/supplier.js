@@ -16,7 +16,7 @@ define(['models'], function(providers) {
 
                 function Supplier() {
                     $self = this;
-                    // - Supplier fields
+                    // - Supplier basic fields
                     $self.type = null;
                     $self.firstName = null;
                     $self.lastName = null;
@@ -29,7 +29,49 @@ define(['models'], function(providers) {
                     $self.remark = null;
                     $self.type = null;
                     $self.companyName = null;
+                    // - Supplier contact info
                     $self.contactInfo = [];
+                    // - Supplier personal fields
+                    var person = {};
+                    person.realName = null; //真实姓名
+                    person.appellation = null; //称呼
+                    // person.gender = null; //性别
+                    person.birthday = null; //出生日期
+                    person.birthplace = null //出生地
+                    person.indentificationType = null; //证件类型
+                    person.identificationNumber = null; //证件号码
+                    // person.education = null; //学历
+                    // person.married = null; //婚姻状态
+                    person.personalIncome = null; //个人收入
+                    person.familyIncome = null; //家庭收入
+                    person.isInternalSupplier = false; //内部供应商
+                    person.expiryDateFrom = null; //有效日期开始
+                    person.expiryDateTo = null //有效日期结束
+                    person.availableTimeFrom = null; //可联系时间开始
+                    person.availableTimeTo = null; //可联系时间结束
+                    // person.purchaseGroup = null; //采购组
+                    person.workdays = []; //工作日
+                    $self.personInfo = person;
+                    // - Supplier company fields
+                    var company = {};
+                    company.taxRegistrationNumber = null; //纳税登记编码
+                    company.taxPayerIdentity = null; //纳税人标识
+                    company.staffCount = null; //员工数
+                    company.establishYear = null; //建立年度
+                    company.ceoName = null; //CEO名称
+                    company.ceoAppellation = null; //CEO称谓
+                    company.organizationCode = null; //组织机构代码
+                    company.companyType = null; //类型
+                    // company.businessScope = null; //业务范围
+                    company.accountingPeriodEnd = null; //会计期末
+                    company.isInternalSupplier = null; //内部供应商
+                    company.expiryDateFrom = null; //有效日期开始
+                    company.expiryDateTo = null //有效日期结束
+                    company.availableTimeFrom = null; //可联系时间开始
+                    company.availableTimeTo = null; //可联系时间结束
+                    // company.purchaseGroup = null; //采购组
+                    company.workdays = []; //工作日
+                    $self.companyInfo = company;
                 };
                 Supplier.prototype.load = function(param) {
                     var promise;
@@ -53,7 +95,9 @@ define(['models'], function(providers) {
                     ])).then(function(value) {
                         $self.dds = value;
                         $self.addContactPoint();
+                        // 设置默认供应商类型
                         $self.type = $self.dds[CUSTOMER_TYPE].options[0].code;
+
                         q.resolve($self);
                     }, function(values) {
                         q.reject();
