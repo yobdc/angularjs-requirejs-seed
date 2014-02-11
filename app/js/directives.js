@@ -23,7 +23,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     return updateModel();
                 };
                 return ngModel.$render = function() {
-                    ngModel.$setViewValue(!!ngModel.$viewValue);
+                    ngModel.$setViewValue( !! ngModel.$viewValue);
                     return updateModel();
                 };
             }
@@ -548,6 +548,9 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
 
         }
     ])
+    /*
+     * @Description : multiselect
+     */
     .directive('multiselect', ['$parse', '$document', '$compile', 'typeaheadParser',
 
         function($parse, $document, $compile, typeaheadParser) {
@@ -561,7 +564,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                         isMultiple = attrs.multiple ? true : false,
                         required = false,
                         scope = originalScope.$new(),
-                        changeHandler = attrs.change || anguler.noop;
+                        changeHandler = attrs.change || angular.noop;
 
                     scope.items = [];
                     scope.header = '请选择...';
@@ -640,9 +643,17 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     element.append($compile(popUpEl)(scope));
 
                     function getHeaderText() {
-                        if (is_empty(modelCtrl.$modelValue)) return scope.header = '请选择...';
+                        if (is_empty(modelCtrl.$modelValue)) return scope.header = '';
                         if (isMultiple) {
-                            scope.header = modelCtrl.$modelValue.length + ' ' + 'selected';
+                            scope.header = '';
+                            var index = 0;
+                            for (var i = 0; i < scope.items.length; i++) {
+                                var item = scope.items[i];
+                                if (item.checked) {
+                                    scope.header += (index ? ',' : '') + item.label;
+                                    index++;
+                                }
+                            }
                         } else {
                             var local = {};
                             local[parsedResult.itemName] = modelCtrl.$modelValue;
@@ -686,12 +697,24 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                         if (isMultiple) {
                             value = [];
                             angular.forEach(scope.items, function(item) {
-                                if (item.checked) value.push(item.model);
+                                if (item.checked) {
+                                    var v = parsedResult.modelMapper(item.model);
+                                    if (v) {
+                                        value.push(v);
+                                    } else {
+                                        value.push(item.model);
+                                    }
+                                };
                             })
                         } else {
                             angular.forEach(scope.items, function(item) {
                                 if (item.checked) {
-                                    value = item.model;
+                                    var v = parsedResult.modelMapper(item.model);
+                                    if (v) {
+                                        value = v;
+                                    } else {
+                                        value = item.model;
+                                    }
                                     return false;
                                 }
                             })
@@ -708,9 +731,17 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                                 }
                             });
                         } else {
+                            for(var i=0;i<scope.items.length;i++){
+                                var item = scope.items[i];
+                                item.checked = false;
+                            }
                             angular.forEach(newVal, function(i) {
                                 angular.forEach(scope.items, function(item) {
-                                    if (angular.equals(item.model, i)) {
+                                    var v = parsedResult.modelMapper(item.model);
+                                    if(!v){
+                                        v = item.model;
+                                    }
+                                    if (angular.equals(v, i)) {
                                         item.checked = true;
                                     }
                                 });
@@ -745,7 +776,9 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
             };
         }
     ])
-
+    /*
+     * @Description : multiselectPopup
+     */
     .directive('multiselectPopup', ['$document',
         function($document) {
             return {
@@ -753,9 +786,10 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                 scope: false,
                 replace: true,
                 template: '<div class="dropdown">' + //
-                '            <button class="btn" ng-click="toggleSelect()" ng-disabled="disabled" ng-class="{\'error\': !valid()}">' + //
-                '              <span class="pull-left">{{header}}</span>' + //
-                '            </button>' + //
+                '            <input type="text" class="form-control mytime" ng-model="header" ng-focus="toggleSelect()" placeholder="请选择...">' + //
+                // '            <button class="btn" ng-click="toggleSelect()" ng-disabled="disabled" ng-class="{\'error\': !valid()}">' + //
+                // '              <span class="pull-left">{{header}}</span>' + //
+                // '            </button>' + //
                 '            <ul class="dropdown-menu" ng-show="open">' + //
                 '              <li ng-repeat="i in items">' + //
                 '                <a ng-click="select(i)">' + //
@@ -768,6 +802,9 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
 
                     scope.isVisible = false;
 
+                    element.find('input').bind("keydown keypress", function(event) {
+                        event.preventDefault();
+                    });
                     scope.toggleSelect = function() {
                         // scope.open = !scope.open;
                         if (element.hasClass('open')) {
@@ -800,6 +837,9 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
             }
         }
     ])
+    /*
+     * @Description : timepickerJh
+     */
     .directive('timepickerJh', ['$parse', '$document', '$compile', 'typeaheadParser',
 
         function($parse, $document, $compile, typeaheadParser) {
@@ -809,16 +849,9 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                 link: function(originalScope, element, attrs, modelCtrl) {
 
                     var exp = attrs.options,
-                        parsedResult = typeaheadParser.parse(exp),
-                        isMultiple = attrs.multiple ? true : false,
-                        required = false,
-                        scope = originalScope.$new(),
-                        changeHandler = attrs.change || anguler.noop;
+                        scope = originalScope.$new();
 
-                    scope.items = [];
-                    scope.header = '请选择...';
-                    scope.multiple = isMultiple;
-                    scope.disabled = false;
+                    scope.myTime = null;
                     scope.open = false;
 
                     originalScope.$on('$destroy', function() {
@@ -826,177 +859,31 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     });
 
                     var popUpEl = angular.element('<timepicker-jh-popup></timepicker-jh-popup>');
+                    element.append($compile(popUpEl)(scope));
 
-                    //required validator
-                    if (attrs.required || attrs.ngRequired) {
-                        required = true;
-                    }
-                    attrs.$observe('required', function(newVal) {
-                        required = newVal;
-                    });
-
-                    //watch disabled state
                     scope.$watch(function() {
-                        return $parse(attrs.disabled)(originalScope);
-                    }, function(newVal) {
-                        scope.disabled = newVal;
-                    });
-
-                    //watch single/multiple state for dynamically change single to multiple
-                    scope.$watch(function() {
-                        return $parse(attrs.multiple)(originalScope);
-                    }, function(newVal) {
-                        isMultiple = newVal || false;
-                    });
-
-                    //watch option changes for options that are populated dynamically
-                    scope.$watch(function() {
-                        return parsedResult.source(originalScope);
-                    }, function(newVal) {
-                        if (angular.isDefined(newVal))
-                            parseModel();
+                        return scope.myTime;
+                    }, function(newVal, oldVal) {
+                        if (angular.isDefined(newVal)) {
+                            modelCtrl.$setViewValue(newVal);
+                        }
                     }, true);
 
-                    //watch model change
                     scope.$watch(function() {
                         return modelCtrl.$modelValue;
                     }, function(newVal, oldVal) {
-                        //when directive initialize, newVal usually undefined. Also, if model value already set in the controller
-                        //for preselected list then we need to mark checked in our scope item. But we don't want to do this every time
-                        //model changes. We need to do this only if it is done outside directive scope, from controller, for example.
+                        scope.myTime = newVal;
                         if (angular.isDefined(newVal)) {
-                            markChecked(newVal);
-                            scope.$eval(changeHandler);
+                            modelCtrl.$setViewValue(newVal);
                         }
-                        getHeaderText();
-                        modelCtrl.$setValidity('required', scope.valid());
                     }, true);
-
-                    function parseModel() {
-                        scope.items.length = 0;
-                        var model = parsedResult.source(originalScope);
-                        if (!angular.isDefined(model)) return;
-                        for (var i = 0; i < model.length; i++) {
-                            var local = {};
-                            local[parsedResult.itemName] = model[i];
-                            scope.items.push({
-                                label: parsedResult.viewMapper(local),
-                                model: model[i],
-                                checked: false
-                            });
-                        }
-                    }
-
-                    parseModel();
-
-                    element.append($compile(popUpEl)(scope));
-
-                    function getHeaderText() {
-                        if (is_empty(modelCtrl.$modelValue)) return scope.header = '请选择...';
-                        if (isMultiple) {
-                            scope.header = modelCtrl.$modelValue.length + ' ' + 'selected';
-                        } else {
-                            var local = {};
-                            local[parsedResult.itemName] = modelCtrl.$modelValue;
-
-                            scope.header = parsedResult.viewMapper(local);
-                        }
-                    }
-
-                    function is_empty(obj) {
-                        if (!obj) return true;
-                        if (obj.length && obj.length > 0) return false;
-                        for (var prop in obj)
-                            if (obj[prop]) return false;
-                        return true;
-                    };
-
-                    scope.valid = function validModel() {
-                        if (!required) return true;
-                        var value = modelCtrl.$modelValue;
-                        return (angular.isArray(value) && value.length > 0) || (!angular.isArray(value) && value != null);
-                    };
-
-                    function selectSingle(item) {
-                        if (item.checked) {
-                            scope.uncheckAll();
-                        } else {
-                            scope.uncheckAll();
-                            item.checked = !item.checked;
-                        }
-                        setModelValue(false);
-                    }
-
-                    function selectMultiple(item) {
-                        item.checked = !item.checked;
-                        setModelValue(true);
-                    }
-
-                    function setModelValue(isMultiple) {
-                        var value;
-
-                        if (isMultiple) {
-                            value = [];
-                            angular.forEach(scope.items, function(item) {
-                                if (item.checked) value.push(item.model);
-                            })
-                        } else {
-                            angular.forEach(scope.items, function(item) {
-                                if (item.checked) {
-                                    value = item.model;
-                                    return false;
-                                }
-                            })
-                        }
-                        modelCtrl.$setViewValue(value);
-                    }
-
-                    function markChecked(newVal) {
-                        if (!angular.isArray(newVal)) {
-                            angular.forEach(scope.items, function(item) {
-                                if (angular.equals(item.model, newVal)) {
-                                    item.checked = true;
-                                    return false;
-                                }
-                            });
-                        } else {
-                            angular.forEach(newVal, function(i) {
-                                angular.forEach(scope.items, function(item) {
-                                    if (angular.equals(item.model, i)) {
-                                        item.checked = true;
-                                    }
-                                });
-                            });
-                        }
-                    }
-
-                    scope.checkAll = function() {
-                        if (!isMultiple) return;
-                        angular.forEach(scope.items, function(item) {
-                            item.checked = true;
-                        });
-                        setModelValue(true);
-                    };
-
-                    scope.uncheckAll = function() {
-                        angular.forEach(scope.items, function(item) {
-                            item.checked = false;
-                        });
-                        setModelValue(true);
-                    };
-
-                    scope.select = function(item) {
-                        if (isMultiple === false) {
-                            selectSingle(item);
-                            scope.toggleSelect();
-                        } else {
-                            selectMultiple(item);
-                        }
-                    }
                 }
             };
         }
     ])
+    /*
+     * @Description : timepickerJhPopup
+     */
     .directive('timepickerJhPopup', ['$document',
         function($document) {
             return {
@@ -1004,15 +891,26 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                 scope: false,
                 replace: true,
                 template: '<div class="dropdown">' + //
-                '            <button class="btn" ng-click="toggleSelect()" ng-disabled="disabled" ng-class="{\'error\': !valid()}">' + //
-                '              <span class="pull-left">{{header}}</span>' + //
-                '            </button>' + //
-                '            <ul class="dropdown-menu" ng-show="open">' + //
-                '              <timepicker hour-step="1" minute-step="1" show-meridian="false"></timepicker>' + //
+                '            <input type="text" class="form-control mytime" ng-model="myTime" ng-focus="toggleSelect()" placeholder="请选择...">' + //
+                //'            <button class="btn" ng-click="toggleSelect()" ng-disabled="disabled" ng-class="{\'error\': !valid()}">' + //
+                //'              <span class="pull-left">{{header}}</span>' + //
+                //'            </button>' + //
+                '            <ul class="dropdown-menu no-min-width" ng-show="open">' + //
+                '              <timepicker hour-step="1" minute-step="1" ng-model="myTime" show-meridian="false"></timepicker>' + //
+                '            </ul>' + //
                 '          </div>',
                 link: function(scope, element, attrs) {
 
                     scope.isVisible = false;
+
+                    element.find('input').bind("keydown keypress", function(event) {
+                        event.preventDefault();
+                    });
+                    scope.$watch(function() {
+                        return scope.myTime;
+                    }, function(newVal, oldVal) {
+                        element.find('input')[0].value = scope.myTime ? scope.myTime.toTimeString().replace(/(\d{2}:\d{2}).*/, "$1") : '';
+                    });
 
                     scope.toggleSelect = function() {
                         // scope.open = !scope.open;

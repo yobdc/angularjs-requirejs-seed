@@ -127,7 +127,19 @@ define([], function() {
 			}, {
 				id: 3,
 				name: 'Banana'
+			}, {
+				id: 4,
+				name: 'Banana'
+			}, {
+				id: 5,
+				name: 'Banana'
+			}, {
+				id: 6,
+				name: 'Banana'
+			}, {
+				id: 7,
+				name: 'Banana'
 			}];
-			$scope.selectedFruit = null;
+			$scope.selectedFruit = [1,2];
 		}];
 });
