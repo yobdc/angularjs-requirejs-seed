@@ -1,0 +1,132 @@
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">纳税登记编码</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.taxRegistrationNumber" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">纳税人标识</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.taxPayerIdentity" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">员工数</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.staffCount" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">建立年度</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.establishYear" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">CEO名称</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.ceoName" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">CEO称谓</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.ceoAppellation" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">组织机构代码</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.organizationCode" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">类型</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" class="form-control" ng-model="$data.supplier.companyInfo.companyType" placeholder="请输入...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">业务范围</label>
+        <div class="col-md-9 col-sm-10">
+            <select class="form-control" ng-model="$data.supplier.companyInfo.businessScope">
+                <option value="">请选择...</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">会计期末</label>
+        <div class="col-md-9 col-sm-10">
+            <input type="text" datepicker-popup="yyyy-MM-dd" class="col-md-9 col-sm-9 form-control" ng-model="$data.supplier.companyInfo.accountingPeriodEnd" placeholder="请选择...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">内部供应商</label>
+        <div class="col-md-9 col-sm-10">
+        	<div ng-switcher class="form-control" ng-model="$data.supplier.companyInfo.isInternalSupplier"></div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">有效日期</label>
+        <div class="col-md-4 col-sm-3">
+            <input type="text" datepicker-popup="yyyy-MM-dd" class="col-md-9 col-sm-9 form-control" ng-model="$data.supplier.companyInfo.expiryDateFrom" placeholder="请选择...">
+        </div>
+        <label class="col-md-1 control-label">至</label>
+        <div class="col-md-4 col-sm-3">
+            <input type="text" datepicker-popup="yyyy-MM-dd" class="col-md-9 col-sm-9 form-control" ng-model="$data.supplier.companyInfo.expiryDateTo" placeholder="请选择...">
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">可联系时间</label>
+        <div class="col-md-4 col-sm-3">
+            <timepicker-jh ng-model="$data.supplier.companyInfo.availableTimeFrom"></timepicker-jh>
+        </div>
+        <label class="col-md-1 control-label">至</label>
+        <div class="col-md-4 col-sm-3">
+            <timepicker-jh ng-model="$data.supplier.companyInfo.availableTimeTo"></timepicker-jh>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">采购组</label>
+        <div class="col-md-9 col-sm-10">
+            <select class="form-control" ng-model="$data.supplier.companyInfo.purchaseGroup">
+                <option value="">请选择...</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="col-md-6 line-div">
+    <div class="form-group">
+        <label class="col-md-3 control-label">工作日</label>
+        <div class="col-md-9 col-sm-10">
+            <multiselect class="input-xlarge" multiple="true" ng-model="$data.supplier.companyInfo.workdays" options="id as c.name for c in fruits"></multiselect>
+        </div>
+    </div>
+</div>
