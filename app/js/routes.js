@@ -3,7 +3,10 @@ define(['angular', 'app'], function(angular, app) {
 
     return app.config(['$routeProvider',
         function($routeProvider) {
-            $routeProvider.when('/supplier', {
+            $routeProvider.when('/supplier/board', {
+                templateUrl: 'app/views/master/supplier/supplierBoard.html',
+                controller: 'SupplierListCtrl',
+            }).when('/supplier/list', {
                 templateUrl: 'app/views/master/supplier/supplierList.html',
                 controller: 'SupplierListCtrl',
             }).when('/supplier/create', {
