@@ -141,13 +141,6 @@ input.form-control {
 .i-unchecked {
     color:#cccccc !important;
 }
-.navbar-title {
-    text-align: center;
-    padding: 7px 0px;
-}
-.navbar-title > span {
-    color: white;
-}
 .hr-dashed {
     border-top: 1px dashed #ccc;
 }
@@ -170,30 +163,36 @@ input.form-control {
     border-bottom-color: transparent;
     border-radius: 4px 4px 0 0;
 }
-.nav-circle > ul.nav-tabs > li > a {
-    color: #cccccc
-}
+/*.nav-circle > ul.nav-tabs > li > a {
+    color: #cccccc;
+    padding: 0;
+}*/
 .nav-circle > ul.nav-tabs > li > a,
 .nav-circle > ul.nav-tabs > li > a:hover,
-.nav-circle > ul.nav-tabs > li > a:focus {
-    margin: 5px 8px 5px;
-    margin-bottom: 8px;
+.nav-circle > ul.nav-tabs > li > a:focus,
+.nav-circle > ul.nav-tabs > li.active > a {
+    color: #cccccc;
+    padding: 0;
+    background-color: transparent;
+    border-color: transparent;
+}
+.circle {
+    margin: 5px;
     text-align: center;
     height: 40px;
     width: 40px;
     border-radius: 50%;
     display: inline-table;
     border: 2px solid #cccccc;
-    padding: 0;
 }
-.nav-circle > ul.nav-tabs > li > a:hover,
-.nav-circle > ul.nav-tabs > li > a:focus,
-.nav-circle > ul.nav-tabs > li.active > a {
-    background-color: #007aff;
+.circle:hover,
+.circle:focus,
+.nav-circle > ul.nav-tabs > li.active > a > tab-heading > .circle {
     color: #ffffff;
-    border-color: transparent;
+    background-color: #007aff;
+    border-color: #007aff;
 }
-.nav-circle > ul.nav-tabs > li > a > tab-heading {
+.circle > i {
     vertical-align: middle;
     display: table-cell;
 }
@@ -212,7 +211,7 @@ input.form-control {
     border-style: solid;
 }
 .bottom-arrow {
-    bottom: -11px;
+    bottom: -2px;
     left: 50%;
     margin-left: -6px;
     border-bottom-color: #999999;
@@ -234,6 +233,7 @@ input.form-control {
 .no-min-width {
     min-width: 0;
 }
+
 /*ng-switcher css start*/
 .switch {
     position: relative;
@@ -266,6 +266,8 @@ input.form-control {
     left: 19px;
     border: 1px solid #00DB4A;
 }
+/*ng-switcher css end*/
+
 div .form-control {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -290,12 +292,12 @@ a[disabled] > .fa
 ,a[disabled] > .fa:focus {
     color: gray;
 }.no-underline {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .panel-title a {
     text-decoration: none;
     cursor: pointer;
-}/*ng-switcher css end*/
+}
 
 .slide-left.ng-enter,
 .slide-left.ng-leave,
@@ -357,6 +359,30 @@ a[disabled] > .fa
     transform: translateX(100%);
 }
 
+.circle-link {
+    margin: 2px 5px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: inline-table;
+    border: 2px solid white;
+    padding: 0;
+    text-decoration: none !important;
+}
+.circle-link > i {
+    vertical-align: middle;
+    display: table-cell;
+}
+.item-card {
+    background-color: #fff;
+    padding: 10px 5px;
+    border: 5px solid #eeeeee;
+}
+
+.line-border {
+    border: 1px solid #ddd;
+}
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
 and (min-device-width : 320px) 

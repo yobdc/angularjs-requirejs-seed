@@ -1,0 +1,50 @@
+<nav class="navbar navbar-fixed-top" role="navigation">
+    <div class="navbar-header navbar-inverse row nav-justified">
+        <a href="/"><i class="fa fa-home fa-white fa-3"></i></a>
+    </div>
+    <div class="navbar-header row nav-justified">
+        <div class="col-md-8 navbar-left line-border">
+            <div class="col-md-9">
+                <input type="text" class="form-control" placeholder="请输入关键字搜索...">
+            </div>
+            <a href="javascript:void(0)"><i class="fa fa-search col-md-3"></i></a>
+        </div>
+        <div class="col-md-4 navbar-right line-border">
+            <select class="form-control">
+                <option value="">所有供应商</option>
+            </select>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="item-card col-md-3 col-sm-4 col-xs-12" ng-repeat="a in [1,2,3,4,5,6]">
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <i class="fa fa-user fa-4x"></i>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                <label class="col-md-12 col-sm-12 col-xs-12">李三三</label>
+                <div class="col-md-12 col-sm-12 col-xs-12">ID12345</div>
+                <div class="col-md-12 col-sm-12 col-xs-12">上海贝斯有限公司</div>
+                <div class="col-md-12 col-sm-12 col-xs-12">15475544716</div>
+            </div>
+            <div class="col-md-1 col-sm-1 col-xs-1">
+                <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
+                    <i class="fa fa-flickr"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">物料</a></li>
+                    <li><a href="javascript:void(0)">合同协议</a></li>
+                    <li><a href="javascript:void(0)">设备</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+    <div class="nav navbar-right">
+        <button class="btn navbar-blue fa-white" ng-click="save()">保存</button>
+        <span class="fa-white">|</span>
+        <button class="btn navbar-blue fa-white">取消</button>
+    </div>
+</nav>

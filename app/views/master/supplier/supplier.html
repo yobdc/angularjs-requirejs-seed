@@ -125,48 +125,76 @@
     </div>
     <div class="row" style="margin-top: 20px;">
         <tabset class="nav-circle">
+            <!--tab for site-->
             <tab>
                 <tab-heading>
-                    <i class="fa fa-location-arrow"></i>
-                    <div class="bottom-arrow"></div>
-                </tab-heading>
-                <div class="nav-circle-tab">
-                    location
-                </div>
-            </tab>
-
-            <!--tab for contact-->
-            <tab> 
-                <tab-heading>
-                    <i class="fa fa-group"></i>
+                    <div class="circle">
+                        <i class="fa fa-location-arrow"></i>
+                    </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
                 <div class="table-responsive nav-circle-tab">
                     <table class="table table-hover" style="margin-bottom: 0;">
                         <tbody>
-                            <tr ng-show="supplier.contacts.length == 0">
-                                <td colspan="7">暂无联系人信息，点击添加</td>
+                            <tr ng-hide="$data.supplier.sites.length > 0">
+                                <td style="text-align: center;">暂无地址信息，点击添加</td>
+                            </tr>
+                            <tr ng-repeat="s in $data.supplier.sites">
+                                <td>
+                                    <a tooltip="主地址" class="no-underline" href="javascript:void(0)" ng-click="s.primary = !s.primary" 
+                                       ng-class="{true:'i-checked', false:'i-unchecked'}[s.primary]">
+                                        <i class="fa fa-foursquare"></i>
+                                    </a>
+                                    <span>{{s.name}}({{s.usage}})</span>
+                                </td>
+                                <td>{{s.country}}, {{s.province}}, {{s.city}}, {{s.district}}</td>
+                                <td>{{s.address}}</td>
+                                <td>{{s.primaryContact}}</td>
+                                <td>
+                                    <a tooltip="更多信息" href="javascript:void(0)" ng-click="editSite(s)">
+                                        <i class="fa fa-chevron-right"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="addSite()">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </tab>
+
+            <!--tab for contact-->
+            <tab> 
+                <tab-heading>
+                    <div class="circle">
+                        <i class="fa fa-group"></i>
+                    </div>
+                    <div class="bottom-arrow"></div>
+                </tab-heading>
+                <div class="table-responsive nav-circle-tab">
+                    <table class="table table-hover" style="margin-bottom: 0;">
+                        <tbody>
+                            <tr ng-hide="$data.supplier.contacts.length > 0">
+                                <td style="text-align: center;">暂无联系人信息，点击添加</td>
                             </tr>
                             <tr ng-repeat="c in $data.supplier.contacts">
                                 <td>
-                                    <a tooltip="主联系人" href="javascript:void(0)" ng-click="c.primary = !c.primary" 
+                                    <a tooltip="主联系人" class="no-underline" href="javascript:void(0)" ng-click="c.primary = !c.primary" 
                                        ng-class="{true:'i-checked', false:'i-unchecked'}[c.primary]">
                                         <i class="fa fa-foursquare"></i>
                                     </a>
+                                    <span>
+                                        <i class="fa fa-user fa-blue"></i>
+                                        {{c.firstName + c.lastName}}
+                                    </span>
                                 </td>
-                                <td><i class="fa fa-user fa-blue"></i></td>
-                                <td>{{c.firstName + c.lastName}}</td>
                                 <td>{{c.honorlficSuffix}}</td>
                                 <td>{{c.mobile}}</td>
                                 <td>{{c.mail}}</td>
                                 <td>
-                                    <a tooltip="编辑联系人" href="javascript:void(0)" ng-click="editContact(c)">
-                                        <i class="fa fa-pencil fa-blue"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a tooltip="删除联系人" href="javascript:void(0)" ng-click="removeContact(c)">
-                                        <i class="fa fa-trash-o fa-blue"></i>
+                                    <a tooltip="更多信息" href="javascript:void(0)" ng-click="editContact(c)">
+                                        <i class="fa fa-chevron-right"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -179,15 +207,17 @@
             </tab>
             <tab>
                 <tab-heading>
-                    <i class="fa fa-gbp"></i>
+                    <div class="circle">
+                        <i class="fa fa-gbp"></i>
+                    </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
                 <div class="row panel panel-default form-horizontal">
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">总账分类</label>
-                            <div class="col-xs-9 col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-md-9 col-xs-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.ledgerCatalog" id="inputEmail3" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">总账分类</label>
+                            <div class="col-xs-8 col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-md-8 col-xs-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.ledgerCatalog" id="inputEmail3" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
@@ -195,17 +225,17 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">付款条件</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" id="inputEmail3" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">付款条件</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" id="inputEmail3" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-xs-3 col-md-3 col-sm-3 control-label">信用信息</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" ng-model="accountingInfo.creditInfo" class="col-xs-9 col-md-9 col-sm-9 form-control" placeholder="请输入...">
+                            <label for="inputEmail3" class="col-xs-4 col-md-4 col-sm-4 control-label">信用信息</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" ng-model="accountingInfo.creditInfo" class="col-xs-8 col-md-8 col-sm-8 form-control" placeholder="请输入...">
                             </div>
                         </div>
                     </div>
@@ -213,17 +243,17 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">结算类型</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.settlementType" id="inputEmail3" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">结算类型</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.settlementType" id="inputEmail3" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">账期</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" datepicker-popup="yyyy-MM-dd" class="col-xs-9 col-md-9 col-sm-9 form-control" ng-model="accountingInfo.accountDate" is-open="accountDateOpenFlag" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">账期</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" datepicker-popup="yyyy-MM-dd" class="col-xs-8 col-md-8 col-sm-8 form-control" ng-model="accountingInfo.accountDate" is-open="accountDateOpenFlag" placeholder="请选择...">
                                 <div class="col-md-1 col-xs-1 col-sm-1 icon-in-input" >
                                     <i class="fa fa-calendar" ng-click="accountDateOpen()" ></i>
                                 </div>
@@ -235,9 +265,9 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">账期提醒</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control"  ng-model="accountingInfo.accountAlert" placeholder="请输入...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">账期提醒</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control"  ng-model="accountingInfo.accountAlert" placeholder="请输入...">
                                 <div class="col-md-1 col-xs-1 col-sm-1 icon-in-input">
                                     天
                                 </div>
@@ -247,9 +277,9 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">付款方式</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">付款方式</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTerms" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
@@ -257,17 +287,17 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">付款对象</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTo" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">付款对象</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.paymentTo" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">缺省币种</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
-                                <input type="text" class="col-xs-9 col-md-9 col-sm-9 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.defaultCurrency" placeholder="请选择...">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">缺省币种</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="accountingInfo.defaultCurrency" placeholder="请选择...">
                             </div>
                         </div>
                     </div>
@@ -275,8 +305,8 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="col-xs-3 col-md-3 col-sm-3 control-label">同时为客户</label>
-                            <div class="col-xs-9 col-md-9 col-sm-9">
+                            <label class="col-xs-4 col-md-4 col-sm-4 control-label">同时为客户</label>
+                            <div class="col-xs-8 col-md-8 col-sm-8">
                                 <div ng-switcher class="form-control" ng-model="accountingInfo.isCustomer"></div>
                             </div>
                         </div>
@@ -289,7 +319,9 @@
             </tab>
             <tab>
                 <tab-heading>
-                    <i class="fa fa-dollar"></i>
+                    <div class="circle">
+                        <i class="fa fa-dollar"></i>
+                    </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
                 <div class="nav-circle-tab">
@@ -298,7 +330,9 @@
             </tab>
             <tab>
                 <tab-heading>
-                    <i class="fa fa-align-justify"></i>
+                    <div class="circle">
+                        <i class="fa fa-align-justify"></i>
+                    </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
                 <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/personalInfo.html'" ng-if="$data.supplier.type=='C'">
@@ -311,6 +345,21 @@
 </div>
 <br>
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+    <div class="nav navbar-left">
+        <a tooltip="物料" class="circle-link" href="javascript:void(0)" ng-click="goToMaterial($data.supplier.id)">
+            <i class="fa fa-eraser fa-white"></i>
+        </a>
+    </div>
+    <div class="nav navbar-left">
+        <a tooltip="合同协议" class="circle-link" href="javascript:void(0)">
+            <i class="fa fa-files-o fa-white"></i>
+        </a>
+    </div>
+    <div class="nav navbar-left">
+        <a tooltip="设备" class="circle-link" href="javascript:void(0)">
+            <i class="fa fa-hdd-o fa-white"></i>
+        </a>
+    </div>
     <div class="nav navbar-right">
         <button class="btn navbar-blue fa-white" ng-click="save()">保存</button>
         <span class="fa-white">|</span>

@@ -11,20 +11,41 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
         return {
             require: 'ngModel',
             restrict: 'AE',
-            scope: false,
-            template: "<div class=\"switch\" ng-class=\"{\'switch-left\': !model, \'switch-right\': model}\" ng-click=\"toggle()\">\n  <div class=\"switch-button\">&nbsp;</div>\n</div>",
-            link: function(scope, element, attrs, ngModel) {
-                var updateModel;
-                updateModel = function() {
-                    return scope.model = ngModel.$viewValue;
+            template: "<div class=\"switch switch-left\">\n  <div class=\"switch-button\">&nbsp;</div>\n</div>",
+            link: function(scope, element, attrs, modelCtrl) {
+                var switchDiv = angular.element(element.find('div')[0]);
+                var modelScope = scope.$new();
+                
+                modelScope.$watch(function() {
+                    return modelCtrl.$modelValue;
+                }, function(newVal, oldVal) {
+                    if (!angular.isDefined(newVal)) {
+                        modelCtrl.$setViewValue(!!modelCtrl.$viewValue);
+                    }
+                }, true);
+                
+                scope.$on('$destroy', function() {
+                    modelScope.$destroy();
+                });
+                
+                var update = function() {
+                    if (modelCtrl.$modelValue === true) {
+                        switchDiv.removeClass('switch-left');
+                        switchDiv.addClass('switch-right');
+                    } else {
+                        switchDiv.removeClass('switch-right');
+                        switchDiv.addClass('switch-left');
+                    }
                 };
-                scope.toggle = function() {
-                    ngModel.$setViewValue(!ngModel.$viewValue);
-                    return updateModel();
-                };
-                return ngModel.$render = function() {
-                    ngModel.$setViewValue( !! ngModel.$viewValue);
-                    return updateModel();
+                
+                switchDiv.bind('click', function() {
+                    modelCtrl.$setViewValue(!modelCtrl.$viewValue);
+                    scope.$apply();
+                    return update();
+                });
+                
+                return modelCtrl.$render = function() {
+                    return update();
                 };
             }
         };
@@ -163,7 +184,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     DictQueryService.fetch({
                         keyword: $attrs.titleKey
                     }, function(data) {
-                        $scope.infoTitles = data.options;
+                        $scope.infoTitles = data.values;
                         if ($scope.contactModel && $scope.contactModel.length > 0) {
                             angular.forEach($scope.contactModel, function(c) {
                                 c.markAsUpdate = true;

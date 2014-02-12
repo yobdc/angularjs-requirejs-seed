@@ -5,16 +5,11 @@
  */
 
 define([], function() {
-    return ['$scope',
-        '$routeParams',
-        '$window',
-        'CommandService',
-        function($scope, $routeParams, $window, CommandService) {
+    return ['$scope', '$routeParams', '$location', 'CommandService',
+        function($scope, $routeParams, $location, CommandService) {
             $scope.command = CommandService.getCommand();
             var command = $scope.command;
             if (command && command.receiver === 'SupplierAddContactCtrl') {
-                $scope.adding = !$routeParams.contactId;
-                $scope.contactId = $scope.adding === true ? null : $routeParams.contactId;
                 $scope.contact = {};
                 $scope.contact.telephones = [{
                     pointName: '电话',
@@ -42,7 +37,7 @@ define([], function() {
                 if($scope.command.action==='EditContact'){
                     angular.extend($scope.originalContact, $scope.contact);
                 }
-                $window.location.href = '#/supplier/create';
+                $location.path('/supplier/create');
             };
 
             $scope.cancel = function() {
@@ -50,7 +45,7 @@ define([], function() {
                     receiver: 'SupplierCtrl',
                     action: 'CancelAddorEditContact'
                 });
-                $window.location.href = '#/supplier/create';
+                $location.path('/supplier/create');
             };
 
             $scope.areaChange = function() {

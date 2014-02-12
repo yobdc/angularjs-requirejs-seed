@@ -3,12 +3,18 @@ define(['angular', 'app'], function(angular, app) {
 
     return app.config(['$routeProvider',
         function($routeProvider) {
-            $routeProvider.when('/supplier/create', {
+            $routeProvider.when('/supplier', {
+                templateUrl: 'app/views/master/supplier/supplierList.html',
+                controller: 'SupplierListCtrl',
+            }).when('/supplier/create', {
                 templateUrl: 'app/views/master/supplier/supplier.html',
                 controller: 'SupplierCtrl',
             }).when('/supplier/create/addOrEditContact', {
                 templateUrl: 'app/views/master/supplier/addContact.html',
                 controller: 'SupplierAddContactCtrl'
+            }).when('/supplier/create/addOrEditSite', {
+                templateUrl: 'app/views/master/supplier/addSite.html',
+                controller: 'SupplierAddSiteCtrl'
             }).when('/position/create', {
                 templateUrl: 'app/views/master/position/position.html',
                 controller: 'PositionCtrl'

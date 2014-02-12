@@ -1,0 +1,95 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a href="/"><i class="fa fa-home fa-white fa-3"></i></a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row panel panel-default form-horizontal" style="position: relative;">
+        
+        <div class="dashed-divider visible-lg visible-md"></div>
+        
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" ng-model="site.name" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="code" class="col-sm-3 control-label">编码</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="code" ng-model="site.code" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="valid" class="col-sm-3 control-label">有效</label>
+                <div class="col-sm-9">
+                    <div ng-switcher class="form-control" ng-model="site.valid" id="valid"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="primary" class="col-sm-3 control-label">主地址</label>
+                <div class="col-sm-9">
+                    <div ng-switcher class="form-control" ng-model="site.primary" id="primary"></div>
+                </div>
+            </div>
+        </div>
+
+        <selectarea country-model="site.country" area-model="site.area" province-model="site.province"
+                    city-model="site.city" district-model="site.district" change-event="areaChange()"></selectarea>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="postcode" class="col-sm-3 control-label">邮编</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="postcode" ng-model="site.postcode" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="address" class="col-sm-3 control-label">地址</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="address" ng-model="site.address" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="usage" class="col-sm-3 control-label">业务用途</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="usage">
+                        <option value="" style="display: none;">请选择...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="contact" class="col-sm-3 control-label">联系人</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="contact">
+                        <option value="" style="display: none;">请选择...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+    <div class="nav navbar-right">
+        <button class="btn navbar-blue fa-white" ng-click="save()">确定</button>
+        <span class="fa-white">|</span>
+        <button class="btn navbar-blue fa-white" ng-click="cancel()">取消</button>
+    </div>
+</nav>
+

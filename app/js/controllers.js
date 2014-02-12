@@ -24,6 +24,19 @@ define([
           $location.url(path);
         }
     }])
+    .controller('SupplierListCtrl',[
+        '$scope',
+        '$injector',
+        function($scope, $injector){
+            require([
+                'controllers/master/supplier/supplierListCtrl'
+            ], function(controller){
+                $injector.invoke(controller, this, {
+                    '$scope': $scope,
+                });
+            })
+        }
+    ])
     // More involved example where controller is required from an external file
     .controller('SupplierCtrl', ['$scope',
         '$injector',
@@ -63,32 +76,30 @@ define([
             });
         }
     ])
-    //controller for supplier contact
-    .controller('SupplierContactCtrl', [
-        '$injector',
-        '$scope',
-        '$routeParams',
-        function($injector, $scope, $routeParams) {
-            require(['controllers/master/supplier/supplierContact'], function(controller) {
-                $injector.invoke(controller, this, {
-                    '$scope': $scope,
-                    '$routeParams': $routeParams
-                });
-            });
-        }
-    ])
     //controller for adding supplier contact        
     .controller('SupplierAddContactCtrl', [
         '$injector',
         '$scope',
         '$routeParams',
-        '$window',
-        function($injector, $scope, $routeParams, $window) {
+        function($injector, $scope, $routeParams) {
             require(['controllers/master/supplier/supplierAddContact'], function(controller) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
                     '$routeParams': $routeParams,
-                    '$window': $window
+                });
+            });
+        }
+    ])
+    //controller for adding supplier site        
+    .controller('SupplierAddSiteCtrl', [
+        '$injector',
+        '$scope',
+        '$routeParams',
+        function($injector, $scope, $routeParams) {
+            require(['controllers/master/supplier/supplierAddSite'], function(controller) {
+                $injector.invoke(controller, this, {
+                    '$scope': $scope,
+                    '$routeParams': $routeParams,
                 });
             });
         }
