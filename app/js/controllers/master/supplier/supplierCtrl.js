@@ -23,6 +23,7 @@ define([], function() {
                 paymentTo: '',
                 isCustomer: false
             };
+            $scope.zzz = 111;
 
             $scope.accountDateOpen = function() {
                 $timeout(function() {

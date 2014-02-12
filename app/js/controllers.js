@@ -27,12 +27,14 @@ define([
     .controller('SupplierListCtrl',[
         '$scope',
         '$injector',
-        function($scope, $injector){
+        '$timeout',
+        function($scope, $injector, $timeout){
             require([
                 'controllers/master/supplier/supplierListCtrl'
             ], function(controller){
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
+                    '$timeout': $timeout
                 });
             })
         }

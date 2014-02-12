@@ -400,6 +400,12 @@ and (max-device-width : 480px) {
         /*color: red;*/
 
     }  
+    .navbar-left {
+        float: left !important;
+    }
+    .navbar-right {
+        float: right !important;
+    }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -414,6 +420,12 @@ and (min-width : 321px) {
         /*color: red;*/
 
     }  
+    .navbar-left {
+        float: left !important;
+    }
+    .navbar-right {
+        float: right !important;
+    }
 }
 
 /* Smartphones (portrait) ----------- */
@@ -426,6 +438,12 @@ and (max-width : 320px) {
     .line-div:nth-child(even) {
         /*color: red;*/
 
+    }
+    .navbar-left {
+        float: left !important;
+    }
+    .navbar-right {
+        float: right !important;
     }
 }
 

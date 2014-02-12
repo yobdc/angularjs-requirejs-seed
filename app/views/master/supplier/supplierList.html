@@ -20,7 +20,28 @@
         </div>
     </div>
 </nav>
+<br>
 <div class="container">
+      <div>
+        <carousel interval="-1">
+          <slide ng-repeat="slide in [1,2,3,4]" active="slide.active">
+            <img ng-src="http://placekitten.com/604/300" style="margin:auto;">
+            <div class="carousel-caption">
+              <h4>Slide {{$index}}</h4>
+            </div>
+          </slide>
+        </carousel>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-info" ng-click="addSlide()">Add Slide</a>
+        </div>
+        <div class="col-md-6">
+          Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+          <br />Enter a negative number to stop the interval.
+        </div>
+      </div>
+    </div>
 </div>
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
     <div class="nav navbar-left">
