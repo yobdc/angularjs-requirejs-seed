@@ -33,6 +33,9 @@ body {
     padding: 70px 0px;
     background-color: #eeeeee;
 }
+.body-back-color {
+    background-color: #eeeeee !important;
+}
 .navbar {
     min-height: 30px;
 }
@@ -379,7 +382,9 @@ a[disabled] > .fa
     padding: 10px 5px;
     border: 5px solid #eeeeee;
 }
-
+.item-card-padding {
+    padding: 0px 2px;
+}
 .line-border {
     border: 1px solid #ddd;
 }
