@@ -11,16 +11,6 @@ define([], function() {
             var command = $scope.command;
             if (command && command.receiver === 'SupplierAddContactCtrl') {
                 $scope.contact = {};
-                $scope.contact.telephones = [{
-                    pointName: '电话',
-                    value: '',
-                    markAsNew: true
-                }];
-                $scope.contact.mails = [{
-                    pointName: '邮箱',
-                    value: '',
-                    markAsNew: true
-                }];
                 if (command.action === 'EditContact') {
                     $scope.originalContact = command.result;
                     angular.extend($scope.contact, command.result);

@@ -18,7 +18,18 @@ define(['angular', 'app'], function(angular, app) {
             }).when('/supplier/create/addOrEditSite', {
                 templateUrl: 'app/views/master/supplier/addSite.html',
                 controller: 'SupplierAddSiteCtrl'
-            }).when('/position/create', {
+            })
+            //router for supplier material
+            .when('/supplier/material/list', {
+                templateUrl: 'app/views/master/supplier/material.html',
+                controller: 'SupplierMaterialCtrl'
+            })
+            .when('/supplier/material/addOrEdit', {
+                templateUrl: 'app/views/master/supplier/addMaterial.html',
+                controller: 'SupplierAddMaterialCtrl'
+            })
+            
+            .when('/position/create', {
                 templateUrl: 'app/views/master/position/position.html',
                 controller: 'PositionCtrl'
             }).when('/organization', {

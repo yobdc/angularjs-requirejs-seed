@@ -1,0 +1,167 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a href="/"><i class="fa fa-home fa-white fa-3"></i></a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row panel panel-default form-horizontal" style="position: relative;">
+        
+        <div class="dashed-divider visible-lg visible-md"></div>
+        
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="code" class="col-sm-3 control-label">编码</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" typeahead="m.code for m in materialList | filter:$viewValue | limitTo:8" ng-model="material.code" id="code" placeholder="请选择/输入...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="code" class="col-sm-3 control-label">价格更新日期</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input type="text" datepicker-popup="yyyy-MM-dd" class="form-control" ng-model="material.updateDate" placeholder="请选择...">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="col-md-3 control-label">有效期</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" datepicker-popup="yyyy-MM-dd" class="form-control" 
+                               ng-model="material.expiryStartDat" placeholder="请选择...">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <label class="col-sm-1 control-label">至</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" datepicker-popup="yyyy-MM-dd" class="form-control" 
+                               ng-model="material.expiryEndDate" placeholder="请选择...">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="currency" class="col-sm-3 control-label">币种</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="currency">
+                        <option value="" style="display: none;">请选择...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="unit" class="col-sm-3 control-label">计量单位</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="unit" ng-model="material.postcode" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="price" class="col-sm-3 control-label">采购单价</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="price" ng-model="material.price" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="shipSite" class="col-sm-3 control-label">发货地点</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="shipSite">
+                        <option value="" style="display: none;">请选择...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="remark" class="col-sm-3 control-label">备注</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="remark" ng-model="material.remark" placeholder="请输入...">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="shipType" class="col-sm-3 control-label">运送方式</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="shipType" ng-model="material.shipType" placeholder="自动绑定发货地点" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="modifyPerson" class="col-sm-3 control-label">修改人</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="modifyPerson" ng-model="material.modifyPerson" placeholder="自动记录" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="firstDealDate" class="col-sm-3 control-label">第一次交易日</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="firstDealDate" ng-model="material.firstDealDate" placeholder="自动记录" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="dealDate" class="col-sm-3 control-label">交易日期</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="dealDate" ng-model="material.dealDate" placeholder="自动记录" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="quotationLeadTime" class="col-sm-3 control-label">报价提前期</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="quotationLeadTime" ng-model="material.quotationLeadTime" placeholder="自动记录" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="shipLeadTime" class="col-sm-3 control-label">发货提前期</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="shipLeadTime" ng-model="material.shipLeadTime" placeholder="自动记录" disabled>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+    <div class="nav navbar-right">
+        <button class="btn navbar-blue fa-white" ng-click="save()">确定</button>
+        <span class="fa-white">|</span>
+        <button class="btn navbar-blue fa-white" ng-click="cancel()">取消</button>
+    </div>
+</nav>
+

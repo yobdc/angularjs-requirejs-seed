@@ -1,0 +1,48 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a href="/"><i class="fa fa-home fa-white fa-3"></i></a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 col-sm-2 col-xs-2">
+            <img src="app/img/amy_jones.jpg" alt="aaa" class="img-circle img-responsive">
+        </div>
+        <div class="col-md-3">
+            <p>支持jpg、gif、png、bmp格式</p>
+        </div>
+    </div>
+</div>
+
+<hr class="hr-dashed">
+
+<div class="container">
+    <div class="table-responsive white-table">
+        <table class="table table-hover" style="margin-bottom: 0;">
+            <tbody>
+                <tr ng-hide="materials.length > 0">
+                    <td style="text-align: center;">暂无物料信息，点击添加</td>
+                </tr>
+                <tr ng-repeat="m in materials">
+                    <td>
+                        <a tooltip="查看物料" class="no-underline" href="javascript:void(0)" ng-click="">
+                            <i class="fa fa-foursquare"></i>
+                        </a>
+                        <span>{{m.name}}</span>
+                    </td>
+                    <td>{{m.code}}</td>
+                    <td>{{m.price}}{{m.currency}}x{{m.unit}}</td>
+                    <td>{{m.expiryStartDate}}-{{m.expiryEndDate}}</td>
+                    <td>
+                        <a tooltip="更多信息" href="javascript:void(0)" ng-click="">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-lg btn-block btn-blue" ng-click="addMaterial()">
+        <i class="fa fa-plus"></i>
+    </button>
+</div>

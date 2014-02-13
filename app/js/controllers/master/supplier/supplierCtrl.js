@@ -88,6 +88,8 @@ define([], function() {
             $scope.removeContactPoint = function(index) {
                 $scope.$data.supplier.removeContactPoint(index);
             };
+            
+            //add and edit supplier contacts
             $scope.editContact = function(contact) {
                 if (contact) {
                     CommandService.setCommand({
@@ -108,6 +110,8 @@ define([], function() {
                 // $scope.go('/supplier/create/addOrEditContact')
                 $location.path('/supplier/create/addOrEditContact');
             };
+            
+            //add and edit supplier sites
             $scope.editSite = function(site) {
                 if (site) {
                     CommandService.setCommand({
@@ -127,6 +131,12 @@ define([], function() {
                 });
                 $location.path('/supplier/create/addOrEditSite');
             };
+            
+            //go to material list of supplier
+            $scope.goToMaterial = function(id) {
+                $location.path('/supplier/material/list');
+            };
+            
             $scope.save = function() {
                 try {
                     $scope.$data.supplier.validate();

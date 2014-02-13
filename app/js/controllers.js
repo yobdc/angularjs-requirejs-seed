@@ -108,6 +108,35 @@ define([
             });
         }
     ])
+    //controller for listing supplier material        
+    .controller('SupplierMaterialCtrl', [
+        '$injector',
+        '$scope',
+        '$routeParams',
+        function($injector, $scope, $routeParams) {
+            require(['controllers/master/supplier/supplierMaterial'], function(controller) {
+                $injector.invoke(controller, this, {
+                    '$scope': $scope,
+                    '$routeParams': $routeParams,
+                });
+            });
+        }
+    ])
+    //controller for adding supplier material        
+    .controller('SupplierAddMaterialCtrl', [
+        '$injector',
+        '$scope',
+        '$routeParams',
+        function($injector, $scope, $routeParams) {
+            require(['controllers/master/supplier/supplierAddMaterial'], function(controller) {
+                $injector.invoke(controller, this, {
+                    '$scope': $scope,
+                    '$routeParams': $routeParams,
+                });
+            });
+        }
+    ])
+
     .controller('PositionCtrl', ['$scope',
         '$injector',
         '$modal',

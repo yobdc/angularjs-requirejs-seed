@@ -159,7 +159,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="addSite()">
+                <button class="btn btn-lg btn-block btn-blue" ng-click="addSite()">
                     <i class="fa fa-plus"></i>
                 </button>
             </tab>
@@ -201,7 +201,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="addContact()">
+                <button class="btn btn-lg btn-block btn-blue" ng-click="addContact()">
                     <i class="fa fa-plus"></i>
                 </button>
             </tab>
@@ -346,18 +346,20 @@
 <br>
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
     <div class="nav navbar-left">
-        <a tooltip="物料" class="circle-link" href="javascript:void(0)" ng-click="goToMaterial($data.supplier.id)">
-            <i class="fa fa-eraser fa-white"></i>
+        <a tooltip="物料" href="javascript:void(0)" ng-click="goToMaterial($data.supplier.id)">
+            <div class="circle-icon">
+                <i class="fa fa-eraser fa-white"></i>
+            </div>
         </a>
-    </div>
-    <div class="nav navbar-left">
-        <a tooltip="合同协议" class="circle-link" href="javascript:void(0)">
-            <i class="fa fa-files-o fa-white"></i>
+        <a tooltip="合同协议" href="javascript:void(0)">
+            <div class="circle-icon">
+                <i class="fa fa-files-o fa-white"></i>
+            </div>
         </a>
-    </div>
-    <div class="nav navbar-left">
-        <a tooltip="设备" class="circle-link" href="javascript:void(0)">
-            <i class="fa fa-hdd-o fa-white"></i>
+        <a tooltip="设备" href="javascript:void(0)">
+            <div class="circle-icon">
+                <i class="fa fa-hdd-o fa-white"></i>
+            </div>
         </a>
     </div>
     <div class="nav navbar-right">
