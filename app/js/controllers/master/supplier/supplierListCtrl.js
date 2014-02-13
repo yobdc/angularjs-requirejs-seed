@@ -2,23 +2,40 @@ define([], function() {
 	return [
 		'$scope',
 		'$timeout',
-		function($scope, $timeout) {
-			$scope.myInterval = 5000;
-			var slides = $scope.slides = [];
-			$scope.addSlide = function() {
-				var newWidth = 600 + slides.length;
-				slides.push({
-					image: 'http://placekitten.com/' + newWidth + '/300',
-					text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-						['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+		'$location',
+		function($scope, $timeout, $location) {
+			$scope.swtichView = function() {
+				if ($location.$$path.indexOf('board') !== -1) {
+					$location.path('/supplier/list');
+				} else {
+					$location.path('/supplier/board');
+				}
+			};
+			$scope.collapse = function() {
+				$scope.$data.collapsed = !$scope.$data.collapsed;
+			};
+			$scope.select = function(index) {
+				if ($scope.$data.supplier === $scope.$data.supplierList[index]) {
+					$scope.$data.supplier = null;
+				} else {
+					$scope.$data.supplier = $scope.$data.supplierList[index];
+					$scope.$data.collapsed = false;
+				}
+			};
+			$scope.search = function(keyword){};
+			$scope.addSupplier = function(){
+				$location.path('/supplier/create');
+			};
+			$scope.init = function() {
+				$scope.$data = {}
+				$scope.$data.supplier = null;
+				$scope.$data.supplierList = [];
+				$scope.$data.collapsed = true;
+
+				$timeout(function() {
+					$scope.$apply();
 				});
 			};
-			for (var i = 0; i < 4; i++) {
-				$scope.addSlide();
-			}
-			$scope.zzz = 123;
-			$timeout(function() {
-                            $scope.$apply();
-                        });
+			$scope.init();
 		}];
 });

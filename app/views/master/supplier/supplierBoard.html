@@ -5,10 +5,10 @@
     <div class="navbar-header row nav-justified hidden-xs">
         <div class="col-sm-8 col-md-8 navbar-left line-border">
             <div class="col-sm-6 col-md-6">
-                <input type="text" class="form-control body-back-color" placeholder="请输入关键字搜索...">
+                <input type="text" class="form-control body-back-color" ng-model="$data.keyword" placeholder="请输入关键字搜索...">
             </div>
             <div class="col-sm-1 col-md-1">
-                <button class="btn body-back-color">
+                <button class="btn body-back-color" ng-click="search($data.keyword)">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -36,7 +36,7 @@
                 <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
                     <i class="fa fa-flickr"></i>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="javascript:void(0)">物料</a></li>
                     <li><a href="javascript:void(0)">合同协议</a></li>
                     <li><a href="javascript:void(0)">设备</a></li>
@@ -47,12 +47,12 @@
 </div>
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
     <div class="nav navbar-left">
-        <button class="btn navbar-blue fa-white">
+        <button class="btn navbar-blue fa-white" ng-click="swtichView()">
             <i class="fa fa-th"></i>
         </button>
     </div>
     <div class="nav navbar-right">
-        <button class="btn navbar-blue fa-white">
+        <button class="btn navbar-blue fa-white" ng-click="addSupplier()">
             <i class="fa fa-plus"></i>
         </button>
     </div>

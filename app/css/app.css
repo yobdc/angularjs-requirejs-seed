@@ -413,9 +413,13 @@ a[disabled] > .fa
 .padding-left-15 {
     padding-left: 15px;
 }
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
 .list-view-side {
     position: absolute;
-    top: 60px;
+    top: 64px;
     left: 0;
     bottom: 0;
     width: 400px;
@@ -424,16 +428,16 @@ a[disabled] > .fa
 }
 .list-view-side-full-width {
     position: absolute;
-    top: 60px;
+    top: 64px;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 98%;
     background-color: #eee;
     overflow: auto;
 }
 .list-view-content {
     position: absolute;
-    top: 60px;
+    top: 64px;
     left: 400px;
     bottom: 0;
     right: 0;
