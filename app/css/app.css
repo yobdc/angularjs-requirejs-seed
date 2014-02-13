@@ -36,6 +36,9 @@ body {
 .body-back-color {
     background-color: #eeeeee !important;
 }
+.body-back-color-light: {
+    background-color: #F8F8F8;
+}
 .navbar {
     min-height: 30px;
 }
@@ -385,6 +388,10 @@ a[disabled] > .fa
     padding: 10px 5px;
     border: 5px solid #eeeeee;
 }
+.item-card-row-selected {
+    background-color: #F8F8F8;
+    border-left: 5px solid #007aff !important;
+}
 .item-card-row-left {
     position: absolute;
     left: 0px
@@ -405,6 +412,9 @@ a[disabled] > .fa
 }
 .fixed-witdh-60 {
     width: 60px;
+}
+.margin-left-10 {
+    margin-left: 10px;
 }
 .padding-top-bottom-15 {
     padding-top: 15px;
@@ -443,6 +453,7 @@ a[disabled] > .fa
     right: 0;
     padding: 30px;
     overflow: auto;
+    background-color: #F8F8F8;
     transition: 0.4s ease-out;
 }
 .list-view-content.ng-hide-add, .list-view-content.ng-hide-remove

@@ -15,9 +15,7 @@ define([], function() {
 				$scope.$data.collapsed = !$scope.$data.collapsed;
 			};
 			$scope.select = function(index) {
-				if ($scope.$data.supplier === $scope.$data.supplierList[index]) {
-					$scope.$data.supplier = null;
-				} else {
+				if ($scope.$data.supplier !== $scope.$data.supplierList[index]) {
 					$scope.$data.supplier = $scope.$data.supplierList[index];
 					$scope.$data.collapsed = false;
 				}
@@ -31,6 +29,10 @@ define([], function() {
 				$scope.$data.supplier = null;
 				$scope.$data.supplierList = [];
 				$scope.$data.collapsed = true;
+
+				for(var i=0;i<6;i++){
+					$scope.$data.supplierList.push({name:'李三三',id:'ID12345',company:'上海贝斯有限公司',phone:'15475544716'});
+				}
 
 				$timeout(function() {
 					$scope.$apply();
