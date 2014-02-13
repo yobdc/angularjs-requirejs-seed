@@ -1,174 +1,66 @@
-<nav class="navbar navbar-fixed-top" role="navigation">
-    <div class="navbar-header navbar-inverse row nav-justified">
-        <a href="/"><i class="fa fa-home fa-white fa-3"></i></a>
-    </div>
-    <div class="navbar-header row nav-justified hidden-xs">
-        <div class="col-sm-8 col-md-8 navbar-left line-border">
-            <div class="col-sm-6 col-md-6">
-                <input type="text" class="form-control body-back-color" placeholder="请输入关键字搜索...">
+<div class="container">
+    <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header navbar-inverse row nav-justified">
+            <a href="/"><i class="fa fa-home fa-white fa-2"></i></a>
+        </div>
+        <div class="navbar-header row nav-justified hidden-xs">
+            <div class="col-sm-8 col-md-8 navbar-left line-border">
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control body-back-color" placeholder="请输入关键字搜索...">
+                </div>
+                <div class="col-sm-1 col-md-1">
+                    <button class="btn body-back-color">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
             </div>
-            <div class="col-sm-1 col-md-1">
-                <button class="btn body-back-color">
-                    <i class="fa fa-search"></i>
-                </button>
+            <div class="col-sm-4 col-md-4 navbar-right line-border">
+                <select class="form-control body-back-color">
+                    <option value="">所有供应商</option>
+                </select>
             </div>
         </div>
-        <div class="col-sm-4 col-md-4 navbar-right line-border">
-            <select class="form-control body-back-color">
-                <option value="">所有供应商</option>
-            </select>
-        </div>
-    </div>
-</nav>
-<div class="row">
-    <div class="line-border" style="
-    position: absolute;  left: 0;  
-    top: 0;  bottom: 0;  margin: 0;  z-index: 3;
-">
-        <div class="bs-sidebar hidden-print affix" role="complementary">
-            <div class="row">
-                <div>
-                    <img src="app/img/amy_jones.jpg" class="img-circle img-responsive">
-                </div>
-                <div>
-                    <label class="col-md-12 col-sm-12 col-xs-12">李三三</label>
-                    <div class="col-md-12 col-sm-12 col-xs-12">ID12345{{zzz}}</div>
-                    <div class="col-md-12 col-sm-12 col-xs-12">上海贝斯有限公司</div>
-                    <div class="col-md-12 col-sm-12 col-xs-12">15475544716</div>
-                </div>
-                <div>
-                    <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
-                        <i class="fa fa-flickr"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">物料</a></li>
-                        <li><a href="javascript:void(0)">合同协议</a></li>
-                        <li><a href="javascript:void(0)">设备</a></li>
-                    </ul>
-                </div>
+    </nav>
+    <div ng-class="{'list-view-side': !$data.collapsed, 'list-view-side-full-width': $data.collapsed}">        
+        <div class="row dot-line-border fixed-height-120 padding-top-bottom-15" ng-repeat="a in [1,2,3,4,5,6]">
+            <div class="item-card-padding fixed-witdh-80 item-card-row-left">
+                <img src="app/img/amy_jones.jpg" class="img-circle img-responsive">
+            </div>
+            <div class="item-card-padding item-card-row-middle">
+                <label class="col-md-12 col-sm-12 col-xs-12">李三三</label>
+                <div class="col-md-12 col-sm-12 col-xs-12">ID12345{{zzz}}</div>
+                <div class="col-md-12 col-sm-12 col-xs-12">上海贝斯有限公司</div>
+                <div class="col-md-12 col-sm-12 col-xs-12">15475544716</div>
+            </div>
+            <div class="item-card-padding fixed-witdh-60 item-card-row-right">
+                <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
+                    <i class="fa fa-flickr"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">物料</a></li>
+                    <li><a href="javascript:void(0)">合同协议</a></li>
+                    <li><a href="javascript:void(0)">设备</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="" style="
-    position: absolute;top: 0;
-    left: 25%;width: 5px;height: 100%;overflow: hidden;z-index: 5;cursor: col-resize;
-" role="main">
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
-        <div class="row">zzz</div>
+    <div ng-hide="$data.collapsed" class="list-view-content" ng-include="'app/views/master/supplier/supplierReadOnly.html'">
     </div>
+    <div ng-class="{'list-view-collapse': !$data.collapsed, 'list-view-collapse-full-width': $data.collapsed}">
+        <a href="javascript:void(0)" ng-click="$data.collapsed=!$data.collapsed">
+            <i class="fa fa-3" ng-class="{'fa-angle-left': $data.collapsed, 'fa-angle-right': !$data.collapsed}"></i>
+        </a>
+    </div>
+    <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+        <div class="nav navbar-left">
+            <button class="btn navbar-blue fa-white">
+                <i class="fa fa-th"></i>
+            </button>
+        </div>
+        <div class="nav navbar-right">
+            <button class="btn navbar-blue fa-white">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </nav>
 </div>
-<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
-    <div class="nav navbar-left">
-        <button class="btn navbar-blue fa-white">
-            <i class="fa fa-th"></i>
-        </button>
-    </div>
-    <div class="nav navbar-right">
-        <button class="btn navbar-blue fa-white">
-            <i class="fa fa-plus"></i>
-        </button>
-    </div>
-</nav>

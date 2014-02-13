@@ -89,8 +89,11 @@ body {
 ,.fa-blue:focus{
     color: #007aff;
 }
-.fa-3{
+.fa-2{
     font-size: 2em;
+}
+.fa-3{
+    font-size: 3em;
 }
 
 .icon-in-input{
@@ -382,11 +385,94 @@ a[disabled] > .fa
     padding: 10px 5px;
     border: 5px solid #eeeeee;
 }
+.item-card-row-left {
+    position: absolute;
+    left: 0px
+}
+.item-card-row-middle {
+    position: absolute;
+    left: 80px
+}
+.item-card-row-right {
+    position: absolute;
+    right: 0px
+}
+.fixed-height-120 {
+    height: 120px;
+}
+.fixed-witdh-80 {
+    width: 80px;
+}
+.fixed-witdh-60 {
+    width: 60px;
+}
+.padding-top-bottom-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.padding-left-15 {
+    padding-left: 15px;
+}
+.list-view-side {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    background-color: #eee;
+    overflow: auto;
+}
+.list-view-side-full-width {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #eee;
+    overflow: auto;
+}
+.list-view-content {
+    position: absolute;
+    top: 60px;
+    left: 400px;
+    bottom: 0;
+    right: 0;
+    padding: 30px;
+    overflow: auto;
+    transition: 0.4s ease-out;
+}
+.list-view-content.ng-hide-add, .list-view-content.ng-hide-remove
+{
+  display: block !important; 
+}
+
+.list-view-content.ng-hide-remove, .list-view-content.ng-hide-add.ng-hide-add-active{
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.list-view-content.ng-hide-remove.ng-hide-remove-active, .list-view-content.ng-hide-add{
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+.list-view-collapse {
+    left: 400px;
+    position: fixed;
+    bottom: 50%;
+}
+.list-view-collapse-full-width {
+    left: 98%;
+    position: fixed;
+    bottom: 50%;
+}
 .item-card-padding {
     padding: 0px 2px;
 }
 .line-border {
     border: 1px solid #ddd;
+}
+.dot-line-border {
+    border: 1px dotted #ddd;
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
