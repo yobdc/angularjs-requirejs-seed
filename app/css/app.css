@@ -424,6 +424,13 @@ a[disabled] > .fa
 .padding-left-15 {
     padding-left: 15px;
 }
+.light-font {
+    font-weight: initial;
+    color: #999;
+}
+.form-control-label {
+    padding: 6px 0 0 12px;
+}
 .dropdown-menu-right {
     right: 0;
     left: auto;

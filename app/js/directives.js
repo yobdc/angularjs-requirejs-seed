@@ -964,5 +964,39 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                 }
             }
         }
+    ])
+    /*
+     * @Description : regionJh
+     */
+    .directive('regionJh', [
+        'RegionService',
+        '$timeout',
+        function(RegionService, $timeout) {
+            return {
+                require: 'ngModel',
+                restrict: 'E',
+                scope: {
+                    depends: '='
+                },
+                replace: true,
+                template: '<select class="form-control" ng-options="o.c as o.n for o in options">'+//
+                '            <option value="">请选择...</option>'+//
+                '          </select>',
+                link: function(scope, element, attrs, modelCtrl) {
+                    scope.$watch('depends', function(newVal, oldVal){
+                            if('depends' in attrs){
+                                var parent = RegionService.get(scope.depends);
+                                scope.options = [];
+                                if(parent){
+                                    scope.options = parent.children;
+                                }
+                                modelCtrl.$setViewValue();
+                            }else{
+                                scope.options = RegionService.getCountries();
+                            }
+                    });
+                }
+            }
+        }
     ]);
 });

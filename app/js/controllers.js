@@ -38,7 +38,7 @@ define([
                     '$timeout': $timeout,
                     '$location': $location
                 });
-            })
+            });
         }
     ])
     // More involved example where controller is required from an external file
@@ -99,11 +99,13 @@ define([
         '$injector',
         '$scope',
         '$routeParams',
-        function($injector, $scope, $routeParams) {
+        'RegionService',
+        function($injector, $scope, $routeParams, RegionService) {
             require(['controllers/master/supplier/supplierAddSite'], function(controller) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
                     '$routeParams': $routeParams,
+                    'RegionService': RegionService
                 });
             });
         }

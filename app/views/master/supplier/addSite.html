@@ -41,10 +41,38 @@
                 </div>
             </div>
         </div>
-
-        <selectarea country-model="site.country" area-model="site.area" province-model="site.province"
-                    city-model="site.city" district-model="site.district" change-event="areaChange()"></selectarea>
-
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">国家</label>
+                <div class="col-sm-9">
+                    <region-jh ng-model="a"></region-jh>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="primary" class="col-sm-3 control-label">省/州</label>
+                <div class="col-sm-9">
+                    <region-jh depends="a" ng-model="b"></region-jh>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="primary" class="col-sm-3 control-label">市</label>
+                <div class="col-sm-9">
+                    <region-jh depends="b" ng-model="c"></region-jh>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <div class="form-group">
+                <label for="primary" class="col-sm-3 control-label">区/县</label>
+                <div class="col-sm-9">
+                    <region-jh depends="c" ng-model="d"></region-jh>
+                </div>
+            </div>
+        </div>
         <div class="col-md-5">
             <div class="form-group">
                 <label for="postcode" class="col-sm-3 control-label">邮编</label>

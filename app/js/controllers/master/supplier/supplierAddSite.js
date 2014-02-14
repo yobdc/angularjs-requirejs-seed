@@ -1,12 +1,17 @@
 /*
  *  Author: Frank Feng
  *  Description: controller for add and edit supplier site
- *  
+ *
  */
 
 define([], function() {
-    return ['$scope', '$routeParams', '$location', 'CommandService',
-        function($scope, $routeParams, $location, CommandService) {
+    return [
+        '$scope',
+        '$routeParams',
+        '$location',
+        'CommandService',
+        'RegionService',
+        function($scope, $routeParams, $location, CommandService, RegionService) {
             $scope.command = CommandService.getCommand();
             var command = $scope.command;
             if (command && command.receiver === 'SupplierAddSiteCtrl') {

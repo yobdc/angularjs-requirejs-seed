@@ -145,43 +145,8 @@ define([], function() {
                 }
             };
             $scope.cancel = function() {
+                $location.path('/supplier/list');
             };
             $scope.init();
-            $scope.name = 'World';
-            $scope.cars = [{
-                    id: 1,
-                    name: 'Audi'
-                }, {
-                    id: 2,
-                    name: 'BMW'
-                }, {
-                    id: 1,
-                    name: 'Honda'
-                }];
-            $scope.selectedCar = [];
-
-            $scope.fruits = [{
-                    id: 1,
-                    name: 'Apple'
-                }, {
-                    id: 2,
-                    name: 'Orange'
-                }, {
-                    id: 3,
-                    name: 'Banana'
-                }, {
-                    id: 4,
-                    name: 'Banana'
-                }, {
-                    id: 5,
-                    name: 'Banana'
-                }, {
-                    id: 6,
-                    name: 'Banana'
-                }, {
-                    id: 7,
-                    name: 'Banana'
-                }];
-            $scope.selectedFruit = [1, 2];
         }];
 });

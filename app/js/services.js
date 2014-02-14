@@ -1,8 +1,9 @@
 define([
         'angular',
-        'angularResource'
+        'angularResource',
+        'models/master/region'
     ],
-    function(angular) {
+    function(angular, resource, regions) {
         'use strict';
 
         /* Services */
@@ -41,6 +42,38 @@ define([
                     },
                     setCommand: function(command){
                         $command = command;
+                    }
+                };
+            }
+        ])
+        // --- RegionService
+        .factory('RegionService', [
+
+            function() {
+                var $regions = {};
+                var root = {};
+                $regions['root'] = root;
+                for(var i=0;i<regions.length;i++){
+                    var region = regions[i];
+                    $regions[region.c] = region;
+                    if(region.pc && $regions[region.pc]){
+                        $regions[region.pc].children = $regions[region.pc].children || [];
+                        $regions[region.pc].children.push(region);
+                        region.parent = $regions[region.pc];
+                    }
+                    if(!region.pc){
+                        region.parent = root;
+                        root.children = root.children||[];
+                        root.children.push(region);
+                    }
+                }
+
+                return {
+                    get: function(key) {
+                        return $regions[key];
+                    },
+                    getCountries: function(){
+                        return $regions['root'].children;
                     }
                 };
             }
