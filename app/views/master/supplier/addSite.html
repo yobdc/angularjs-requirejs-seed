@@ -4,11 +4,8 @@
     </div>
 </nav>
 <div class="container">
-    <div class="row panel panel-default form-horizontal" style="position: relative;">
-        
-        <div class="dashed-divider visible-lg visible-md"></div>
-        
-        <div class="col-md-5">
+    <div class="row panel panel-default form-horizontal">        
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">名称</label>
                 <div class="col-sm-9">
@@ -16,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="code" class="col-sm-3 control-label">编码</label>
                 <div class="col-sm-9">
@@ -25,7 +22,7 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="valid" class="col-sm-3 control-label">有效</label>
                 <div class="col-sm-9">
@@ -33,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">主地址</label>
                 <div class="col-sm-9">
@@ -41,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label class="col-sm-3 control-label">国家</label>
                 <div class="col-sm-9">
@@ -49,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">省/州</label>
                 <div class="col-sm-9">
@@ -57,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">市</label>
                 <div class="col-sm-9">
@@ -65,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">区/县</label>
                 <div class="col-sm-9">
@@ -73,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="postcode" class="col-sm-3 control-label">邮编</label>
                 <div class="col-sm-9">
@@ -81,16 +78,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="address" class="col-sm-3 control-label">地址</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="address" ng-model="site.address" placeholder="请输入...">
                 </div>
             </div>
-        </div>
-        
-        <div class="col-md-5">
+        </div>        
+        <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="usage" class="col-sm-3 control-label">业务用途</label>
                 <div class="col-sm-9">
@@ -100,9 +96,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6 line-div" ng-repeat="c in $data.contacts">
             <div class="form-group">
-                <label for="contact" class="col-sm-3 control-label">联系人</label>
+                <div class="col-md-3 control-label">
+                    <i class="fa fa-plus-circle" ng-click="addContact()" ng-if="$index===0"></i>
+                    <i class="fa fa-minus-circle" ng-click="removeContact($index)" ng-if="$index!==0"></i>
+                    <label for="contact">联系人</label>
+                </div>
                 <div class="col-sm-9">
                     <select class="form-control" id="contact">
                         <option value="" style="display: none;">请选择...</option>

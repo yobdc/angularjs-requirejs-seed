@@ -11,7 +11,8 @@ define([], function() {
         '$location',
         'CommandService',
         'RegionService',
-        function($scope, $routeParams, $location, CommandService, RegionService) {
+        '$timeout',
+        function($scope, $routeParams, $location, CommandService, RegionService, $timeout) {
             $scope.command = CommandService.getCommand();
             var command = $scope.command;
             if (command && command.receiver === 'SupplierAddSiteCtrl') {
@@ -46,5 +47,21 @@ define([], function() {
             $scope.areaChange = function() {
 
             };
+            $scope.addContact = function(){
+                $scope.$data.contacts.push({});
+            };
+            $scope.removeContact = function(index){
+                if(index>=0){
+                    $scope.$data.contacts.splice(index,1);
+                }
+            };
+            $scope.init = function() {
+                $scope.$data = {};
+                $scope.$data.contacts = [{}];
+                $timeout(function() {
+                    $scope.$apply();
+                });
+            };
+            $scope.init();
         }];
 });
