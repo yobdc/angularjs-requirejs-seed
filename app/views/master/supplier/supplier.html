@@ -116,7 +116,7 @@
                                 </select>
                             </div>
                             <div class="col-md-9 col-sm-10">
-                                <input type="text" class="form-control" placeholder="请输入...">
+                                <input type="text" class="form-control" ng-model="o.value" placeholder="请输入...">
                             </div>
                         </div>
                     </div>
@@ -182,17 +182,17 @@
                             <tr ng-repeat="c in $data.supplier.contacts">
                                 <td>
                                     <a tooltip="主联系人" class="no-underline" href="javascript:void(0)" ng-click="c.primary = !c.primary" 
-                                       ng-class="{true:'i-checked', false:'i-unchecked'}[c.primary]">
+                                       ng-class="{true:'i-checked', false:'i-unchecked'}[c.isPrimary]">
                                         <i class="fa fa-foursquare"></i>
                                     </a>
                                     <span>
                                         <i class="fa fa-user fa-blue"></i>
-                                        {{c.firstName + c.lastName}}
+                                        {{c.lastName + c.firstName}}
                                     </span>
                                 </td>
-                                <td>{{c.honorlficSuffix}}</td>
+                                <td>{{c.title}}</td>
                                 <td>{{c.mobile}}</td>
-                                <td>{{c.mail}}</td>
+                                <td>{{c.email}}</td>
                                 <td>
                                     <a tooltip="更多信息" href="javascript:void(0)" ng-click="editContact(c)">
                                         <i class="fa fa-chevron-right"></i>

@@ -62,7 +62,7 @@ define([], function() {
                     if (command.action === 'EditSite') {
                         $scope.originalSite = command.result;
                         angular.extend($scope.$data.site, command.result);
-                    } else {
+                    } else if (command.action === 'AddSite') {
                         $scope.$data.site.load().then(function(value) {
                             $timeout(function() {
                                 $scope.$apply();

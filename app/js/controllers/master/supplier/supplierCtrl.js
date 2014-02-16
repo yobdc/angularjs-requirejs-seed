@@ -55,8 +55,10 @@ define([], function() {
                             case 'AddContact':
                                 $scope.$data.supplier.contacts = $scope.$data.supplier.contacts || [];
                                 $scope.$data.supplier.contacts.push(command.result);
+                                $scope.$data.supplier.setPrimaryContact(command.result);
                                 break;
                             case 'EditContact':
+                                $scope.$data.supplier.setPrimaryContact(command.result);
                                 break;
                             case 'AddSite':
                                 $scope.$data.supplier.sites = $scope.$data.supplier.sites || [];

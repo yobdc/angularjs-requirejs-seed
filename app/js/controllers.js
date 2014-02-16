@@ -85,11 +85,17 @@ define([
         '$injector',
         '$scope',
         '$routeParams',
-        function($injector, $scope, $routeParams) {
-            require(['controllers/master/supplier/supplierAddContact'], function(controller) {
+        '$timeout',
+        function($injector, $scope, $routeParams, $timeout) {
+            require([
+                'controllers/master/supplier/supplierAddContact',
+                'models/master/contact'
+                ], function(controller, Contact) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
                     '$routeParams': $routeParams,
+                    'Contact': Contact,
+                    '$timeout': $timeout
                 });
             });
         }

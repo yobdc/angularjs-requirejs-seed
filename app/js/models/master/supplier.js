@@ -128,6 +128,14 @@ define(['models'], function(providers) {
                         }
                     }
                 };
+                Supplier.prototype.setPrimaryContact = function(contact) {
+                    for (var i = 0; i < $self.contacts.length; i++) {
+                        var s = $self.contacts[i];
+                        if (s && contact && s.uid !== contact.uid) {
+                            s.isPrimary = false;
+                        }
+                    }
+                };
                 Supplier.prototype.validate = function() {
                     if ($self.type === 'C') {
                         if (!$self.firstName || !$self.lastName || !$self.title) {
