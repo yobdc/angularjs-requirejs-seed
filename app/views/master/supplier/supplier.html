@@ -129,7 +129,7 @@
             <!--tab for site-->
             <tab>
                 <tab-heading>
-                    <div class="circle">
+                    <div class="circle" tooltip="地址">
                         <i class="fa fa-location-arrow"></i>
                     </div>
                     <div class="bottom-arrow"></div>
@@ -168,7 +168,7 @@
             <!--tab for contact-->
             <tab> 
                 <tab-heading>
-                    <div class="circle">
+                    <div class="circle" tooltip="联系人">
                         <i class="fa fa-group"></i>
                     </div>
                     <div class="bottom-arrow"></div>
@@ -208,7 +208,7 @@
             </tab>
             <tab>
                 <tab-heading>
-                    <div class="circle">
+                    <div class="circle" tooltip="会计">
                         <i class="fa fa-gbp"></i>
                     </div>
                     <div class="bottom-arrow"></div>
@@ -316,7 +316,7 @@
             </tab>
             <tab>
                 <tab-heading>
-                    <div class="circle">
+                    <div class="circle" tooltip="采购">
                         <i class="fa fa-dollar"></i>
                     </div>
                     <div class="bottom-arrow"></div>
@@ -325,16 +325,24 @@
                     zz
                 </div>
             </tab>
-            <tab>
+            <tab ng-if="$data.supplier.type=='C'">
                 <tab-heading>
-                    <div class="circle">
+                    <div class="circle" tooltip="个人">
                         <i class="fa fa-align-justify"></i>
                     </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
-                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/personalInfo.html'" ng-if="$data.supplier.type=='C'">
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/personalInfo.html'">
                 </div>
-                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/companyInfo.html'" ng-if="$data.supplier.type=='B'">
+            </tab>
+            <tab ng-if="$data.supplier.type=='B'">
+                <tab-heading>
+                    <div class="circle" tooltip="公司">
+                        <i class="fa fa-align-justify"></i>
+                    </div>
+                    <div class="bottom-arrow"></div>
+                </tab-heading>
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/companyInfo.html'">
                 </div>
             </tab>
         </tabset>
