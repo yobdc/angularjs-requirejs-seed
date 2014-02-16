@@ -525,6 +525,10 @@ and (max-device-width : 480px) {
     .navbar-right {
         float: right !important;
     }
+    .no-horizontal-padding {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -532,8 +536,8 @@ and (max-device-width : 480px) {
 and (min-width : 321px) {
     /* Styles */
     .line-div:nth-child(odd) {
-        /*color: green;*/
-        border-right:1px dotted rgb(0, 0, 0);
+        /*color: green;
+        border-right:1px dotted rgb(0, 0, 0);*/
     }
     .line-div:nth-child(even) {
         /*color: red;*/

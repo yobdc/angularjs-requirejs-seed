@@ -22,22 +22,22 @@
     <div class="row panel panel-default form-horizontal" style="position: relative;">
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label input-required">名称</label>
-                <div class="col-sm-3">
+                <label for="name" class="col-md-3 col-sm-3 col-xs-4 control-label input-required">名称</label>
+                <div class="col-md-3 col-sm-3 col-xs-2">
                     <input type="text" class="form-control" id="name" ng-model="$data.contact.lastName" placeholder="姓...">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-3 col-xs-3">
                     <input type="text" class="form-control" id="name" ng-model="$data.contact.firstName" placeholder="名...">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-sm-3 col-xs-3">
                     <input type="text" class="form-control" id="name" ng-model="$data.contact.title" placeholder="称谓...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="department" class="col-sm-3 control-label">部门</label>
-                <div class="col-sm-9">
+                <label for="department" class="col-md-3 col-sm-3 col-xs-4 control-label">部门</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" id="department" ng-model="$data.contact.department" placeholder="请输入...">
                 </div>
             </div>
@@ -45,61 +45,61 @@
 
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="position" class="col-sm-3 control-label">职位</label>
-                <div class="col-sm-9">
+                <label for="position" class="col-md-3 col-sm-3 col-xs-4 control-label">职位</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" id="position" ng-model="$data.contact.position" placeholder="请输入...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="isPrimary" class="col-sm-3 control-label">主联系人</label>
-                <div class="col-sm-9">
+                <label for="isPrimary" class="col-md-3 col-sm-3 col-xs-4 control-label">主联系人</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <div ng-switcher class="form-control" ng-model="$data.contact.isPrimary" id="isPrimary"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div" ng-repeat="o in $data.contact.contactInfo">
             <div class="form-group">
-                <div class="col-md-3 control-label">
+                <div class="col-md-3 col-sm-3 col-xs-4 control-label">
                     <i class="fa fa-plus-circle" ng-click="addContactPoint()" ng-if="$index===0"></i>
                     <i class="fa fa-minus-circle" ng-click="removeContactPoint($index)" ng-if="$index!==0"></i>
                     <select class="no-select-background" ng-model="o.type" ng-options="t.code as t.name for t in $data.contact.dds['ContactInfo.Type'].options">
                     </select>
                 </div>
-                <div class="col-md-9 col-sm-10">
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" ng-model="o.value" placeholder="请输入...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-sm-3 control-label">国家</label>
-                <div class="col-sm-9">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">国家</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <region-jh ng-model="$data.contact.country.code"></region-jh>
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="primary" class="col-sm-3 control-label">省/州</label>
-                <div class="col-sm-9">
+                <label for="primary" class="col-md-3 col-sm-3 col-xs-4 control-label">省/州</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <region-jh depends="$data.contact.country.code" ng-model="$data.contact.province.code"></region-jh>
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="primary" class="col-sm-3 control-label">市</label>
-                <div class="col-sm-9">
+                <label for="primary" class="col-md-3 col-sm-3 col-xs-4 control-label">市</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <region-jh depends="$data.contact.province.code" ng-model="$data.contact.city.code"></region-jh>
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="primary" class="col-sm-3 control-label">区/县</label>
-                <div class="col-sm-9">
+                <label for="primary" class="col-md-3 col-sm-3 col-xs-4 control-label">区/县</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <region-jh depends="$data.contact.city.code" ng-model="$data.contact.region.code"></region-jh>
                 </div>
             </div>
@@ -107,16 +107,16 @@
 
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="postcode" class="col-sm-3 control-label">邮编</label>
-                <div class="col-sm-9">
+                <label for="postcode" class="col-md-3 col-sm-3 col-xs-4 control-label">邮编</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" id="postcode" ng-model="$data.contact.postcode" placeholder="请输入...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="address" class="col-sm-3 control-label">地址</label>
-                <div class="col-sm-9">
+                <label for="address" class="col-md-3 col-sm-3 col-xs-4 control-label">地址</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" id="address" ng-model="$data.contact.address" placeholder="请输入...">
                 </div>
             </div>

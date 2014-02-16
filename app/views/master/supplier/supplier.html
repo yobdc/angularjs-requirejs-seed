@@ -19,8 +19,8 @@
     <div class="row panel panel-default form-horizontal">
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label">类型</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">类型</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <select class="form-control" ng-model="$data.supplier.type" ng-options="o.code as o.name for o in $data.supplier.dds['CustomerType'].options">
                     </select>
                 </div>
@@ -28,16 +28,16 @@
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label input-required">名称</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label input-required">名称</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" placeholder="请输入..." ng-model="$data.supplier.accountName">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label">编码</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">编码</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <label class="form-control-label light-font" ng-if="!$data.supplier.accountNumber">自动生成</label>
                     <label class="form-control-label" ng-if="$data.supplier.accountNumber">{{$data.supplier.accountNumber}}</label>
                 </div>
@@ -45,8 +45,8 @@
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label">所属公司</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">所属公司</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <select class="form-control">
                         <option value="">请选择...</option>
                     </select>
@@ -55,46 +55,46 @@
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label">客户全称</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">客户全称</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" placeholder="请输入...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div" ng-if="$data.supplier.type=='C'">
             <div class="form-group">
-                <label class="col-md-3 control-label">真实姓名</label>
-                <div class="col-md-3 col-sm-3">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">真实姓名</label>
+                <div class="col-md-3 col-sm-3 col-xs-2 no-horizontal-padding">
                     <input type="text" class="form-control" placeholder="姓" ng-model="$data.supplier.lastName">
                 </div>
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-3 col-sm-3 col-xs-4 no-horizontal-padding">
                     <input type="text" class="form-control" placeholder="名" ng-model="$data.supplier.firstName">
                 </div>
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-3 col-sm-3 col-xs-4 no-horizontal-padding">
                     <input type="text" class="form-control" placeholder="称谓" ng-model="$data.supplier.title">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div" ng-if="$data.supplier.type=='B'">
             <div class="form-group">
-                <label class="col-md-3 control-label input-required">企业名称</label>
-                <div class="col-md-9 col-sm-3">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label input-required">企业名称</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" placeholder="请输入..." ng-model="$data.supplier.companyName" ng-blur="validateCompanyName($data.supplier.companyName)">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label">备注</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">备注</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" placeholder="请输入...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label class="col-md-3 control-label">关键字</label>
-                <div class="col-md-9 col-sm-10">
+                <label class="col-md-3 col-sm-3 col-xs-4 control-label">关键字</label>
+                <div class="col-md-9 col-sm-9 col-xs-8">
                     <input type="text" class="form-control" placeholder="请输入...">
                 </div>
             </div>
@@ -109,13 +109,13 @@
                 <div class="form-horizontal">
                     <div class="col-md-6 line-div" ng-repeat="o in $data.supplier.contactInfo">
                         <div class="form-group">
-                            <div class="col-md-3 control-label">
+                            <div class="col-md-3 col-sm-3 col-xs-4 control-label">
                                 <i class="fa fa-plus-circle" ng-click="addContactPoint()" ng-if="$index===0"></i>
                                 <i class="fa fa-minus-circle" ng-click="removeContactPoint($index)" ng-if="$index!==0"></i>
                                 <select class="no-select-background" ng-model="o.type" ng-options="t.code as t.name for t in $data.supplier.dds['ContactInfo.Type'].options">
                                 </select>
                             </div>
-                            <div class="col-md-9 col-sm-10">
+                            <div class="col-md-9 col-sm-9 col-xs-8">
                                 <input type="text" class="form-control" ng-model="o.value" placeholder="请输入...">
                             </div>
                         </div>
@@ -259,7 +259,6 @@
                                     <i class="fa fa-calendar" ng-click="accountDateOpen()" ></i>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="col-md-2 vertical_dotted_line visible-lg visible-md">
