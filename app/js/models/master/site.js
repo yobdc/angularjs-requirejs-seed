@@ -36,9 +36,7 @@ define(['models'], function(providers) {
                     }; //区/县
                     $self.postcode = null; //邮编
                     $self.businessScope = null; //业务用途
-                    $self.addressList = [{
-                        address: null
-                    }]; //地址
+                    $self.address = null; //地址
                     $self.contactList = [{}]; //联系人
                 };
                 Site.prototype.load = function(param) {

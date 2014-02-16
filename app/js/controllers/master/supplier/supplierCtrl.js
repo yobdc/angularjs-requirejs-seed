@@ -32,14 +32,14 @@ define([], function() {
             }
 
             $scope.ledgerCatalogs = [{
-                    name: 'bbc'
-                }, {
-                    name: 'aaa'
-                }, {
-                    name: 'abc'
-                }, {
-                    name: 'ccc'
-                }];
+                name: 'bbc'
+            }, {
+                name: 'aaa'
+            }, {
+                name: 'abc'
+            }, {
+                name: 'ccc'
+            }];
             $scope.autoLedgerCatalog = function(term) {
                 var aaa = CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
                 return CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
@@ -61,8 +61,10 @@ define([], function() {
                             case 'AddSite':
                                 $scope.$data.supplier.sites = $scope.$data.supplier.sites || [];
                                 $scope.$data.supplier.sites.push(command.result);
+                                $scope.$data.supplier.setPrimarySite(command.result);
                                 break;
                             case 'EditSite':
+                                $scope.$data.supplier.setPrimarySite(command.result);
                                 break;
                         }
                     }
@@ -79,8 +81,7 @@ define([], function() {
                 // CommandService.setCommand();
             };
             $scope.validateCompanyName = function(name) {
-                $q.when($scope.$data.supplier.validateCompanyName(name)).then(function(result) {
-                });
+                $q.when($scope.$data.supplier.validateCompanyName(name)).then(function(result) {});
             };
             $scope.addContactPoint = function() {
                 $scope.$data.supplier.addContactPoint();
@@ -88,7 +89,7 @@ define([], function() {
             $scope.removeContactPoint = function(index) {
                 $scope.$data.supplier.removeContactPoint(index);
             };
-            
+
             //add and edit supplier contacts
             $scope.editContact = function(contact) {
                 if (contact) {
@@ -110,7 +111,7 @@ define([], function() {
                 // $scope.go('/supplier/create/addOrEditContact')
                 $location.path('/supplier/create/addOrEditContact');
             };
-            
+
             //add and edit supplier sites
             $scope.editSite = function(site) {
                 if (site) {
@@ -131,12 +132,12 @@ define([], function() {
                 });
                 $location.path('/supplier/create/addOrEditSite');
             };
-            
+
             //go to material list of supplier
             $scope.goToMaterial = function(id) {
                 $location.path('/supplier/material/list');
             };
-            
+
             $scope.save = function() {
                 try {
                     $scope.$data.supplier.validate();

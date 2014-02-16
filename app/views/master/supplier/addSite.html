@@ -78,15 +78,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 line-div" ng-repeat="addr in $data.site.addressList">
+        <div class="col-md-6 line-div">
             <div class="form-group">
-                <div class="col-md-3 control-label">
-                    <i class="fa fa-plus-circle" ng-click="addAddress()" ng-if="$index===0"></i>
-                    <i class="fa fa-minus-circle" ng-click="removeAddress($index)" ng-if="$index!==0"></i>
-                    <label>地址</label>
-                </div>
+                <label for="address" class="col-sm-3 control-label">地址</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="addr.address" placeholder="请输入...">
+                    <input type="text" id="address" class="form-control" ng-model="$data.site.address" placeholder="请输入...">
                 </div>
             </div>
         </div>     

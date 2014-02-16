@@ -143,13 +143,13 @@
                             <tr ng-repeat="s in $data.supplier.sites">
                                 <td>
                                     <a tooltip="主地址" class="no-underline" href="javascript:void(0)" ng-click="s.primary = !s.primary" 
-                                       ng-class="{true:'i-checked', false:'i-unchecked'}[s.primary]">
+                                       ng-class="{true:'i-checked', false:'i-unchecked'}[s.isPrimary]">
                                         <i class="fa fa-foursquare"></i>
                                     </a>
                                     <span>{{s.name}}</span><span ng-if="s.businessScope">({{s.businessScope}})</span>
                                 </td>
                                 <td>{{s.regionString}}</td>
-                                <td>{{s.addressList}}</td>
+                                <td>{{s.address}}</td>
                                 <td>{{s.primaryContact}}</td>
                                 <td>
                                     <a tooltip="更多信息" href="javascript:void(0)" ng-click="editSite(s)">

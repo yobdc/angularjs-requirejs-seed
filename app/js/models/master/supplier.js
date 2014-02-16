@@ -6,7 +6,7 @@ define(['models'], function(providers) {
         'DdsFactory',
         '$q',
         'SupplierService',
-        'UidService', 
+        'UidService',
         function($timeout, $log, ValidatorService, DdsFactory, $q, SupplierService, UidService) {
             this.$get = function() {
                 var $self;
@@ -120,20 +120,28 @@ define(['models'], function(providers) {
                     }
                     return $self.contactInfo;
                 };
+                Supplier.prototype.setPrimarySite = function(site) {
+                    for (var i = 0; i < $self.sites.length; i++) {
+                        var s = $self.sites[i];
+                        if (s && site && s.uid !== site.uid) {
+                            s.isPrimary = false;
+                        }
+                    }
+                };
                 Supplier.prototype.validate = function() {
                     if ($self.type === 'C') {
-                        if(!$self.firstName||!$self.lastName||!$self.title){
+                        if (!$self.firstName || !$self.lastName || !$self.title) {
                             throw Error("姓名未填写");
                         }
                     } else if ($self.type === 'B') {
-                        if(!$self.companyName){
+                        if (!$self.companyName) {
                             throw Error("企业名称未填写");
                         }
                     }
-                    if(!$self.type){
+                    if (!$self.type) {
                         throw Error("供应商类型未选择");
                     }
-                    if(!$self.accountName){
+                    if (!$self.accountName) {
                         throw Error("账户名未填写");
                     }
                 };
