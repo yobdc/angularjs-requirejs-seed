@@ -7,34 +7,34 @@
     <div class="row panel panel-default form-horizontal">        
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">名称</label>
+                <label for="name" class="col-sm-3 control-label input-required">名称</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="name" ng-model="site.name" placeholder="请输入...">
+                    <input type="text" class="form-control" id="name" ng-model="$data.site.name" placeholder="请输入...">
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="code" class="col-sm-3 control-label">编码</label>
+                <label for="number" class="col-sm-3 control-label">编码</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="code" ng-model="site.code" placeholder="请输入...">
+                    <input type="text" class="form-control" id="number" ng-model="$data.site.number" placeholder="请输入...">
                 </div>
             </div>
         </div>
 
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="valid" class="col-sm-3 control-label">有效</label>
+                <label for="enabled" class="col-sm-3 control-label">有效</label>
                 <div class="col-sm-9">
-                    <div ng-switcher class="form-control" ng-model="site.valid" id="valid"></div>
+                    <div ng-switcher class="form-control" ng-model="$data.site.enabled" id="enabled"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="primary" class="col-sm-3 control-label">主地址</label>
+                <label for="isPrimary" class="col-sm-3 control-label">主地址</label>
                 <div class="col-sm-9">
-                    <div ng-switcher class="form-control" ng-model="site.primary" id="primary"></div>
+                    <div ng-switcher class="form-control" ng-model="$data.site.isPrimary" id="isPrimary"></div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">国家</label>
                 <div class="col-sm-9">
-                    <region-jh ng-model="a"></region-jh>
+                    <region-jh ng-model="$data.site.country"></region-jh>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">省/州</label>
                 <div class="col-sm-9">
-                    <region-jh depends="a" ng-model="b"></region-jh>
+                    <region-jh depends="$data.site.country" ng-model="$data.site.province"></region-jh>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">市</label>
                 <div class="col-sm-9">
-                    <region-jh depends="b" ng-model="c"></region-jh>
+                    <region-jh depends="$data.site.province" ng-model="$data.site.city"></region-jh>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">区/县</label>
                 <div class="col-sm-9">
-                    <region-jh depends="c" ng-model="d"></region-jh>
+                    <region-jh depends="$data.site.city" ng-model="$data.site.region"></region-jh>
                 </div>
             </div>
         </div>
@@ -74,29 +74,33 @@
             <div class="form-group">
                 <label for="postcode" class="col-sm-3 control-label">邮编</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="postcode" ng-model="site.postcode" placeholder="请输入...">
+                    <input type="text" class="form-control" id="postcode" ng-model="$data.site.postcode" placeholder="请输入...">
                 </div>
             </div>
         </div>
-        <div class="col-md-6 line-div">
+        <div class="col-md-6 line-div" ng-repeat="addr in $data.site.addressList">
             <div class="form-group">
-                <label for="address" class="col-sm-3 control-label">地址</label>
+                <div class="col-md-3 control-label">
+                    <i class="fa fa-plus-circle" ng-click="addAddress()" ng-if="$index===0"></i>
+                    <i class="fa fa-minus-circle" ng-click="removeAddress($index)" ng-if="$index!==0"></i>
+                    <label>地址</label>
+                </div>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="address" ng-model="site.address" placeholder="请输入...">
+                    <input type="text" class="form-control" ng-model="addr.address" placeholder="请输入...">
                 </div>
             </div>
-        </div>        
+        </div>     
         <div class="col-md-6 line-div">
             <div class="form-group">
-                <label for="usage" class="col-sm-3 control-label">业务用途</label>
+                <label for="businessScope" class="col-sm-3 control-label">业务用途</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="usage">
+                    <select class="form-control" id="businessScope" ng-model="$data.site.businessScope" ng-options="o.code as o.name for o in $data.site.dds['Site.BusinessScope'].options">
                         <option value="" style="display: none;">请选择...</option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 line-div" ng-repeat="c in $data.contacts">
+        <div class="col-md-6 line-div" ng-repeat="c in $data.site.contactList">
             <div class="form-group">
                 <div class="col-md-3 control-label">
                     <i class="fa fa-plus-circle" ng-click="addContact()" ng-if="$index===0"></i>

@@ -355,7 +355,9 @@ define([
                                     if (angular.isArray(values)) {
                                         for (var i = 0; i < values.length; i++) {
                                             var v = values[i];
-                                            result[v.keyword] = v;
+                                            if (v) {
+                                                result[v.keyword] = v;
+                                            }
                                         }
                                     }
                                     resultPromise.resolve(result);

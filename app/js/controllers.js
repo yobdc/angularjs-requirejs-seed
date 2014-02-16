@@ -102,12 +102,16 @@ define([
         'RegionService',
         '$timeout',
         function($injector, $scope, $routeParams, RegionService, $timeout) {
-            require(['controllers/master/supplier/supplierAddSite'], function(controller) {
+            require([
+                'controllers/master/supplier/supplierAddSite',
+                'models/master/site'
+                ], function(controller, Site) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
                     '$routeParams': $routeParams,
                     'RegionService': RegionService,
-                    '$timeout': $timeout
+                    '$timeout': $timeout,
+                    'Site': Site
                 });
             });
         }

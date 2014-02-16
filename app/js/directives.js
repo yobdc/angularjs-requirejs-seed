@@ -984,16 +984,23 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                 '          </select>',
                 link: function(scope, element, attrs, modelCtrl) {
                     scope.$watch('depends', function(newVal, oldVal){
-                            if('depends' in attrs){
-                                var parent = RegionService.get(scope.depends);
-                                scope.options = [];
-                                if(parent){
-                                    scope.options = parent.children;
-                                }
-                                modelCtrl.$setViewValue();
-                            }else{
-                                scope.options = RegionService.getCountries();
+                        if('depends' in attrs){
+                            var parent = RegionService.get(scope.depends);
+                            scope.options = [];
+                            if(parent){
+                                scope.options = parent.children;
                             }
+                            var oldModelValue = modelCtrl.$modelValue;
+                            modelCtrl.$setViewValue();
+                            for(var i=0;i<scope.options.length;i++){
+                                var option = scope.options[i];
+                                if(option.c===oldModelValue){
+                                    modelCtrl.$setViewValue(oldModelValue);
+                                }
+                            }
+                        }else{
+                            scope.options = RegionService.getCountries();
+                        }
                     });
                 }
             }

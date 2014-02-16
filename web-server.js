@@ -63,6 +63,18 @@ app.get('/resources/dds/CustomerType', function(req, res) {
 		}]
 	});
 });
+app.get('/resources/dds/Site.BusinessScope', function(req, res) {
+	res.send({
+		keyword: 'Site.BusinessScope',
+		options: [{
+			code: '1',
+			name: '收货'
+		}, {
+			code: '2',
+			name: '收票'
+		}]
+	});
+});
 app.get('/resources/supplier/validatename', function(req, res) {
 	res.send({
 		result: true

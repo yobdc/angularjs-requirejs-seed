@@ -12,17 +12,8 @@ define([], function() {
         'CommandService',
         'RegionService',
         '$timeout',
-        function($scope, $routeParams, $location, CommandService, RegionService, $timeout) {
-            $scope.command = CommandService.getCommand();
-            var command = $scope.command;
-            if (command && command.receiver === 'SupplierAddSiteCtrl') {
-                $scope.site = {};
-                if (command.action === 'EditSite') {
-                    $scope.originalSite = command.result;
-                    angular.extend($scope.site, command.result);
-                }
-            }
-
+        'Site',
+        function($scope, $routeParams, $location, CommandService, RegionService, $timeout, Site) {
             $scope.save = function() {
                 CommandService.setCommand({
                     receiver: 'SupplierCtrl',
@@ -35,7 +26,6 @@ define([], function() {
                 }
                 $location.path('/supplier/create');
             };
-
             $scope.cancel = function() {
                 CommandService.setCommand({
                     receiver: 'SupplierCtrl',
@@ -43,24 +33,38 @@ define([], function() {
                 });
                 $location.path('/supplier/create');
             };
-
-            $scope.areaChange = function() {
-
+            $scope.addContact = function() {
+                $scope.$data.site.addContact();
             };
-            $scope.addContact = function(){
-                $scope.$data.contacts.push({});
+            $scope.removeContact = function(index) {
+                $scope.$data.site.removeContact(index);
             };
-            $scope.removeContact = function(index){
-                if(index>=0){
-                    $scope.$data.contacts.splice(index,1);
-                }
+            $scope.addAddress = function() {
+                $scope.$data.site.addAddress();
+            };
+            $scope.removeAddress = function(index) {
+                $scope.$data.site.removeAddress(index);
             };
             $scope.init = function() {
                 $scope.$data = {};
-                $scope.$data.contacts = [{}];
-                $timeout(function() {
+                $scope.command = CommandService.getCommand();
+                var command = $scope.command;
+                if (command && command.receiver === 'SupplierAddSiteCtrl') {
+                    $scope.$data.site = new Site();
+                    if (command.action === 'EditSite') {
+                        $scope.originalSite = command.result;
+                        angular.extend($scope.site, command.result);
+                    } else {
+                        $scope.$data.site.load().then(function(value) {
+                            $timeout(function() {
+                                $scope.$apply();
+                            });
+                        });
+                    }
+                } else {
+                    $location.path('/');
                     $scope.$apply();
-                });
+                }
             };
             $scope.init();
         }];
