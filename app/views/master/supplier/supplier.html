@@ -146,10 +146,10 @@
                                        ng-class="{true:'i-checked', false:'i-unchecked'}[s.primary]">
                                         <i class="fa fa-foursquare"></i>
                                     </a>
-                                    <span>{{s.name}}({{s.usage}})</span>
+                                    <span>{{s.name}}</span><span ng-if="s.businessScope">({{s.businessScope}})</span>
                                 </td>
-                                <td>{{s.country}}, {{s.province}}, {{s.city}}, {{s.district}}</td>
-                                <td>{{s.address}}</td>
+                                <td>{{s.regionString}}</td>
+                                <td>{{s.addressList}}</td>
                                 <td>{{s.primaryContact}}</td>
                                 <td>
                                     <a tooltip="更多信息" href="javascript:void(0)" ng-click="editSite(s)">

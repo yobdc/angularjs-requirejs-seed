@@ -15,7 +15,7 @@ define([
             .value('version', '0.0.1')
             .constant('URL_PREFIX', urlPrefix)
         // - Common util api definitions start
-        
+
         // --- CommandService
         .factory('CommandService', [
 
@@ -37,10 +37,10 @@ define([
                     contain: function(key) {
                         return (key in $dataMap);
                     },
-                    getCommand: function(){
+                    getCommand: function() {
                         return $command;
                     },
-                    setCommand: function(command){
+                    setCommand: function(command) {
                         $command = command;
                     }
                 };
@@ -53,17 +53,19 @@ define([
                 var $regions = {};
                 var root = {};
                 $regions['root'] = root;
-                for(var i=0;i<regions.length;i++){
+                for (var i = 0; i < regions.length; i++) {
                     var region = regions[i];
                     $regions[region.c] = region;
-                    if(region.pc && $regions[region.pc]){
+                    if (region.pc && $regions[region.pc]) {
                         $regions[region.pc].children = $regions[region.pc].children || [];
-                        $regions[region.pc].children.push(region);
-                        region.parent = $regions[region.pc];
+                        if ($regions[region.pc].children.indexOf(region) === -1) {
+                            $regions[region.pc].children.push(region);
+                            region.parent = $regions[region.pc];
+                        }
                     }
-                    if(!region.pc){
+                    if (!region.pc) {
                         region.parent = root;
-                        root.children = root.children||[];
+                        root.children = root.children || [];
                         root.children.push(region);
                     }
                 }
@@ -72,7 +74,7 @@ define([
                     get: function(key) {
                         return $regions[key];
                     },
-                    getCountries: function(){
+                    getCountries: function() {
                         return $regions['root'].children;
                     }
                 };
@@ -194,19 +196,19 @@ define([
             this.messages = [];
 
             this.showError = function(msg) {
-                this.setMessage(msg, 'error', '����');
+                this.setMessage(msg, 'error', '错误');
             };
 
             this.showSuccess = function(msg) {
-                this.setMessage(msg, 'success', '�ɹ���');
+                this.setMessage(msg, 'success', '成功');
             };
 
             this.showInfo = function(msg) {
-                this.setMessage(msg, 'info', '��Ϣ��');
+                this.setMessage(msg, 'info', '消息');
             };
 
             this.showWarn = function(msg) {
-                this.setMessage(msg, 'warn', '���棺');
+                this.setMessage(msg, 'warn', '警告');
             };
 
             this.setMessage = function(content, type, title) {

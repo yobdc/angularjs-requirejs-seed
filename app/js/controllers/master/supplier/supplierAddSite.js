@@ -15,21 +15,29 @@ define([], function() {
         'Site',
         function($scope, $routeParams, $location, CommandService, RegionService, $timeout, Site) {
             $scope.save = function() {
-                CommandService.setCommand({
-                    receiver: 'SupplierCtrl',
-                    sender: 'SupplierAddSiteCtrl',
-                    action: $scope.command.action,
-                    result: $scope.site
-                });
-                if ($scope.command.action === 'EditSite') {
-                    angular.extend($scope.originalSite, $scope.site);
+                try {
+                    var site = $scope.$data.site;
+                    site.validate();
+                    site.toRegionString();
+
+                    CommandService.setCommand({
+                        receiver: 'SupplierCtrl',
+                        sender: 'SupplierAddSiteCtrl',
+                        action: $scope.command.action,
+                        result: site
+                    });
+                    if ($scope.command.action === 'EditSite') {
+                        angular.extend($scope.originalSite, site);
+                    }
+                    $location.path('/supplier/create');
+                } catch (ex) {
+                    console.warn(ex);
                 }
-                $location.path('/supplier/create');
             };
             $scope.cancel = function() {
                 CommandService.setCommand({
                     receiver: 'SupplierCtrl',
-                    action: 'CancelAddorEditContact'
+                    action: 'CancelAddorEditSite'
                 });
                 $location.path('/supplier/create');
             };
@@ -53,7 +61,7 @@ define([], function() {
                     $scope.$data.site = new Site();
                     if (command.action === 'EditSite') {
                         $scope.originalSite = command.result;
-                        angular.extend($scope.site, command.result);
+                        angular.extend($scope.$data.site, command.result);
                     } else {
                         $scope.$data.site.load().then(function(value) {
                             $timeout(function() {

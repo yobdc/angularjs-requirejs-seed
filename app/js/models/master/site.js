@@ -5,7 +5,8 @@ define(['models'], function(providers) {
         '$q',
         'UidService',
         'DdsFactory',
-        function($timeout, $log, $q, UidService, DdsFactory) {
+        'RegionService',
+        function($timeout, $log, $q, UidService, DdsFactory, RegionService) {
             this.$get = function() {
                 var $self;
 
@@ -79,6 +80,32 @@ define(['models'], function(providers) {
                 Site.prototype.removeAddress = function(index){
                     $self.addressList.splice(index, 1);
                 }
+                Site.prototype.validate = function() {
+                    if(!$self.name){
+                        throw Error('地址名称未填写');
+                    }
+                };
+                Site.prototype.toRegionString = function() {
+                    var str = '';
+                    if($self.country.code){
+                        $self.country.name = RegionService.get($self.country.code).n;
+                        str += $self.country.name;
+                    }
+                    if($self.province.code){
+                        $self.province.name = RegionService.get($self.province.code).n;
+                        str += ' , ' +$self.province.name;
+                    }
+                    if($self.city.code){
+                        $self.city.name = RegionService.get($self.city.code).n;
+                        str += ' , ' +$self.city.name;
+                    }
+                    if($self.region.code){
+                        $self.region.name = RegionService.get($self.region.code).n;
+                        str += ' , ' +$self.region.name;
+                    }
+                    $self.regionString = str;
+                    return str;
+                };
                 Site.prototype.toPostData = function() {
                 };
                 return Site;

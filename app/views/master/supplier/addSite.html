@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">国家</label>
                 <div class="col-sm-9">
-                    <region-jh ng-model="$data.site.country"></region-jh>
+                    <region-jh ng-model="$data.site.country.code"></region-jh>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">省/州</label>
                 <div class="col-sm-9">
-                    <region-jh depends="$data.site.country" ng-model="$data.site.province"></region-jh>
+                    <region-jh depends="$data.site.country.code" ng-model="$data.site.province.code"></region-jh>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">市</label>
                 <div class="col-sm-9">
-                    <region-jh depends="$data.site.province" ng-model="$data.site.city"></region-jh>
+                    <region-jh depends="$data.site.province.code" ng-model="$data.site.city.code"></region-jh>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <div class="form-group">
                 <label for="primary" class="col-sm-3 control-label">区/县</label>
                 <div class="col-sm-9">
-                    <region-jh depends="$data.site.city" ng-model="$data.site.region"></region-jh>
+                    <region-jh depends="$data.site.city.code" ng-model="$data.site.region.code"></region-jh>
                 </div>
             </div>
         </div>
