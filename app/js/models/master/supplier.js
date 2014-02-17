@@ -11,8 +11,14 @@ define(['models'], function(providers) {
             this.$get = function() {
                 var $self;
 
-                var CONTACTINFO_TYPE = 'ContactInfo.Type';
-                var CUSTOMER_TYPE = 'CustomerType';
+                var CONTACTINFO_TYPE = 'ContactInfo.Type',
+                    CUSTOMER_TYPE = 'CustomerType',
+                    PAYMENT_TERM = 'PaymentTerm',
+                    MARRIED_STATUS = "maritalStatus",
+                    GENDER = 'gender',
+                    EDUCATION = 'education',
+                    WORKDAY = 'Workday',
+                    PAYMENT_METHOD = 'PaymentMethod';
 
                 function Supplier() {
                     $self = this;
@@ -52,6 +58,19 @@ define(['models'], function(providers) {
                     // person.purchaseGroup = null; //采购组
                     person.workdays = []; //工作日
                     $self.personInfo = person;
+                    // - Supplier accounting fields
+                    var accounting = {};
+                    accounting.ledgerClassification = null; //总账分类
+                    accounting.paymentTerm = null; //付款条件
+                    accounting.creditInfo = null; //信用信息
+                    accounting.billSettleType = null; //结算类型
+                    accounting.ledgerPeriod = null; //账期
+                    accounting.ledgerPeriodRemindDays = null; //账期提醒
+                    accounting.paymentType = null; //付款方式
+                    accounting.payee = null; //付款对象
+                    accounting.defaultCurrency = null; //缺省币种
+                    accounting.isCustomer = false; //同时为客户
+                    $self.accountingInfo = accounting;
                     // - Supplier company fields
                     var company = {};
                     company.taxRegistrationNumber = null; //纳税登记编码
@@ -91,7 +110,13 @@ define(['models'], function(providers) {
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         CONTACTINFO_TYPE,
-                        CUSTOMER_TYPE
+                        CUSTOMER_TYPE,
+                        PAYMENT_TERM,
+                        MARRIED_STATUS,
+                        GENDER,
+                        EDUCATION,
+                        WORKDAY,
+                        PAYMENT_METHOD
                     ])).then(function(value) {
                         $self.dds = value;
                         $self.addContactPoint();

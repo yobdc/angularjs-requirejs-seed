@@ -18,7 +18,7 @@
     <div class="form-group">
         <label class="col-md-3 col-sm-3 col-xs-4 control-label">性别</label>
         <div class="col-md-9 col-sm-9 col-xs-8">
-            <select class="form-control" ng-model="$data.supplier.personInfo.gender">
+            <select class="form-control" ng-model="$data.supplier.personInfo.gender" ng-options="o.code as o.name for o in $data.supplier.dds['gender'].options">
                 <option value="">请选择...</option>
             </select>
         </div>
@@ -60,7 +60,7 @@
     <div class="form-group">
         <label class="col-md-3 col-sm-3 col-xs-4 control-label">学历</label>
         <div class="col-md-9 col-sm-9 col-xs-8">
-            <select class="form-control" ng-model="$data.supplier.personInfo.education">
+            <select class="form-control" ng-model="$data.supplier.personInfo.education" ng-options="o.code as o.name for o in $data.supplier.dds['education'].options">
                 <option value="">请选择...</option>
             </select>
         </div>
@@ -70,7 +70,7 @@
     <div class="form-group">
         <label class="col-md-3 col-sm-3 col-xs-4 control-label">婚姻状态</label>
         <div class="col-md-9 col-sm-9 col-xs-8">
-            <select class="form-control" ng-model="$data.supplier.personInfo.married">
+            <select class="form-control" ng-model="$data.supplier.personInfo.married" ng-options="o.code as o.name for o in $data.supplier.dds['maritalStatus'].options">
                 <option value="">请选择...</option>
             </select>
         </div>
@@ -138,7 +138,7 @@
     <div class="form-group">
         <label class="col-md-3 col-sm-3 col-xs-4 control-label">工作日</label>
         <div class="col-md-9 col-sm-9 col-xs-8">
-            <multiselect class="input-xlarge" multiple="true" ng-model="$data.supplier.personInfo.workdays" options="id as c.name for c in fruits"></multiselect>
+            <multiselect class="input-xlarge" multiple="true" ng-model="$data.supplier.personInfo.workdays" options="code as o.name for o in $data.supplier.dds['Workday'].options"></multiselect>
         </div>
     </div>
 </div>

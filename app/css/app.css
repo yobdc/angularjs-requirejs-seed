@@ -414,6 +414,9 @@ a[disabled] > .fa
 .fixed-witdh-60 {
     width: 60px;
 }
+.dropdown-menu {
+    z-index: 2000;
+}
 .margin-left-10 {
     margin-left: 10px;
 }

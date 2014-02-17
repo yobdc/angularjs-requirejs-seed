@@ -11,35 +11,11 @@ define([], function() {
         'CommandService',
         '$location',
         function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, CommandService, $location) {
-            $scope.accountingInfo = {
-                ledgerCatalog: '',
-                creditInfo: '',
-                accountDate: null,
-                paymentType: '',
-                defaultCurrency: '',
-                paymentTerms: '',
-                settlementType: '',
-                accountAlert: '',
-                paymentTo: '',
-                isCustomer: false
-            };
-            $scope.zzz = 111;
-
             $scope.accountDateOpen = function() {
                 $timeout(function() {
                     $scope.accountDateOpenFlag = true;
                 });
             }
-
-            $scope.ledgerCatalogs = [{
-                name: 'bbc'
-            }, {
-                name: 'aaa'
-            }, {
-                name: 'abc'
-            }, {
-                name: 'ccc'
-            }];
             $scope.autoLedgerCatalog = function(term) {
                 var aaa = CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
                 return CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
@@ -69,15 +45,14 @@ define([], function() {
                                 $scope.$data.supplier.setPrimarySite(command.result);
                                 break;
                         }
+                        $scope.$apply();
                     }
                 } else {
                     $scope.$data = {};
                     CommandService.set('SupplierCtrl', $scope.$data);
                     $scope.$data.supplier = new Supplier();
                     $scope.$data.supplier.load().then(function(value) {
-                        $timeout(function() {
-                            $scope.$apply();
-                        });
+                        $scope.$apply();
                     });
                 }
                 // CommandService.setCommand();
