@@ -94,6 +94,18 @@ define(['models'], function(providers) {
                             break;
                         }
                     }
+                    $self.toFullname();
+                };
+                Contact.prototype.toFullname = function() {
+                    var name = '';
+                    if ($self.lastName) {
+                        name += $self.lastName;
+                    }
+                    if ($self.firstName) {
+                        name += $self.firstName;
+                    }
+                    $self.fullname = name;
+                    return name;
                 };
                 Contact.prototype.toPostData = function() {
                     return $self;

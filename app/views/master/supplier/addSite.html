@@ -104,9 +104,7 @@
                     <label for="contact">联系人</label>
                 </div>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <select class="form-control" id="contact">
-                        <option value="" style="display: none;">请选择...</option>
-                    </select>
+                    <input type="text" class="col-md-8 col-xs-8 col-sm-8 form-control" typeahead-jh="a as a.fullname for a in autoContact($viewValue)" ng-model="c.value" placeholder="请选择...">
                 </div>
             </div>
         </div>

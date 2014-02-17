@@ -107,7 +107,8 @@ define([
         '$routeParams',
         'RegionService',
         '$timeout',
-        function($injector, $scope, $routeParams, RegionService, $timeout) {
+        '$q',
+        function($injector, $scope, $routeParams, RegionService, $timeout, $q) {
             require([
                 'controllers/master/supplier/supplierAddSite',
                 'models/master/site'
@@ -117,7 +118,8 @@ define([
                     '$routeParams': $routeParams,
                     'RegionService': RegionService,
                     '$timeout': $timeout,
-                    'Site': Site
+                    'Site': Site,
+                    '$q': $q
                 });
             });
         }

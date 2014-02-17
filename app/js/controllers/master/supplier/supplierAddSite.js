@@ -13,7 +13,8 @@ define([], function() {
         'RegionService',
         '$timeout',
         'Site',
-        function($scope, $routeParams, $location, CommandService, RegionService, $timeout, Site) {
+        '$q',
+        function($scope, $routeParams, $location, CommandService, RegionService, $timeout, Site, $q) {
             $scope.save = function() {
                 try {
                     var site = $scope.$data.site;
@@ -53,6 +54,25 @@ define([], function() {
             $scope.removeAddress = function(index) {
                 $scope.$data.site.removeAddress(index);
             };
+            $scope.autoContact = function(term) {
+                var q = $q.defer();
+                $timeout(function() {
+                    var contacts = $scope.command.result.contacts;
+                    if (term === '.') {
+                        q.resolve(contacts);
+                    } else {
+                        var result = [];
+                        for (var i = 0; i < contacts.length; i++) {
+                            var c = contacts[i];
+                            if (c && c.toFullname().indexOf(term) !== -1) {
+                                result.push(c);
+                            }
+                        }
+                        q.resolve(result);
+                    }
+                });
+                return q.promise;
+            };
             $scope.init = function() {
                 $scope.$data = {};
                 $scope.command = CommandService.getCommand();
@@ -60,8 +80,8 @@ define([], function() {
                 if (command && command.receiver === 'SupplierAddSiteCtrl') {
                     $scope.$data.site = new Site();
                     if (command.action === 'EditSite') {
-                        $scope.originalSite = command.result;
-                        angular.extend($scope.$data.site, command.result);
+                        $scope.originalSite = command.result.site;
+                        angular.extend($scope.$data.site, command.result.site);
                     } else if (command.action === 'AddSite') {
                         $scope.$data.site.load().then(function(value) {
                             $timeout(function() {

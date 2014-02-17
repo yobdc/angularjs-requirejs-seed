@@ -302,7 +302,8 @@
                             <label class="col-xs-4 col-md-4 col-sm-4 control-label">同时为客户</label>
                             <div class="col-xs-8 col-md-8 col-sm-8">
                                 <!-- <div ng-switcher class="form-control" ng-model="$data.supplier.accountingInfo.isCustomer"></div> -->
-                                <div ng-switcher class="form-control" ng-model="isCustomer"></div>
+        <!-- <div ng-switcher class="form-control" ng-model="$data.zz"></div> -->
+                                <input type="checkbox" ng-model="$data.supplier.accountingInfo.isCustomer">
                             </div>
                         </div>
                     </div>
@@ -316,19 +317,27 @@
                     <div class="bottom-arrow"></div>
                 </tab-heading>
                 <div class="nav-circle-tab">
-                    {{data}}
+                    {{$data}}
                 </div>
             </tab>
-            <tab>
+            <tab ng-if="$data.supplier.type=='C'">
                 <tab-heading>
-                    <div class="circle" tooltip="信息">
+                    <div class="circle" tooltip="个人">
                         <i class="fa fa-align-justify"></i>
                     </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
-                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-if="$data.supplier.type=='C'" ng-include="'app/views/master/supplier/personalInfo.html'">
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/personalInfo.html'">
                 </div>
-                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-if="$data.supplier.type=='B'" ng-include="'app/views/master/supplier/companyInfo.html'">
+            </tab>
+            <tab ng-if="$data.supplier.type=='B'">
+                <tab-heading>
+                    <div class="circle" tooltip="公司">
+                        <i class="fa fa-align-justify"></i>
+                    </div>
+                    <div class="bottom-arrow"></div>
+                </tab-heading>
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/companyInfo.html'">
                 </div>
             </tab>
         </tabset>

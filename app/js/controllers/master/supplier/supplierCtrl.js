@@ -20,6 +20,12 @@ define([], function() {
                 var aaa = CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
                 return CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
             }
+            $scope.zz = true;
+            $scope.$watch(function(){
+                return $scope.zz;
+            }, function(newVal, oldVal){
+                console.log(newVal);
+            })
 
             $scope.init = function() {
                 $scope.command = CommandService.getCommand();
@@ -45,14 +51,18 @@ define([], function() {
                                 $scope.$data.supplier.setPrimarySite(command.result);
                                 break;
                         }
-                        $scope.$apply();
+                        $timeout(function() {
+                            $scope.$apply();
+                        });
                     }
                 } else {
                     $scope.$data = {};
                     CommandService.set('SupplierCtrl', $scope.$data);
                     $scope.$data.supplier = new Supplier();
                     $scope.$data.supplier.load().then(function(value) {
-                        $scope.$apply();
+                        $timeout(function() {
+                            $scope.$apply();
+                        });
                     });
                 }
                 // CommandService.setCommand();
@@ -96,7 +106,10 @@ define([], function() {
                         receiver: 'SupplierAddSiteCtrl',
                         sender: 'SupplierCtrl',
                         action: 'EditSite',
-                        result: site
+                        result: {
+                            site: site,
+                            contacts: $scope.$data.supplier.contacts
+                        }
                     });
                     $location.path('/supplier/create/addOrEditSite');
                 }
@@ -105,7 +118,10 @@ define([], function() {
                 CommandService.setCommand({
                     receiver: 'SupplierAddSiteCtrl',
                     sender: 'SupplierCtrl',
-                    action: 'AddSite'
+                    action: 'AddSite',
+                    result: {
+                        contacts: $scope.$data.supplier.contacts
+                    }
                 });
                 $location.path('/supplier/create/addOrEditSite');
             };
