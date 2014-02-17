@@ -8,54 +8,53 @@ define(['models'], function(providers) {
         'RegionService',
         function($timeout, $log, $q, UidService, DdsFactory, RegionService) {
             this.$get = function() {
-                var $self;
 
                 var CONTACTINFO_TYPE = 'ContactInfo.Type';
 
                 function Contact() {
-                    $self = this;
-                    $self.firstName = null; //名
-                    $self.lastName = null; //姓
-                    $self.title = null; //称呼
-                    $self.department = null; //部门
-                    $self.position = null; //职位
-                    $self.isPrimary = false; //主地址
-                    $self.country = {
+                    this.firstName = null; //名
+                    this.lastName = null; //姓
+                    this.title = null; //称呼
+                    this.department = null; //部门
+                    this.position = null; //职位
+                    this.isPrimary = false; //主地址
+                    this.country = {
                         code: null,
                         name: null
                     }; //国家
-                    $self.province = {
+                    this.province = {
                         code: null,
                         name: null
                     }; //省/州
-                    $self.city = {
+                    this.city = {
                         code: null,
                         name: null
                     }; //市
-                    $self.region = {
+                    this.region = {
                         code: null,
                         name: null
                     }; //区/县
-                    $self.address = null; //地址
-                    $self.contactInfo = []; //联系信息
+                    this.address = null; //地址
+                    this.contactInfo = []; //联系信息
                 };
                 Contact.prototype.load = function(param) {
                     var promise;
                     if (typeof param === 'object') {} else {
-                        promise = $self.loadNew(param);
+                        promise = this.loadNew(param);
                     }
                     return promise;
                 };
                 Contact.prototype.loadNew = function() {
-                    $self.uid = UidService.get();
+                    var self = this;
+                    self.uid = UidService.get();
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         CONTACTINFO_TYPE
                     ])).then(function(value) {
-                        $self.dds = value;
-                        $self.addContactPoint();
+                        self.dds = value;
+                        self.addContactPoint();
 
-                        q.resolve($self);
+                        q.resolve(self);
                     }, function(values) {
                         q.reject();
                     });
@@ -63,52 +62,52 @@ define(['models'], function(providers) {
                 };
                 Contact.prototype.loadFromJSON = function(json) {};
                 Contact.prototype.addContactPoint = function() {
-                    $self.contactInfo = $self.contactInfo || [];
+                    this.contactInfo = this.contactInfo || [];
                     var newContact = {};
-                    if ($self.dds && $self.dds[CONTACTINFO_TYPE]) {
-                        newContact.type = $self.dds[CONTACTINFO_TYPE].options[0].code;
+                    if (this.dds && this.dds[CONTACTINFO_TYPE]) {
+                        newContact.type = this.dds[CONTACTINFO_TYPE].options[0].code;
                         newContact.value = null;
                     }
-                    $self.contactInfo.push(newContact);
+                    this.contactInfo.push(newContact);
                     return newContact;
                 };
                 Contact.prototype.removeContactPoint = function(index) {
-                    $self.contactInfo.splice(index, 1);
+                    this.contactInfo.splice(index, 1);
                 };
                 Contact.prototype.validate = function() {
-                    if (!$self.lastName || !$self.firstName) {
+                    if (!this.lastName || !this.firstName) {
                         throw Error('姓名未填写');
                     }
                 };
                 Contact.prototype.convertModel = function() {
                     var foundEmail, foundMobile;
-                    for (var i = 0; i < $self.contactInfo.length; i++) {
-                        var point = $self.contactInfo[i];
+                    for (var i = 0; i < this.contactInfo.length; i++) {
+                        var point = this.contactInfo[i];
                         if (point && !foundMobile && point.type === '1') {
-                            $self.mobile = point.value;
+                            this.mobile = point.value;
                         }
                         if (point && !foundEmail && point.type === '2') {
-                            $self.email = point.value;
+                            this.email = point.value;
                         }
                         if (foundEmail && foundMobile) {
                             break;
                         }
                     }
-                    $self.toFullname();
+                    this.toFullname();
                 };
                 Contact.prototype.toFullname = function() {
                     var name = '';
-                    if ($self.lastName) {
-                        name += $self.lastName;
+                    if (this.lastName) {
+                        name += this.lastName;
                     }
-                    if ($self.firstName) {
-                        name += $self.firstName;
+                    if (this.firstName) {
+                        name += this.firstName;
                     }
-                    $self.fullname = name;
+                    this.fullname = name;
                     return name;
                 };
                 Contact.prototype.toPostData = function() {
-                    return $self;
+                    return this;
                 };
                 return Contact;
             };

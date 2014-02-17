@@ -9,7 +9,6 @@ define(['models'], function(providers) {
         'UidService',
         function($timeout, $log, ValidatorService, DdsFactory, $q, SupplierService, UidService) {
             this.$get = function() {
-                var $self;
 
                 var CONTACTINFO_TYPE = 'ContactInfo.Type',
                     CUSTOMER_TYPE = 'CustomerType',
@@ -21,22 +20,21 @@ define(['models'], function(providers) {
                     PAYMENT_METHOD = 'PaymentMethod';
 
                 function Supplier() {
-                    $self = this;
                     // - Supplier basic fields
-                    $self.type = null;
-                    $self.firstName = null;
-                    $self.lastName = null;
-                    $self.title = null;
-                    $self.belongToCompany = null;
-                    $self.keyword = null;
-                    $self.customerFullName = null;
-                    $self.accountName = null;
-                    $self.accountNumber = null;
-                    $self.remark = null;
-                    $self.type = null;
-                    $self.companyName = null;
+                    this.type = null;
+                    this.firstName = null;
+                    this.lastName = null;
+                    this.title = null;
+                    this.belongToCompany = null;
+                    this.keyword = null;
+                    this.customerFullName = null;
+                    this.accountName = null;
+                    this.accountNumber = null;
+                    this.remark = null;
+                    this.type = null;
+                    this.companyName = null;
                     // - Supplier contact info
-                    $self.contactInfo = [];
+                    this.contactInfo = [];
                     // - Supplier personal fields
                     var person = {};
                     person.realName = null; //真实姓名
@@ -57,7 +55,7 @@ define(['models'], function(providers) {
                     person.availableTimeTo = null; //可联系时间结束
                     // person.purchaseGroup = null; //采购组
                     person.workdays = []; //工作日
-                    $self.personInfo = person;
+                    this.personInfo = person;
                     // - Supplier accounting fields
                     var accounting = {};
                     accounting.ledgerClassification = null; //总账分类
@@ -70,7 +68,7 @@ define(['models'], function(providers) {
                     accounting.payee = null; //付款对象
                     accounting.defaultCurrency = null; //缺省币种
                     accounting.isCustomer = false; //同时为客户
-                    $self.accountingInfo = accounting;
+                    this.accountingInfo = accounting;
                     // - Supplier company fields
                     var company = {};
                     company.taxRegistrationNumber = null; //纳税登记编码
@@ -90,23 +88,24 @@ define(['models'], function(providers) {
                     company.availableTimeTo = null; //可联系时间结束
                     // company.purchaseGroup = null; //采购组
                     company.workdays = []; //工作日
-                    $self.companyInfo = company;
+                    this.companyInfo = company;
                 };
                 Supplier.prototype.load = function(param) {
                     var promise;
                     if (typeof param === 'string') {
-                        promise = $self.loadFromId(param);
+                        promise = this.loadFromId(param);
                     } else if (typeof param === 'object') {
-                        promise = $self.loadFromJSON(param);
+                        promise = this.loadFromJSON(param);
                     } else {
-                        promise = $self.loadNew();
+                        promise = this.loadNew();
                     }
                     return promise;
                 };
                 Supplier.prototype.loadFromId = function(id) {};
                 Supplier.prototype.loadFromJSON = function(json) {};
                 Supplier.prototype.loadNew = function() {
-                    $self.uid = UidService.get();
+                    var self = this;
+                    self.uid = UidService.get();
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         CONTACTINFO_TYPE,
@@ -118,63 +117,63 @@ define(['models'], function(providers) {
                         WORKDAY,
                         PAYMENT_METHOD
                     ])).then(function(value) {
-                        $self.dds = value;
-                        $self.addContactPoint();
+                        self.dds = value;
+                        self.addContactPoint();
                         // 设置默认供应商类型
-                        $self.type = $self.dds[CUSTOMER_TYPE].options[0].code;
+                        self.type = self.dds[CUSTOMER_TYPE].options[0].code;
 
-                        q.resolve($self);
+                        q.resolve(self);
                     }, function(values) {
                         q.reject();
                     });
                     return q.promise;
                 };
                 Supplier.prototype.addContactPoint = function() {
-                    $self.contactInfo = $self.contactInfo || [];
+                    this.contactInfo = this.contactInfo || [];
                     var newContact = {};
-                    if ($self.dds && $self.dds[CONTACTINFO_TYPE]) {
-                        newContact.type = $self.dds[CONTACTINFO_TYPE].options[0].code;
+                    if (this.dds && this.dds[CONTACTINFO_TYPE]) {
+                        newContact.type = this.dds[CONTACTINFO_TYPE].options[0].code;
                         newContact.value = null;
                     }
-                    $self.contactInfo.push(newContact);
+                    this.contactInfo.push(newContact);
                     return newContact;
                 };
                 Supplier.prototype.removeContactPoint = function(index) {
-                    if ($self.contactInfo) {
-                        $self.contactInfo.splice(index, 1);
+                    if (this.contactInfo) {
+                        this.contactInfo.splice(index, 1);
                     }
-                    return $self.contactInfo;
+                    return this.contactInfo;
                 };
                 Supplier.prototype.setPrimarySite = function(site) {
-                    for (var i = 0; i < $self.sites.length; i++) {
-                        var s = $self.sites[i];
+                    for (var i = 0; i < this.sites.length; i++) {
+                        var s = this.sites[i];
                         if (s && site && s.uid !== site.uid) {
                             s.isPrimary = false;
                         }
                     }
                 };
                 Supplier.prototype.setPrimaryContact = function(contact) {
-                    for (var i = 0; i < $self.contacts.length; i++) {
-                        var s = $self.contacts[i];
+                    for (var i = 0; i < this.contacts.length; i++) {
+                        var s = this.contacts[i];
                         if (s && contact && s.uid !== contact.uid) {
                             s.isPrimary = false;
                         }
                     }
                 };
                 Supplier.prototype.validate = function() {
-                    if ($self.type === 'C') {
-                        if (!$self.firstName || !$self.lastName || !$self.title) {
+                    if (this.type === 'C') {
+                        if (!this.firstName || !this.lastName || !this.title) {
                             throw Error("姓名未填写");
                         }
-                    } else if ($self.type === 'B') {
-                        if (!$self.companyName) {
+                    } else if (this.type === 'B') {
+                        if (!this.companyName) {
                             throw Error("企业名称未填写");
                         }
                     }
-                    if (!$self.type) {
+                    if (!this.type) {
                         throw Error("供应商类型未选择");
                     }
-                    if (!$self.accountName) {
+                    if (!this.accountName) {
                         throw Error("账户名未填写");
                     }
                 };
@@ -198,7 +197,7 @@ define(['models'], function(providers) {
                 Supplier.prototype.create = function() {};
                 Supplier.prototype.update = function() {};
                 Supplier.prototype.toPostData = function() {
-                    return $self;
+                    return this;
                 };
                 return Supplier;
             };

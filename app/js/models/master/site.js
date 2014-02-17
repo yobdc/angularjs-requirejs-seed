@@ -8,54 +8,53 @@ define(['models'], function(providers) {
         'RegionService',
         function($timeout, $log, $q, UidService, DdsFactory, RegionService) {
             this.$get = function() {
-                var $self;
 
                 var SITE_BUSINESSSCOPE = 'Site.BusinessScope';
 
                 function Site() {
-                    $self = this;
-                    $self.name = null; //名称
-                    $self.number = null; //编码
-                    $self.enabled = true; //是否有效
-                    $self.isPrimary = false; //主地址
-                    $self.country = {
+                    this.name = null; //名称
+                    this.number = null; //编码
+                    this.enabled = true; //是否有效
+                    this.isPrimary = false; //主地址
+                    this.country = {
                         code: null,
                         name: null
                     }; //国家
-                    $self.province = {
+                    this.province = {
                         code: null,
                         name: null
                     }; //省/州
-                    $self.city = {
+                    this.city = {
                         code: null,
                         name: null
                     }; //市
-                    $self.region = {
+                    this.region = {
                         code: null,
                         name: null
                     }; //区/县
-                    $self.postcode = null; //邮编
-                    $self.businessScope = null; //业务用途
-                    $self.address = null; //地址
-                    $self.contactList = [{}]; //联系人
+                    this.postcode = null; //邮编
+                    this.businessScope = null; //业务用途
+                    this.address = null; //地址
+                    this.contactList = [{}]; //联系人
                 };
                 Site.prototype.load = function(param) {
                     var promise;
                     if (typeof param === 'object') {
                     } else {
-                        promise = $self.loadNew(param);
+                        promise = this.loadNew(param);
                     }
                     return promise;
                 };
                 Site.prototype.loadNew = function() {
-                    $self.uid = UidService.get();
+                    var self = this;
+                    self.uid = UidService.get();
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         SITE_BUSINESSSCOPE
                     ])).then(function(value) {
-                        $self.dds = value;
+                        self.dds = value;
 
-                        q.resolve($self);
+                        q.resolve(self);
                     }, function(values) {
                         q.reject();
                     });
@@ -64,44 +63,44 @@ define(['models'], function(providers) {
                 Site.prototype.loadFromJSON = function(json) {
                 };
                 Site.prototype.addContact = function(){
-                    $self.contactList.push({});
+                    this.contactList.push({});
                 }
                 Site.prototype.removeContact = function(index){
-                    $self.contactList.splice(index, 1);
+                    this.contactList.splice(index, 1);
                 }
                 Site.prototype.addAddress = function(){
-                    $self.addressList = $self.addressList || [];
-                    $self.addressList.push({
+                    this.addressList = this.addressList || [];
+                    this.addressList.push({
                         address: null
                     });
                 }
                 Site.prototype.removeAddress = function(index){
-                    $self.addressList.splice(index, 1);
+                    this.addressList.splice(index, 1);
                 }
                 Site.prototype.validate = function() {
-                    if(!$self.name){
+                    if(!this.name){
                         throw Error('地址名称未填写');
                     }
                 };
                 Site.prototype.toRegionString = function() {
                     var str = '';
-                    if($self.country.code){
-                        $self.country.name = RegionService.get($self.country.code).n;
-                        str += $self.country.name;
+                    if(this.country.code){
+                        this.country.name = RegionService.get(this.country.code).n;
+                        str += this.country.name;
                     }
-                    if($self.province.code){
-                        $self.province.name = RegionService.get($self.province.code).n;
-                        str += ' , ' +$self.province.name;
+                    if(this.province.code){
+                        this.province.name = RegionService.get(this.province.code).n;
+                        str += ' , ' +this.province.name;
                     }
-                    if($self.city.code){
-                        $self.city.name = RegionService.get($self.city.code).n;
-                        str += ' , ' +$self.city.name;
+                    if(this.city.code){
+                        this.city.name = RegionService.get(this.city.code).n;
+                        str += ' , ' +this.city.name;
                     }
-                    if($self.region.code){
-                        $self.region.name = RegionService.get($self.region.code).n;
-                        str += ' , ' +$self.region.name;
+                    if(this.region.code){
+                        this.region.name = RegionService.get(this.region.code).n;
+                        str += ' , ' +this.region.name;
                     }
-                    $self.regionString = str;
+                    this.regionString = str;
                     return str;
                 };
                 Site.prototype.toPostData = function() {
