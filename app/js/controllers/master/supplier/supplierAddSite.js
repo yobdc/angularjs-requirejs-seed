@@ -73,21 +73,36 @@ define([], function() {
                 });
                 return q.promise;
             };
+            $scope.edit = function() {
+                CommandService.setCommand({
+                    receiver: 'SupplierAddSiteCtrl',
+                    sender: 'SupplierAddSiteCtrl',
+                    action: 'EditSite',
+                    result: $scope.command.result
+                });
+                $location.path('/supplier/create/addOrEditSite');
+            };
             $scope.init = function() {
                 $scope.$data = {};
                 $scope.command = CommandService.getCommand();
                 var command = $scope.command;
                 if (command && command.receiver === 'SupplierAddSiteCtrl') {
                     $scope.$data.site = new Site();
-                    if (command.action === 'EditSite') {
-                        $scope.originalSite = command.result.site;
-                        angular.extend($scope.$data.site, command.result.site);
-                    } else if (command.action === 'AddSite') {
-                        $scope.$data.site.load().then(function(value) {
-                            $timeout(function() {
-                                $scope.$apply();
+                    switch (command.action) {
+                        case 'EditSite':
+                            $scope.originalSite = command.result.site;
+                            angular.extend($scope.$data.site, command.result.site);
+                            break;
+                        case 'ViewSite':
+                            $scope.originalSite = command.result.site;
+                            angular.extend($scope.$data.site, command.result.site);
+                            break;
+                        case 'AddSite':
+                            $scope.$data.site.load().then(function(value) {
+                                $timeout(function() {
+                                    $scope.$apply();
+                                });
                             });
-                        });
                     }
                 } else {
                     $location.path('/');

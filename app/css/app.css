@@ -427,6 +427,12 @@ a[disabled] > .fa
 .padding-left-15 {
     padding-left: 15px;
 }
+.padding-top-6 {
+    padding-top: 6px;
+}
+.no-font-weight {
+    font-weight: initial;
+}
 .light-font {
     font-weight: initial;
     color: #999;
@@ -539,8 +545,8 @@ and (max-device-width : 480px) {
 and (min-width : 321px) {
     /* Styles */
     .line-div:nth-child(odd) {
-        /*color: green;
-        border-right:1px dotted rgb(0, 0, 0);*/
+        /*color: green;*/
+        border-right:1px dotted rgb(0, 0, 0);
     }
     .line-div:nth-child(even) {
         /*color: red;*/

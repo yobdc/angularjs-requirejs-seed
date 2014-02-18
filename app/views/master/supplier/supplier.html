@@ -39,7 +39,7 @@
                 <label class="col-md-3 col-sm-3 col-xs-4 control-label">编码</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
                     <label class="form-control-label light-font" ng-if="!$data.supplier.number">自动生成</label>
-                    <label class="form-control-label" ng-if="$data.supplier.number">{{$data.supplier.number}}</label>
+                    <label class="form-control-label" ng-if="$data.supplier.number">{{$data.supplier.accountNumber}}</label>
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
                                 <td>{{s.address}}</td>
                                 <td>{{s.primaryContact}}</td>
                                 <td>
-                                    <a tooltip="更多信息" href="javascript:void(0)" ng-click="editSite(s)">
+                                    <a tooltip="更多信息" href="javascript:void(0)" ng-click="viewSite(s)">
                                         <i class="fa fa-chevron-right"></i>
                                     </a>
                                 </td>
@@ -192,7 +192,7 @@
                                 <td>{{c.mobile}}</td>
                                 <td>{{c.email}}</td>
                                 <td>
-                                    <a tooltip="更多信息" href="javascript:void(0)" ng-click="editContact(c)">
+                                    <a tooltip="更多信息" href="javascript:void(0)" ng-click="viewContact(c)">
                                         <i class="fa fa-chevron-right"></i>
                                     </a>
                                 </td>
@@ -221,8 +221,7 @@
                     </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
-                <div class="nav-circle-tab">
-                    {{$data}}
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/purchaseInfo.html'">
                 </div>
             </tab>
             <tab ng-if="$data.supplier.type=='C'">

@@ -91,6 +91,17 @@ define([], function() {
                     $location.path('/supplier/create/addOrEditContact');
                 }
             };
+            $scope.viewContact = function(contact) {
+                if (contact) {
+                    CommandService.setCommand({
+                        receiver: 'SupplierAddContactCtrl',
+                        sender: 'SupplierCtrl',
+                        action: 'ViewContact',
+                        result: contact
+                    });
+                    $location.path('/supplier/contact');
+                }
+            };
             $scope.addContact = function() {
                 CommandService.setCommand({
                     receiver: 'SupplierAddContactCtrl',
@@ -114,6 +125,20 @@ define([], function() {
                         }
                     });
                     $location.path('/supplier/create/addOrEditSite');
+                }
+            };
+            $scope.viewSite = function(site) {
+                if (site) {
+                    CommandService.setCommand({
+                        receiver: 'SupplierAddSiteCtrl',
+                        sender: 'SupplierCtrl',
+                        action: 'ViewSite',
+                        result: {
+                            site: site,
+                            contacts: $scope.$data.supplier.contacts
+                        }
+                    });
+                    $location.path('/supplier/site');
                 }
             };
             $scope.addSite = function() {

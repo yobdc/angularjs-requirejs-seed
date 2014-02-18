@@ -40,11 +40,20 @@ define([], function() {
                 });
                 $location.path('/supplier/create');
             };
-            $scope.addContactPoint = function(){
+            $scope.addContactPoint = function() {
                 $scope.$data.contact.addContactPoint();
             };
-            $scope.removeContactPoint = function(index){
+            $scope.removeContactPoint = function(index) {
                 $scope.$data.contact.removeContactPoint(index);
+            };
+            $scope.edit = function() {
+                CommandService.setCommand({
+                    receiver: 'SupplierAddContactCtrl',
+                    sender: 'SupplierAddContactCtrl',
+                    action: 'EditContact',
+                    result: $scope.command.result
+                });
+                $location.path('/supplier/create/addOrEditContact');
             };
             $scope.init = function() {
                 $scope.$data = {};
@@ -52,15 +61,21 @@ define([], function() {
                 var command = $scope.command;
                 if (command && command.receiver === 'SupplierAddContactCtrl') {
                     $scope.$data.contact = new Contact();
-                    if (command.action === 'EditContact') {
-                        $scope.originalContact = command.result;
-                        angular.extend($scope.$data.contact, command.result);
-                    } else if (command.action === 'AddContact') {
-                        $scope.$data.contact.load().then(function(value) {
-                            $timeout(function() {
-                                $scope.$apply();
+                    switch (command.action) {
+                        case 'EditContact':
+                            $scope.originalContact = command.result;
+                            angular.extend($scope.$data.contact, command.result);
+                            break;
+                        case 'ViewContact':
+                            $scope.originalContact = command.result;
+                            angular.extend($scope.$data.contact, command.result);
+                            break;
+                        case 'AddContact':
+                            $scope.$data.contact.load().then(function(value) {
+                                $timeout(function() {
+                                    $scope.$apply();
+                                });
                             });
-                        });
                     }
                 } else {
                     $location.path('/');

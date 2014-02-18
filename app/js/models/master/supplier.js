@@ -89,6 +89,15 @@ define(['models'], function(providers) {
                     // company.purchaseGroup = null; //采购组
                     company.workdays = []; //工作日
                     this.companyInfo = company;
+                    // - Supplier purchase fields
+                    var purchase = {};
+                    purchase.org = null; //采购组织
+                    purchase.yype = null; //类型
+                    purchase.signedSupplier = null; //签约供应商
+                    purchase.signedType = null; //签约类型
+                    purchase.expiryDateFrom = null; //签约有效期开始
+                    purchase.expiryDateTo = null; //签约有效期结束
+                    this.purchaseInfo = purchase;
                 };
                 Supplier.prototype.load = function(param) {
                     var promise;
