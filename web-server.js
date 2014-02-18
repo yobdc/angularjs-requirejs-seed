@@ -183,6 +183,18 @@ app.get('/resources/dds/BillSettleType', function(req, res) {
 		}]
 	});
 });
+app.get('/resources/dds/identityCardType', function(req, res) {
+	res.send({
+		keyword: 'identityCardType',
+		options: [{
+			code: 'IDCard',
+			name: '身份证'
+		}, {
+			code: 'Passport',
+			name: '护照'
+		}]
+	});
+});
 app.get('/resources/supplier/validatename', function(req, res) {
 	res.send({
 		result: true

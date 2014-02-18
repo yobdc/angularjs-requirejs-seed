@@ -60,9 +60,7 @@
         </div>
         <div class="col-md-6 line-div" ng-repeat="o in $data.contact.contactInfo">
             <div class="form-group">
-                <div class="col-md-3 col-sm-3 col-xs-4 control-label">
-                    zzz
-                </div>
+                <label for="position" class="col-md-3 col-sm-3 col-xs-4 control-label">{{$data.contact.dds['ContactInfo.Type'].map[o.type]}}</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
                     <label class="form-control no-font-weight">{{o.value}}</label>
                 </div>

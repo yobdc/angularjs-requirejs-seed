@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="name" class="col-md-3 col-sm-3 col-xs-4 control-label input-required">名称</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.name}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.name}}</label>
                 </div>
             </div>
         </div>
@@ -17,14 +17,14 @@
             <div class="form-group">
                 <label for="number" class="col-md-3 col-sm-3 col-xs-4 control-label">编码</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.name}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.name}}</label>
                 </div>
             </div>
         </div>
         <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="enabled" class="col-md-3 col-sm-3 col-xs-4 control-label">有效</label>
-                <div class="col-md-9 col-sm-9 col-xs-8">
+                <div class="col-md-9 col-sm-9 col-xs-8 padding-top-6">
                     <div ng-switcher class="form-control" ng-model="$data.site.enabled" id="enabled"></div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <div class="col-md-6 line-div">
             <div class="form-group">
                 <label for="isPrimary" class="col-md-3 col-sm-3 col-xs-4 control-label">主地址</label>
-                <div class="col-md-9 col-sm-9 col-xs-8">
+                <div class="col-md-9 col-sm-9 col-xs-8 padding-top-6">
                     <div ng-switcher class="form-control" ng-model="$data.site.isPrimary" id="isPrimary"></div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 col-xs-4 control-label">国家</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.country.name}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.country.name}}</label>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label for="primary" class="col-md-3 col-sm-3 col-xs-4 control-label">省/州</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.province.name}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.province.name}}</label>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label for="primary" class="col-md-3 col-sm-3 col-xs-4 control-label">市</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.city.name}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.city.name}}</label>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
             <div class="form-group">
                 <label for="primary" class="col-md-3 col-sm-3 col-xs-4 control-label">区/县</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.region.name}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.region.name}}</label>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             <div class="form-group">
                 <label for="postcode" class="col-md-3 col-sm-3 col-xs-4 control-label">邮编</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.postcode}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.postcode}}</label>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
             <div class="form-group">
                 <label for="address" class="col-md-3 col-sm-3 col-xs-4 control-label">地址</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.address}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.address}}</label>
                 </div>
             </div>
         </div>     
@@ -89,7 +89,7 @@
             <div class="form-group">
                 <label for="businessScope" class="col-md-3 col-sm-3 col-xs-4 control-label">业务用途</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{$data.site.businessScope}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.businessScope}}</label>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                     <label for="contact">联系人</label>
                 </div>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control-label">{{c.fullname}}</label>
+                    <label class="form-control no-font-weight">{{c.fullname}}</label>
                 </div>
             </div>
         </div>

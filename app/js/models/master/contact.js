@@ -94,6 +94,28 @@ define(['models'], function(providers) {
                         }
                     }
                     this.toFullname();
+                    this.toRegionString();
+                };
+                Contact.prototype.toRegionString = function() {
+                    var str = '';
+                    if(this.country.code){
+                        this.country.name = RegionService.get(this.country.code).n;
+                        str += this.country.name;
+                    }
+                    if(this.province.code){
+                        this.province.name = RegionService.get(this.province.code).n;
+                        str += ' , ' +this.province.name;
+                    }
+                    if(this.city.code){
+                        this.city.name = RegionService.get(this.city.code).n;
+                        str += ' , ' +this.city.name;
+                    }
+                    if(this.region.code){
+                        this.region.name = RegionService.get(this.region.code).n;
+                        str += ' , ' +this.region.name;
+                    }
+                    this.regionString = str;
+                    return str;
                 };
                 Contact.prototype.toFullname = function() {
                     var name = '';

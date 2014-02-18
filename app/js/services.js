@@ -332,6 +332,13 @@ define([
                     DDService.get({
                         key: dds
                     }, function(data) {
+                        data.map = {};
+                        for (var i = 0; i < data.options.length; i++) {
+                            var o = data.options[i];
+                            if (o) {
+                                data.map[o.code] = o.name;
+                            }
+                        }
                         q.resolve(data);
                     }, function(data) {
                         q.resolve();

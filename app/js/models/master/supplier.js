@@ -18,7 +18,8 @@ define(['models'], function(providers) {
                     EDUCATION = 'education',
                     WORKDAY = 'Workday',
                     PAYMENT_METHOD = 'PaymentMethod',
-                    BILL_SETTLE_TYPE = 'BillSettleType';
+                    BILL_SETTLE_TYPE = 'BillSettleType',
+                    IDENTITY_CARD_TYPE = 'identityCardType';
 
                 function Supplier() {
                     // - Supplier basic fields
@@ -42,7 +43,7 @@ define(['models'], function(providers) {
                     // person.gender = null; //性别
                     person.birthday = null; //出生日期
                     person.birthplace = null //出生地
-                    person.indentificationType = null; //证件类型
+                    // person.indentificationType = null; //证件类型
                     person.identificationNumber = null; //证件号码
                     // person.education = null; //学历
                     // person.married = null; //婚姻状态
@@ -125,7 +126,8 @@ define(['models'], function(providers) {
                         EDUCATION,
                         WORKDAY,
                         PAYMENT_METHOD,
-                        BILL_SETTLE_TYPE
+                        BILL_SETTLE_TYPE,
+                        IDENTITY_CARD_TYPE
                     ])).then(function(value) {
                         self.dds = value;
                         self.addContactPoint();

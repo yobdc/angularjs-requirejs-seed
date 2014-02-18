@@ -44,7 +44,9 @@
     <div class="form-group">
         <label class="col-md-3 col-sm-3 col-xs-4 control-label">证件类型</label>
         <div class="col-md-9 col-sm-9 col-xs-8">
-            <input type="text" class="form-control" ng-model="$data.supplier.personInfo.indentificationType" placeholder="请输入...">
+            <select class="form-control" ng-model="$data.supplier.personInfo.indentificationType" ng-options="o.code as o.name for o in $data.supplier.dds['identityCardType'].options">
+                <option value="">请选择...</option>
+            </select>
         </div>
     </div>
 </div>
