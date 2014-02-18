@@ -1,0 +1,58 @@
+<div class="container">
+    <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header navbar-inverse row nav-justified">
+            <a href="/"><i class="fa fa-home fa-white fa-2"></i></a>
+                <text style="color: #fff">系统设置\用户</text>
+        </div>
+        <div class="navbar-header row nav-justified hidden-xs">
+            <div class="col-sm-8 col-md-8 navbar-left line-border">
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control body-back-color"  placeholder="请输入关键字搜索...">
+                </div>
+                <div class="col-sm-1 col-md-1">
+                    <button class="btn body-back-color" >
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 navbar-right line-border">
+                <select class="form-control body-back-color">
+                    <option value="">所有用户</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+    <div ng-class="{'list-view-side': !$data.collapsed, 'list-view-side-full-width': $data.collapsed}">
+        <div class="row dot-line-border fixed-height-120 padding-top-bottom-15" >
+            <div class="item-card-padding fixed-witdh-80 item-card-row-left">
+                <img src="app/img/amy_jones.jpg" class="img-circle img-responsive margin-left-10">
+            </div>
+            <div class="item-card-padding item-card-row-middle">
+                <label class="col-md-12 col-sm-12 col-xs-12">李三三</label>
+                <div class="col-md-12 col-sm-12 col-xs-12">ID12345{{zzz}}</div>
+                <div class="col-md-12 col-sm-12 col-xs-12">上海贝斯有限公司</div>
+                <div class="col-md-12 col-sm-12 col-xs-12">15475544716</div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="!$data.collapsed" class="list-view-content">
+        <div ng-include="'app/views/master/user/userInfo.html'"></div>
+    </div>
+    <div ng-class="{'list-view-collapse': !$data.collapsed, 'list-view-collapse-full-width': $data.collapsed}">
+        <a href="javascript:void(0)" ng-click="collapse()">
+            <i class="fa fa-3" ng-class="{'fa-angle-left': $data.collapsed, 'fa-angle-right': !$data.collapsed}"></i>
+        </a>
+    </div>
+    <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+        <div class="nav navbar-left">
+            <button class="btn navbar-blue fa-white" >
+                <i class="fa fa-th"></i>
+            </button>
+        </div>
+        <div class="nav navbar-right">
+            <button class="btn navbar-blue fa-white" ng-click="addUser()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </nav>
+</div>

@@ -92,6 +92,17 @@ body {
 ,.fa-blue:focus{
     color: #007aff;
 }
+
+.fa-green {
+    color: rgb(19, 213, 19);
+}
+.fa-green:hover
+,.fa-green:focus{
+    color: rgb(19, 213, 19);
+}
+.fa-1{
+    font-size: 1em;
+}
 .fa-2{
     font-size: 2em;
 }
@@ -242,6 +253,43 @@ span.input-group-addon {
 }
 .no-min-width {
     min-width: 0;
+}
+
+.right{
+    float: right;
+}
+.left{
+    float: left;
+}
+
+.noBG
+{
+    background: inherit;
+}
+
+.nocolor
+{
+    color: inherit;
+}
+.grayBottomBorder
+{
+    border-bottom: 1px solid #ccc !important;
+}
+
+.breadcrumb {
+    padding: 8px 15px 0;
+    margin-bottom: 0px;
+    list-style: none;
+    background-color: inherit;
+    border-radius: 4px;
+    margin-left: 20px;
+}
+
+.breadcrumb a{
+    color: rgb(255, 255, 255)
+}
+.breadcrumb :before{
+    float: left;
 }
 
 /*ng-switcher css start*/

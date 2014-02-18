@@ -133,7 +133,7 @@ define([
             require(['controllers/master/supplier/supplierMaterial'], function(controller) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
-                    '$routeParams': $routeParams,
+                    '$routeParams': $routeParams
                 });
             });
         }
@@ -147,7 +147,7 @@ define([
             require(['controllers/master/supplier/supplierAddMaterial'], function(controller) {
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
-                    '$routeParams': $routeParams,
+                    '$routeParams': $routeParams
                 });
             });
         }
@@ -155,20 +155,14 @@ define([
 
     .controller('PositionCtrl', ['$scope',
         '$injector',
-        '$modal',
-        '$routeParams',
-
-        function($scope, $injector, $modal, $routeParams) {
+        '$timeout',
+        'OrganizationStructureService',
+        function($scope, $injector,$timeout,OrganizationStructureService) {
             require(['controllers/master/position/position'], function(controller) {
-                // injector method takes an array of modules as the first argument
-                // if you want your controller to be able to use components from
-                // any of your other modules, make sure you include it together with 'ng'
-                // Furthermore we need to pass on the $scope as it's unique to this controller
                 $injector.invoke(controller, this, {
                     '$scope': $scope,
-                    '$modal': $modal,
-                    '$routeParams': $routeParams
-
+                    '$timeout': $timeout,
+                    'OrganizationStructureService': OrganizationStructureService
                 });
             });
         }
@@ -215,5 +209,72 @@ define([
                 });
             });
         }
-    ]);
+    ])
+    .controller("userController",['$scope','$injector','$modal','$routeParams',
+        function($scope,$injector,$modal,$routeParams){
+            require(['controllers/master/user/userCtrl'],function(controller){
+                $injector.invoke(controller,this,{
+                    '$scope': $scope,
+                    '$modal': $modal,
+                    '$routeParams':$routeParams
+                });
+            });
+        }
+    ])
+    .controller("userAddCtrl",['$scope','$injector','$modal','$routeParams',
+        function($scope,$injector,$modal,$routeParams){
+            require(['controllers/master/user/addUserCtrl'],function(controller){
+                $injector.invoke(controller,this,{
+                    '$scope': $scope,
+                    '$modal': $modal,
+                    '$routeParams':$routeParams
+                });
+            });
+        }
+    ])
+    .controller("roleCtrl",['$scope','$injector','$modal','$routeParams',
+        function($scope,$injector,$modal,$routeParams){
+            require(['controllers/master/role/roleCtrl'],function(controller){
+                $injector.invoke(controller,this,{
+                    '$scope': $scope,
+                    '$modal': $modal,
+                    '$routeParams':$routeParams
+                });
+            });
+        }
+    ])
+    .controller("roleAddCtrl",['$scope','$injector','$modal','$routeParams',
+        function($scope,$injector,$modal,$routeParams){
+            require(['controllers/master/role/addRoleCtrl'],function(controller){
+                $injector.invoke(controller,this,{
+                    '$scope': $scope,
+                    '$modal': $modal,
+                    '$routeParams':$routeParams
+                });
+            });
+        }
+    ])
+     .controller("permissionGroupCtrl",['$scope','$injector','$modal','$routeParams',
+        function($scope,$injector,$modal,$routeParams){
+            require(['controllers/master/permission/groupCtrl'],function(controller){
+                $injector.invoke(controller,this,{
+                    '$scope': $scope,
+                    '$modal': $modal,
+                    '$routeParams':$routeParams
+                });
+            });
+        }
+    ])
+    .controller("permissionGroupAddCtrl",['$scope','$injector','$modal','$routeParams',
+        function($scope,$injector,$modal,$routeParams){
+            require(['controllers/master/permission/addGroupCtrl'],function(controller){
+                $injector.invoke(controller,this,{
+                    '$scope': $scope,
+                    '$modal': $modal,
+                    '$routeParams':$routeParams
+                });
+            });
+        }
+    ])
+    ;
 });

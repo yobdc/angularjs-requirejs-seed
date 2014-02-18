@@ -1,14 +1,48 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+
+
+<div class="container" style="margin-left: 0px">
+    <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header navbar-inverse row nav-justified">
+            <a href="/"><i class="fa fa-home fa-white fa-2"></i></a>
+        </div>
+        <div class="navbar-header row nav-justified hidden-xs">
+            <div class="col-sm-8 col-md-8 navbar-left line-border">
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control body-back-color" ng-model="$data.keyword" placeholder="请输入关键字搜索...">
+                </div>
+                <div class="col-sm-1 col-md-1">
+                    <button class="btn body-back-color" ng-click="search($data.keyword)">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 navbar-right line-border">
+                <select class="form-control body-back-color">
+                    <option value="">所有职位</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <div>        
+        <div class="row dot-line-border padding-top-bottom-15" ng-repeat="s in osrChildren">
+            {{s.name}}
+        </div>
+    </div>
+
+    <div class="list-view-content">   
+        <div class="row panel panel-default form-horizontal">
+            <div ng-repeat="p in positions" style="line-height: 20px; cursor: pointer;" ng-click="viewPosition(p.id)">
+                <div style="margin:5px 5px 5px 5px">
+                    <span>{{p.name}}</span>
+                </div>
+                <hr style="margin-top: 5px">
+            </div>
+            <div ng-show="(!!positions)==false || positions.length == 0" style="text-align: center; margin-top: 10px; color:#929292">暂无职位</div>
+        </div>
+
+        <button class="btn btn-lg btn-block btn-blue" style="margin-top: 10px;" ng-click="addSite()">
+            <i class="fa fa-plus"></i>
+        </button>     
+    </div>
+</div>

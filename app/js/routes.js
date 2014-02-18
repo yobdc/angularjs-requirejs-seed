@@ -35,13 +35,32 @@ define(['angular', 'app'], function(angular, app) {
                 controller: 'SupplierAddMaterialCtrl'
             })
             
-            .when('/position/create', {
+            .when('/position/position/list', {
                 templateUrl: 'app/views/master/position/position.html',
                 controller: 'PositionCtrl'
             }).when('/organization', {
                 templateUrl: 'app/views/master/organization/organizationStructure.html',
                 controller: 'organizationStructureCtrl'
-            }).otherwise({
+            }).when('/user',{
+                templateUrl: 'app/views/master/user/userList.html',
+                controller: 'userController'
+            }).when('/user/create',{
+                templateUrl: 'app/views/master/user/addUser.html',
+                controller: 'userAddCtrl'
+            }).when('/role',{
+                templateUrl: 'app/views/master/role/roleList.html',
+                controller: 'roleCtrl'
+            }).when('/role/create',{
+                templateUrl: 'app/views/master/role/addRole.html',
+                controller: 'roleAddCtrl'
+            }).when('/permission/group',{
+                templateUrl: 'app/views/master/permission/groupList.html',
+                controller: 'permissionGroupCtrl'
+            }).when('/permission/group/create',{
+                templateUrl: 'app/views/master/permission/addGroup.html',
+                controller: 'permissionGroupAddCtrl'
+            })
+            .otherwise({
                 redirectTo: '/supplier/create'
             });
         }
