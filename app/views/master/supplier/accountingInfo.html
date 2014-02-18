@@ -28,7 +28,9 @@
     <div class="form-group">
         <label class="col-xs-4 col-md-4 col-sm-4 control-label">结算类型</label>
         <div class="col-xs-8 col-md-8 col-sm-8">
-            <input type="text" class="col-xs-8 col-md-8 col-sm-8 form-control" typeahead-jh="a as a.name for a in autoLedgerCatalog($viewValue)" ng-model="$data.supplier.accountingInfo.billSettleType" id="inputEmail3" placeholder="请选择...">
+            <select class="form-control" ng-model="$data.supplier.accountingInfo.billSettleType" ng-options="o.code as o.name for o in $data.supplier.dds['BillSettleType'].options">
+                <option value="">请选择...</option>
+            </select>
         </div>
     </div>
 </div>

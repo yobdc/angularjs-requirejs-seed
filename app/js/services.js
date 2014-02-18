@@ -483,6 +483,14 @@ define([
                             path: 'validatename',
                             name: ''
                         }
+                    },
+                    search: {
+                        method: 'GET',
+                        params: {
+                            path: 'search',
+                            query: ''
+                        },
+                        isArray: true
                     }
                 });
             }

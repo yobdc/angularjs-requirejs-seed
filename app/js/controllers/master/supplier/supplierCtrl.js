@@ -20,12 +20,14 @@ define([], function() {
                 var aaa = CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
                 return CommonService.getAutoData($scope.ledgerCatalogs, term, 'name');
             }
-            $scope.zz = true;
-            $scope.$watch(function(){
-                return $scope.zz;
-            }, function(newVal, oldVal){
-                console.log(newVal);
-            })
+            $scope.autoBelongto = function(term) {
+                var q = $q.defer();
+                var query = (term !== '.') ? '' : term;
+                $scope.$data.supplier.search(query).then(function(data) {
+                    q.resolve(data);
+                });
+                return q.promise;
+            };
 
             $scope.init = function() {
                 $scope.command = CommandService.getCommand();

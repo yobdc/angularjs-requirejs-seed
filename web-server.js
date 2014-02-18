@@ -162,7 +162,7 @@ app.get('/resources/dds/PaymentMethod', function(req, res) {
 		}, {
 			code: 'CRD',
 			name: '银行卡'
-		},{
+		}, {
 			code: 'ALP',
 			name: '支付宝'
 		}, {
@@ -171,8 +171,29 @@ app.get('/resources/dds/PaymentMethod', function(req, res) {
 		}]
 	});
 });
+app.get('/resources/dds/BillSettleType', function(req, res) {
+	res.send({
+		keyword: 'BillSettleType',
+		options: [{
+			code: 'Ordinary',
+			name: '普通'
+		}, {
+			code: 'Month',
+			name: '月结'
+		}]
+	});
+});
 app.get('/resources/supplier/validatename', function(req, res) {
 	res.send({
 		result: true
 	});
+});
+app.get('/resources/supplier/search', function(req, res) {
+	res.send([{
+		name: '111'
+	}, {
+		name: '222'
+	}, {
+		name: '333'
+	}]);
 });

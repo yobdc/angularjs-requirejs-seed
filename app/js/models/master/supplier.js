@@ -17,22 +17,22 @@ define(['models'], function(providers) {
                     GENDER = 'gender',
                     EDUCATION = 'education',
                     WORKDAY = 'Workday',
-                    PAYMENT_METHOD = 'PaymentMethod';
+                    PAYMENT_METHOD = 'PaymentMethod',
+                    BILL_SETTLE_TYPE = 'BillSettleType';
 
                 function Supplier() {
                     // - Supplier basic fields
-                    this.type = null;
-                    this.firstName = null;
-                    this.lastName = null;
-                    this.title = null;
-                    this.belongToCompany = null;
-                    this.keyword = null;
-                    this.customerFullName = null;
-                    this.accountName = null;
-                    this.accountNumber = null;
-                    this.remark = null;
-                    this.type = null;
-                    this.companyName = null;
+                    this.type = null; //供应商类型
+                    this.firstName = null; //名
+                    this.lastName = null; //姓
+                    this.title = null; //称谓
+                    this.belongTo = null; //所属公司
+                    this.keyword = null; //关键字
+                    this.customerFullName = null; //客户全称
+                    this.name = null; //名称
+                    this.number = null; //编码
+                    this.remark = null; //备注
+                    this.companyName = null; //企业名称
                     // - Supplier contact info
                     this.contactInfo = [];
                     // - Supplier personal fields
@@ -115,7 +115,8 @@ define(['models'], function(providers) {
                         GENDER,
                         EDUCATION,
                         WORKDAY,
-                        PAYMENT_METHOD
+                        PAYMENT_METHOD,
+                        BILL_SETTLE_TYPE
                     ])).then(function(value) {
                         self.dds = value;
                         self.addContactPoint();
@@ -125,6 +126,17 @@ define(['models'], function(providers) {
                         q.resolve(self);
                     }, function(values) {
                         q.reject();
+                    });
+                    return q.promise;
+                };
+                Supplier.prototype.search = function(key) {
+                    var q = $q.defer();
+                    SupplierService.search({
+                        query: key
+                    }, function(data) {
+                        q.resolve(data);
+                    }, function(data) {
+                        q.resolve();
                     });
                     return q.promise;
                 };
