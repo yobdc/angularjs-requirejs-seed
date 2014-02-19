@@ -217,6 +217,7 @@ span.input-group-addon {
 .nav-circle > ul.nav-tabs > li.active > a > tab-heading > .bottom-arrow:after {
     visibility: visible;
 }
+
 .bottom-arrow,
 .bottom-arrow:after {
     visibility: hidden;
@@ -425,10 +426,20 @@ a[disabled] > .fa
     border-radius: 50%;
     display: inline-table;
     border: 2px solid white;
-    padding: 0;
-    text-decoration: none !important;
 }
-.circle-icon > i {
+.circle-icon-in-ul {
+    margin: 0 5px;
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-table;
+    color: white;
+    background-color: #007aff;
+    border-color: #007aff;
+}
+.circle-icon > i,
+.circle-icon-in-ul > i {
     vertical-align: middle;
     display: table-cell;
 }
@@ -492,38 +503,135 @@ a[disabled] > .fa
     right: 0;
     left: auto;
 }
-.list-view-side {
+/*css for list view of supplier on mobile screen start*/
+.list-xs-view-top-full-width {
     position: absolute;
-    top: 64px;
+    top: 30px;
+    bottom: 65px;
     left: 0;
-    bottom: 0;
-    width: 400px;
-    background-color: #eee;
-    overflow: auto;
-}
-.list-view-side-full-width {
-    position: absolute;
-    top: 64px;
-    left: 0;
-    bottom: 0;
-    width: 98%;
-    background-color: #eee;
-    overflow: auto;
-}
-.list-view-content {
-    position: absolute;
-    top: 64px;
-    left: 400px;
-    bottom: 0;
     right: 0;
-    padding: 30px;
+    background-color: #eee;
+    overflow: auto;
+}
+.list-xs-view-content {
+    position: absolute;
+    top: 60px;
+    bottom: 35px;
+    left: 0;
+    right: 0;
     overflow: auto;
     background-color: #F8F8F8;
     transition: 0.4s ease-out;
 }
-.list-view-content.ng-hide-add, .list-view-content.ng-hide-remove
+.list-xs-view-collapse {
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: #f8f8f8;
+    text-align: center;
+    position: fixed;
+}
+.list-xs-view-collapse-full-width {
+    bottom: 35px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: #f8f8f8;
+    text-align: center;
+    position: fixed;
+}
+.list-xs-view-collapse > a,
+.list-xs-view-collapse-full-width > a {
+    display: inline-table;
+    height: 100%;
+    text-decoration: none;
+}
+.list-xs-view-collapse > a > i,
+.list-xs-view-collapse-full-width > a > i {
+    display: table-cell;
+    vertical-align: middle;
+}
+.list-xs-view-content.ng-hide-add, .list-xs-view-content.ng-hide-remove
 {
   display: block !important; 
+}
+
+.list-xs-view-content.ng-hide-remove, .list-xs-view-content.ng-hide-add.ng-hide-add-active{
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+}
+
+.list-xs-view-content.ng-hide-remove.ng-hide-remove-active, .list-xs-view-content.ng-hide-add{
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+/*css for list view of supplier on mobile screen start*/
+
+/*css for list view of supplier on larger screen start*/
+@media (min-width: 768px) {
+    .list-view-side {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        bottom: 35px;
+        width: 400px;
+        background-color: #eee;
+        overflow: auto;
+    }
+    .list-view-side-full-width {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 30px;
+        bottom: 35px;
+        background-color: #eee;
+        overflow: auto;
+    }
+    .list-view-content {
+        position: absolute;
+        top: 64px;
+        bottom: 35px;
+        left: 430px;
+        right: 0;
+        padding: 0 30px 30px 0;
+        overflow: auto;
+        background-color: #F8F8F8;
+        transition: 0.4s ease-out;
+    }
+    .list-view-collapse {
+        top: 64px;
+        bottom: 35px;
+        left: 400px;
+        width: 30px;
+        background-color: #f8f8f8;
+        text-align: center;
+        position: fixed;
+    }
+    .list-view-collapse-full-width {
+        top: 64px;
+        bottom: 35px;
+        right: 0;
+        width: 30px;
+        background-color: #f8f8f8;
+        text-align: center;
+        position: fixed;
+    }
+    .list-view-collapse > a,
+    .list-view-collapse-full-width > a {
+        display: inline-table;
+        height: 100%;
+        text-decoration: none;
+    }
+    .list-view-collapse > a > i,
+    .list-view-collapse-full-width > a > i {
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+.list-view-content.ng-hide-add, .list-view-content.ng-hide-remove
+{
+    display: block !important; 
 }
 
 .list-view-content.ng-hide-remove, .list-view-content.ng-hide-add.ng-hide-add-active{
@@ -535,15 +643,83 @@ a[disabled] > .fa
     -webkit-transform: translateX(0);
     transform: translateX(0);
 }
-.list-view-collapse {
-    left: 400px;
-    position: fixed;
-    bottom: 50%;
+/*css for list view of supplier on larger screen end*/
+
+.navi-board-left {
+    position:absolute;
+    width:100%;
+    padding:1px;
+    transition: 4s ease-out;
 }
-.list-view-collapse-full-width {
-    left: 98%;
-    position: fixed;
-    bottom: 50%;
+.navi-board-left.ng-hide-add, .navi-board-left.ng-hide-remove
+{
+    display: block !important; 
+}
+
+.navi-board-left.ng-hide-remove, .navi-board-left.ng-hide-add.ng-hide-add-active{
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.navi-board-left.ng-hide-remove.ng-hide-remove-active, .navi-board-left.ng-hide-add{
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+}
+
+.navi-board-right {
+    position:absolute;
+    width:100%;
+    padding:1px;
+    transition: 0.4s ease-out;
+}
+.navi-board-right.ng-hide-add, .navi-board-right.ng-hide-remove
+{
+    display: block !important; 
+}
+
+.navi-board-right.ng-hide-remove, .navi-board-right.ng-hide-add.ng-hide-add-active{
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.navi-board-right.ng-hide-remove.ng-hide-remove-active, .navi-board-right.ng-hide-add{
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.navi-board-arrow {
+    text-align:center;
+    margin-top:12%;
+    padding:50px;
+    color:gray
+}
+.navi-board-arrow:hover{
+    color: #007aff
+}
+
+.section-cube{
+    width:25%;
+    float:left;
+    padding:30px;
+    text-align: center;
+    /*    border-left: 1px dashed #000;
+        border-bottom: 1px dashed #000;
+        border-color:#ccc;*/
+    height:100%;
+}
+.section-circle{
+    margin: 5px 8px 5px;
+    margin-bottom: 8px;
+    text-align: center;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: inline-table;
+    padding: 10px;
+    background:#007aff;
+}
+.section-circle i{
+    color:white;
 }
 .item-card-padding {
     padding: 0px 2px;
@@ -553,6 +729,13 @@ a[disabled] > .fa
 }
 .dot-line-border {
     border: 1px dotted #ddd;
+}
+.avatar-bar {
+    border-bottom: 1px dashed #ddd;
+    margin-bottom: 20px;
+}
+.form-group > span {
+    padding-top: 7px;
 }
 .white-table {
     margin-bottom: 10px;

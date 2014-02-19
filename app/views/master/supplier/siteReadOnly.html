@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="enabled" class="col-md-3 col-sm-3 col-xs-4 control-label">有效</label>
                 <div class="col-md-9 col-sm-9 col-xs-8 padding-top-6">
-                    <div ng-switcher class="form-control" ng-model="$data.site.enabled" id="enabled"></div>
+                    <div ng-switcher switcher-disabled="true" class="form-control" ng-model="$data.site.enabled" id="enabled"></div>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label for="isPrimary" class="col-md-3 col-sm-3 col-xs-4 control-label">主地址</label>
                 <div class="col-md-9 col-sm-9 col-xs-8 padding-top-6">
-                    <div ng-switcher class="form-control" ng-model="$data.site.isPrimary" id="isPrimary"></div>
+                    <div ng-switcher switcher-disabled="true" class="form-control" ng-model="$data.site.isPrimary" id="isPrimary"></div>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
             <div class="form-group">
                 <label for="businessScope" class="col-md-3 col-sm-3 col-xs-4 control-label">业务用途</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <label class="form-control no-font-weight">{{$data.site.businessScope}}</label>
+                    <label class="form-control no-font-weight">{{$data.site.businessScopeString}}</label>
                 </div>
             </div>
         </div>

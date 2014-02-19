@@ -64,6 +64,23 @@ define([
             });
         }
     ])
+    .controller('SupplierDetailCtrl',[
+        '$scope',
+        '$injector',
+        '$timeout',
+        '$location',
+        function($scope, $injector, $timeout, $location){
+            require([
+                'controllers/master/supplier/supplierDetailCtrl'
+            ], function(controller){
+                $injector.invoke(controller, this, {
+                    '$scope': $scope,
+                    '$timeout': $timeout,
+                    '$location': $location
+                });
+            });
+        }
+    ])
     // ModalInstanceCtrl
     .controller('ModalInstanceCtrl', [
         '$scope',

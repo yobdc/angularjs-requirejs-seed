@@ -3,15 +3,24 @@ define(['angular', 'app'], function(angular, app) {
 
     return app.config(['$routeProvider',
         function($routeProvider) {
-            $routeProvider.when('/supplier/board', {
+            $routeProvider.when('/supplier', {
+                templateUrl: 'app/views/master/supplier/index.html',
+                controller: 'SupplierCtrl'
+            }).when('/supplier/board', {
                 templateUrl: 'app/views/master/supplier/supplierBoard.html',
-                controller: 'SupplierListCtrl',
+                controller: 'SupplierListCtrl'
             }).when('/supplier/list', {
                 templateUrl: 'app/views/master/supplier/supplierList.html',
-                controller: 'SupplierListCtrl',
+                controller: 'SupplierListCtrl'
+            }).when('/supplier/detail', {
+                templateUrl: 'app/views/master/supplier/supplierDetail.html',
+                controller: 'SupplierDetailCtrl'
             }).when('/supplier/create', {
                 templateUrl: 'app/views/master/supplier/supplier.html',
-                controller: 'SupplierCtrl',
+                controller: 'SupplierCtrl'
+            }).when('/supplier/edit/:guid', {
+                templateUrl: 'app/views/master/supplier/supplier.html',
+                controller: 'SupplierCtrl'
             }).when('/supplier/create/addOrEditContact', {
                 templateUrl: 'app/views/master/supplier/addContact.html',
                 controller: 'SupplierAddContactCtrl'
@@ -33,8 +42,7 @@ define(['angular', 'app'], function(angular, app) {
             .when('/supplier/material/addOrEdit', {
                 templateUrl: 'app/views/master/supplier/addMaterial.html',
                 controller: 'SupplierAddMaterialCtrl'
-            })
-            
+            })            
             .when('/position/position/list', {
                 templateUrl: 'app/views/master/position/position.html',
                 controller: 'PositionCtrl'

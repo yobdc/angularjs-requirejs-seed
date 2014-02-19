@@ -1,19 +1,20 @@
 <nav class="navbar navbar-fixed-top" role="navigation">
-    <div class="navbar-header navbar-inverse row nav-justified">
+    <div class="navbar-header navbar-inverse nav-justified">
         <a href="/"><i class="fa fa-home fa-white fa-2"></i></a>
+        <span class="fa-white">供应商</span>
     </div>
     <div class="navbar-header row nav-justified hidden-xs">
-        <div class="col-sm-8 col-md-8 navbar-left line-border">
-            <div class="col-sm-6 col-md-6">
+        <div class="col-sm-8 navbar-left line-border">
+            <div class="col-sm-11">
                 <input type="text" class="form-control body-back-color" ng-model="$data.keyword" placeholder="请输入关键字搜索...">
             </div>
-            <div class="col-sm-1 col-md-1">
+            <div class="col-sm-1">
                 <button class="btn body-back-color" ng-click="search($data.keyword)">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
         </div>
-        <div class="col-sm-4 col-md-4 navbar-right line-border">
+        <div class="col-sm-4 navbar-right line-border">
             <select class="form-control body-back-color">
                 <option value="">所有供应商</option>
             </select>
@@ -22,33 +23,53 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="item-card col-md-3 col-sm-4 col-xs-12" ng-repeat="a in [1,2,3,4,5,6]">
-            <div class="col-md-2 col-sm-2 col-xs-2 item-card-padding">
-                <img src="app/img/amy_jones.jpg" class="img-circle img-responsive">
-            </div>
-            <div class="col-md-8 col-sm-8 col-xs-8 item-card-padding">
-                <label class="col-md-12 col-sm-12 col-xs-12">李三三</label>
-                <div class="col-md-12 col-sm-12 col-xs-12">ID12345{{zzz}}</div>
-                <div class="col-md-12 col-sm-12 col-xs-12">上海贝斯有限公司</div>
-                <div class="col-md-12 col-sm-12 col-xs-12">15475544716</div>
-            </div>
-            <div class="col-md-1 col-sm-1 col-xs-1 item-card-padding">
-                <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
-                    <i class="fa fa-flickr"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="javascript:void(0)">物料</a></li>
-                    <li><a href="javascript:void(0)">合同协议</a></li>
-                    <li><a href="javascript:void(0)">设备</a></li>
-                </ul>
-            </div>
+        <div class="item-card col-md-4 col-sm-6 col-xs-12" ng-repeat="s in $data.supplierList">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="col-xs-2 item-card-padding" ng-click="goToDetail($index)">
+                            <img src="app/img/amy_jones.jpg" class="img-circle img-responsive">
+                        </td>
+                        <td class="col-xs-8 item-card-padding" ng-click="goToDetail($index)">
+                            <label class="col-xs-12">{{s.accountName}}</label>
+                            <div class="col-xs-12">{{s.accountNumber}}</div>
+                            <div class="col-xs-12">{{s.belongToCompany}}</div>
+                            <div class="col-xs-12">{{s.phone}}</div>
+                        </td>
+                        <td class="col-xs-1 item-card-padding" style="vertical-align: top;">
+                            <div style="position: absolute">
+                                <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">
+                                    <i class="fa fa-flickr"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="javascript:void(0)" ng-click="goToMaterial($data.supplier.id)">
+                                            <div class="circle-icon-in-ul"><i class="fa fa-eraser"></i></div>物料
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <div class="circle-icon-in-ul"><i class="fa fa-files-o"></i></div>合同协议
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <div class="circle-icon-in-ul"><i class="fa fa-hdd-o"></i></div>设备
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
     <div class="nav navbar-left">
         <button class="btn navbar-blue fa-white" ng-click="swtichView()">
-            <i class="fa fa-th"></i>
+            <i class="fa fa-list"></i>
         </button>
     </div>
     <div class="nav navbar-right">

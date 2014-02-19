@@ -38,11 +38,13 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     }
                 };
                 
-                switchDiv.bind('click', function() {
-                    modelCtrl.$setViewValue(!modelCtrl.$viewValue);
-                    scope.$apply();
-                    return update();
-                });
+                if (!attrs.switcherDisabled) {
+                    switchDiv.bind('click', function() {
+                        modelCtrl.$setViewValue(!modelCtrl.$viewValue);
+                        scope.$apply();
+                        return update();
+                    });
+                }
                 
                 return modelCtrl.$render = function() {
                     return update();

@@ -19,7 +19,7 @@ define([], function() {
                 try {
                     var site = $scope.$data.site;
                     site.validate();
-                    site.toRegionString();
+                    site.convertModel();
 
                     CommandService.setCommand({
                         receiver: 'SupplierCtrl',

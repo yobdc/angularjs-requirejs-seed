@@ -498,6 +498,24 @@ define([
                             query: ''
                         },
                         isArray: true
+                    },
+                    list: {
+                        method: 'GET',
+                        params: {
+                            path: 'list'
+                        }
+                    },
+                    getByGuid: {
+                        method: 'GET',
+                        params: {
+                            path: 'getByGuid'
+                        }
+                    },
+                    query: {
+                        method: 'GET',
+                        params: {
+                            path: 'query'
+                        }
                     }
                 });
             }

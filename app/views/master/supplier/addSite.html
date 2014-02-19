@@ -90,9 +90,7 @@
             <div class="form-group">
                 <label for="businessScope" class="col-md-3 col-sm-3 col-xs-4 control-label">业务用途</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <select class="form-control" id="businessScope" ng-model="$data.site.businessScope" ng-options="o.code as o.name for o in $data.site.dds['Site.BusinessScope'].options">
-                        <option value="" style="display: none;">请选择...</option>
-                    </select>
+                    <multiselect class="input-xlarge" multiple="true" ng-model="$data.site.businessScope" options="code as o.name for o in $data.site.dds['BusinessPurpose'].options"></multiselect>
                 </div>
             </div>
         </div>
@@ -110,7 +108,6 @@
         </div>
     </div>
 </div>
-
 <nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
     <div class="nav navbar-right">
         <button class="btn navbar-blue fa-white" ng-click="save()">确定</button>

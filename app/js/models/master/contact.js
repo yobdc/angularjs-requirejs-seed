@@ -35,6 +35,7 @@ define(['models'], function(providers) {
                         name: null
                     }; //区/县
                     this.address = null; //地址
+                    this.postcode = null; //邮编
                     this.contactInfo = []; //联系信息
                 };
                 Contact.prototype.load = function(param) {
@@ -129,7 +130,25 @@ define(['models'], function(providers) {
                     return name;
                 };
                 Contact.prototype.toPostData = function() {
-                    return this;
+                    var self = this;
+                    var postData = {
+                        guid: self.guid,
+                        firstName: self.firstName,
+                        lastName: self.lastName,
+                        fullName: self.fullname,
+                        honorlficSuffix: self.title,
+                        department: self.department,
+                        position: self.position,
+                        primaryFlag: self.isPrimary?'Y':'N',
+                        country: self.country.code,
+                        province: self.province.code,
+                        city: self.city.code,
+                        districtOrCounty: self.region.code,
+                        zipcode: self.postcode,
+                        address1: self.address,
+                        contactPoints: self.contactInfo
+                    };
+                    return postData;
                 };
                 return Contact;
             };

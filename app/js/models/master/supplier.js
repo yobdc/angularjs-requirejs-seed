@@ -93,12 +93,16 @@ define(['models'], function(providers) {
                     // - Supplier purchase fields
                     var purchase = {};
                     purchase.org = null; //采购组织
-                    purchase.yype = null; //类型
+                    purchase.type = null; //类型
                     purchase.signedSupplier = null; //签约供应商
                     purchase.signedType = null; //签约类型
                     purchase.expiryDateFrom = null; //签约有效期开始
                     purchase.expiryDateTo = null; //签约有效期结束
                     this.purchaseInfo = purchase;
+                    // - 供应商地址
+                    this.sites = [];
+                    // - 供应商联系人
+                    this.contacts = [];
                 };
                 Supplier.prototype.load = function(param) {
                     var promise;
@@ -219,8 +223,87 @@ define(['models'], function(providers) {
                 };
                 Supplier.prototype.create = function() {};
                 Supplier.prototype.update = function() {};
+                Supplier.prototype.clearEmptySite = function() {
+                    for (var i = 0; i < this.sites.length;) {
+                        var s = this.sites[i];
+                        if (s && s.guid) {
+                            i++;
+                        } else {
+                            this.sites.splice(i, 1);
+                        }
+                    }
+                };
+                Supplier.prototype.clearEmptyContact = function() {
+                    for (var i = 0; i < this.contacts.length;) {
+                        var s = this.contacts[i];
+                        if (s && s.guid) {
+                            i++;
+                        } else {
+                            this.contacts.splice(i, 1);
+                        }
+                    }
+                };
                 Supplier.prototype.toPostData = function() {
-                    return this;
+                    var postData = {};
+                    var self = this;
+                    postData.uid = self.guid;
+                    postData.supplierInfo = {
+                        guid: self.guid,
+                        number: self.number,
+                        name: self.name,
+                        type: self.type,
+                        isCustomer: self.accountingInfo.isCustomer,
+                        paymentTerm: self.accountingInfo.paymentTerm,
+                        settlementType: self.accountingInfo.billSettleType,
+                        paymentType: self.accountingInfo.paymentType,
+                        finalAccountingDate: null,
+                        currency: self.accountingInfo.defaultCurrency,
+                        contractFlag: self.purchase.signedSupplier ? 'Y' : 'N',
+                        contractType: self.purchase.signedType,
+                        contractStartDate: self.purchase.expiryDateFrom,
+                        contractEndDate: self.purchase.expiryDateTo
+                    };
+                    postData.basicInfo = {
+                        guid: null,
+                        belongToCompanyId: null,
+                        belongToCompanyName: null,
+                        remark: self.remark,
+                        contactPoints: []
+                    };
+                    for (var i = 0; i < self.contactInfo.length; i++) {
+                        var p = self.contactInfo[i];
+                        if (p && p.value) {
+                            postData.basicInfo.contactPoints.push(p);
+                        }
+                    }
+                    postData.contactInfos = [];
+                    for (var i = 0; i < self.contacts.length; i++) {
+                        var c = self.contacts[i];
+                        if (c) {
+                            postData.contactInfos.push(c.toPostData());
+                        }
+                    }
+                    postData.siteInfos = [];
+                    for (var i = 0; i < self.sites.length; i++) {
+                        var s = self.sites[i];
+                        if (s) {
+                            postData.siteInfos.push(c.toPostData());
+                        }
+                    }
+                    if (self.type === 'C') {
+                        postData.supplierInfo.isInner = self.personInfo.isInternalSupplier;
+                        postData.basicInfo.effectiveDate = self.personInfo.expiryDateFrom;
+                        postData.basicInfo.endDate = self.personInfo.expiryDateTo;
+                        postData.basicInfo.startTime = self.personInfo.availableTimeFrom;
+                        postData.basicInfo.endTime = self.personInfo.availableTimeTo;
+                    } else if (self.type === 'B') {
+                        postData.supplierInfo.isInner = self.companyInfo.isInternalSupplier;
+                        postData.basicInfo.effectiveDate = self.companyInfo.expiryDateFrom;
+                        postData.basicInfo.endDate = self.companyInfo.expiryDateTo;
+                        postData.basicInfo.startTime = self.companyInfo.availableTimeFrom;
+                        postData.basicInfo.endTime = self.companyInfo.availableTimeTo;
+                    }
+                    return postData;
                 };
                 return Supplier;
             };

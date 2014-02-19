@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-        <a href="/"><i class="fa fa-home fa-white fa-3"></i></a>
+        <a href="/"><i class="fa fa-home fa-white fa-2x"></i></a>
     </div>
 </nav>
 <div class="container">
@@ -25,8 +25,8 @@
                 </tr>
                 <tr ng-repeat="m in materials">
                     <td>
-                        <a tooltip="查看物料" class="no-underline" href="javascript:void(0)" ng-click="">
-                            <i class="fa fa-foursquare"></i>
+                        <a tooltip="查看物料供应商" class="no-underline" href="javascript:void(0)">
+                            <i class="fa fa-dropbox"></i>
                         </a>
                         <span>{{m.name}}</span>
                     </td>
@@ -34,7 +34,7 @@
                     <td>{{m.price}}{{m.currency}}x{{m.unit}}</td>
                     <td>{{m.expiryStartDate}}-{{m.expiryEndDate}}</td>
                     <td>
-                        <a tooltip="更多信息" href="javascript:void(0)" ng-click="">
+                        <a tooltip="更多信息" href="javascript:void(0)" ng-click="addMaterial()">
                             <i class="fa fa-chevron-right"></i>
                         </a>
                     </td>

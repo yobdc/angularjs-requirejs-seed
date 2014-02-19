@@ -1,0 +1,28 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a href="/"><i class="fa fa-home fa-white fa-2"></i></a>
+    </div>
+</nav>
+<div class="container" ng-include="'app/views/master/supplier/supplierReadOnly.html'"></div>
+<nav class="navbar navbar-blue navbar-fixed-bottom" role="navigation">
+    <div class="nav navbar-left">
+        <a tooltip="物料" href="javascript:void(0)" ng-click="goToMaterial($data.supplier.id)">
+            <div class="circle-icon">
+                <i class="fa fa-eraser fa-white"></i>
+            </div>
+        </a>
+        <a tooltip="合同协议" href="javascript:void(0)">
+            <div class="circle-icon">
+                <i class="fa fa-files-o fa-white"></i>
+            </div>
+        </a>
+        <a tooltip="设备" href="javascript:void(0)">
+            <div class="circle-icon">
+                <i class="fa fa-hdd-o fa-white"></i>
+            </div>
+        </a>
+    </div>
+    <div class="nav navbar-right">
+        <button class="btn navbar-blue fa-white" ng-click="editSupplier()">编辑</button>
+    </div>
+</nav>
