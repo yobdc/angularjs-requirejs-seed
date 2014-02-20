@@ -7,111 +7,25 @@
     <div class="col-md-2 col-xs-2 col-sm-2 navi-board-arrow"  ng-click="slideLeft()">
         <i class="fa fa-chevron-left fa-4x"></i>
     </div>
-    <div class="container col-md-8 col-xs-8 col-sm-8" style="min-height:400px;margin-top:5%;">
+    <div class="col-md-8 navi-board col-xs-8 col-sm-8">
         <div class="navi-board-left" ng-repeat="slide in slides" ng-show="$index==currentIndex">
-            <div class="row">
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="{{slide.icon}}"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
+            <div ng-repeat="item in slide" class="section-cube" ng-click="jumpTo(item.url)">
+                <div class="section-circle">
+                    <i class="{{item.icon}}"></i>
                 </div>
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
+                <div class="name">
+                    {{item.name}}
                 </div>
-
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
-                </div>
-
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
-                </div>
-
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
-                </div>
-
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
-                </div>
-
-                <div class="section-cube">
-                    <div class="section-circle">
-                        <i class="fa fa-usd fa-4x"></i>
-                    </div>
-                    <div style="font-family:SimHei;font-weight:bold;font-size:1.8em;">
-                        {{slide.name}}
-                    </div>
-                    <div style="font-family:SimHei;font-size:1.2em;color:gray">
-                        我的工单信息
-                    </div>
+                <div class="info">
+                    {{item.info}}
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-2  col-xs-2 col-sm-2 navi-board-arrow" ng-click="slideLeft()"  style="text-align: center;margin-top:12%;padding:50px;">
+    <div class="col-md-2  col-xs-2 col-sm-2 navi-board-arrow" ng-click="slideLeft()">
         <i class="fa fa-chevron-right fa-4x"></i>
     </div>
 </div>
-<div class="row" style="text-align:center;margin-top:50px;">
-    <i class="fa fa-minus fa-3x" style="color:#007aff;margin-left:10px;" ng-repeat="slide in slides" ></i>
+<div class="row navi-button-row">
+    <i ng-class="{false:'fa fa-minus fa-3x navi-button',true:'fa fa-minus fa-3x navi-button-active'}[$index==currentIndex]" ng-click="slideTo($index)" ng-repeat="slide in slides" ></i>
 </div>

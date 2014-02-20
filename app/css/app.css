@@ -554,7 +554,7 @@ a[disabled] > .fa
 }
 .list-xs-view-content.ng-hide-add, .list-xs-view-content.ng-hide-remove
 {
-  display: block !important; 
+    display: block !important; 
 }
 
 .list-xs-view-content.ng-hide-remove, .list-xs-view-content.ng-hide-add.ng-hide-add-active{
@@ -644,7 +644,24 @@ a[disabled] > .fa
     transform: translateX(0);
 }
 /*css for list view of supplier on larger screen end*/
-
+.navi-button-row{
+    text-align:center;
+    margin-top:50px;
+}
+.navi-button{
+    color:gray;
+    margin-left:10px;
+}
+.navi-button-active{
+    color:#007aff;
+    margin-left:10px;
+}
+.navi-board{
+    margin-right: auto;
+    margin-left: auto;
+    min-height:400px;
+    margin-top:5%;
+}
 .navi-board-left {
     position:absolute;
     width:100%;
@@ -707,6 +724,17 @@ a[disabled] > .fa
         border-color:#ccc;*/
     height:100%;
 }
+
+.section-cube .name{
+    font-family:SimHei;
+    font-weight:bold;
+    font-size:1.8em;
+}
+.section-cube .info{
+    font-family:SimHei;
+    font-size:1.2em;
+    color:gray
+}
 .section-circle{
     margin: 5px 8px 5px;
     margin-bottom: 8px;
@@ -718,6 +746,7 @@ a[disabled] > .fa
     padding: 10px;
     background:#007aff;
 }
+
 .section-circle i{
     color:white;
 }

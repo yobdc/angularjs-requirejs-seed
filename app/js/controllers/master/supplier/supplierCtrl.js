@@ -10,22 +10,9 @@ define([], function() {
     'CommonService',
     'CommandService',
     '$location',
-    function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, CommandService, $location) {
+    'SupplierService',
+    function($scope, $timeout, $modal, $log, $routeParams, Supplier, $q, CommonService, CommandService, $location,SupplierService) {
             
-        $scope.slides = [{
-            name:'1',
-            icon:"fa fa-4x fa-circle-o"
-        },{
-            name:'2',
-            icon:"fa fa-4x fa-cloud-upload"
-        },{
-            name:'3',
-            icon:"fa fa-4x fa-camera-retro"
-        },{
-            name:'4',
-            icon:"fa fa-4x fa-anchor"
-        }];
-                        
         $scope.accountingInfo = {
             ledgerCatalog: '',
             creditInfo: '',
@@ -38,12 +25,21 @@ define([], function() {
             paymentTo: '',
             isCustomer: false
         };
-        $scope.currentIndex = 2;
+        $scope.jumpTo = function(url){
+            $location.url(url);
+        }
+        $scope.currentIndex = 0;
+        $scope.slideTo =  function(index){
+            if(index!=null){
+                $scope.currentIndex = index;
+            }
+        }
+     
         $scope.slideLeft = function(){
-            $scope.currentIndex=($scope.currentIndex+1)%4;
+            $scope.currentIndex=($scope.currentIndex+1)%$scope.slides.length;
         }
         $scope.slideRight = function(){
-            $scope.currentIndex=($scope.currentIndex-1)%4;
+            $scope.currentIndex=($scope.currentIndex-1)%$scope.slides.length;
         }
             
         $scope.accountDateOpen = function() {
@@ -63,8 +59,12 @@ define([], function() {
             });
             return q.promise;
         };
-
         $scope.init = function() {
+            SupplierService.getNaviBoard(
+                function(data){
+                    $scope.slides = data;
+                }
+            );
             $scope.command = CommandService.getCommand();
             var command = $scope.command;
             if (command && (command.receiver === 'SupplierCtrl' || command.sender === 'SupplierCtrl')) {
@@ -105,6 +105,8 @@ define([], function() {
                     });
                 });
             }
+            
+            
         // CommandService.setCommand();
         };
         $scope.validateCompanyName = function(name) {
@@ -198,7 +200,7 @@ define([], function() {
 
         $scope.save = function() {
             try {
-                $scope.$data.supplier.validate();
+                $scope.$data.supplier.save();
             } catch (ex) {
                 $log.warn(ex);
             }

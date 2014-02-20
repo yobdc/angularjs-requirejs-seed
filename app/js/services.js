@@ -516,6 +516,19 @@ define([
                         params: {
                             path: 'query'
                         }
+                    },
+                    save: {
+                        method: 'POST',
+                        params: {
+                            path: 'save'
+                        }
+                    },
+                    getNaviBoard: {
+                        method: 'GET',
+                        params: {
+                            path: 'getNaviBoard'
+                        },
+                        isArray:true
                     }
                 });
             }

@@ -15,19 +15,19 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
             link: function(scope, element, attrs, modelCtrl) {
                 var switchDiv = angular.element(element.find('div')[0]);
                 var modelScope = scope.$new();
-                
+
                 modelScope.$watch(function() {
                     return modelCtrl.$modelValue;
                 }, function(newVal, oldVal) {
                     if (!angular.isDefined(newVal)) {
-                        modelCtrl.$setViewValue(!!modelCtrl.$viewValue);
+                        modelCtrl.$setViewValue( !! modelCtrl.$viewValue);
                     }
                 }, true);
-                
+
                 scope.$on('$destroy', function() {
                     modelScope.$destroy();
                 });
-                
+
                 var update = function() {
                     if (modelCtrl.$modelValue === true) {
                         switchDiv.removeClass('switch-left');
@@ -37,7 +37,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                         switchDiv.addClass('switch-left');
                     }
                 };
-                
+
                 if (!attrs.switcherDisabled) {
                     switchDiv.bind('click', function() {
                         modelCtrl.$setViewValue(!modelCtrl.$viewValue);
@@ -45,7 +45,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                         return update();
                     });
                 }
-                
+
                 return modelCtrl.$render = function() {
                     return update();
                 };
@@ -754,14 +754,14 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                                 }
                             });
                         } else {
-                            for(var i=0;i<scope.items.length;i++){
+                            for (var i = 0; i < scope.items.length; i++) {
                                 var item = scope.items[i];
                                 item.checked = false;
                             }
                             angular.forEach(newVal, function(i) {
                                 angular.forEach(scope.items, function(item) {
                                     var v = parsedResult.modelMapper(item.model);
-                                    if(!v){
+                                    if (!v) {
                                         v = item.model;
                                     }
                                     if (angular.equals(v, i)) {
@@ -887,7 +887,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     scope.$watch(function() {
                         return scope.myTime;
                     }, function(newVal, oldVal) {
-                        if (angular.isDefined(newVal)) {
+                        if (angular.isDefined(newVal) && newVal !== null) {
                             modelCtrl.$setViewValue(newVal);
                         }
                     }, true);
@@ -896,7 +896,7 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                         return modelCtrl.$modelValue;
                     }, function(newVal, oldVal) {
                         scope.myTime = newVal;
-                        if (angular.isDefined(newVal)) {
+                        if (angular.isDefined(newVal) && newVal !== null) {
                             modelCtrl.$setViewValue(newVal);
                         }
                     }, true);
@@ -981,26 +981,26 @@ define(['angular', 'services', 'jquery', 'bootstrap', 'angularBootstrap'], funct
                     depends: '='
                 },
                 replace: true,
-                template: '<select class="form-control" ng-options="o.c as o.n for o in options">'+//
-                '            <option value="">请选择...</option>'+//
+                template: '<select class="form-control" ng-options="o.c as o.n for o in options">' + //
+                '            <option value="">请选择...</option>' + //
                 '          </select>',
                 link: function(scope, element, attrs, modelCtrl) {
-                    scope.$watch('depends', function(newVal, oldVal){
-                        if('depends' in attrs){
+                    scope.$watch('depends', function(newVal, oldVal) {
+                        if ('depends' in attrs) {
                             var parent = RegionService.get(scope.depends);
                             scope.options = [];
-                            if(parent){
+                            if (parent) {
                                 scope.options = parent.children;
                             }
                             var oldModelValue = modelCtrl.$modelValue;
                             modelCtrl.$setViewValue();
-                            for(var i=0;i<scope.options.length;i++){
+                            for (var i = 0; i < scope.options.length; i++) {
                                 var option = scope.options[i];
-                                if(option.c===oldModelValue){
+                                if (option.c === oldModelValue) {
                                     modelCtrl.$setViewValue(oldModelValue);
                                 }
                             }
-                        }else{
+                        } else {
                             scope.options = RegionService.getCountries();
                         }
                     });

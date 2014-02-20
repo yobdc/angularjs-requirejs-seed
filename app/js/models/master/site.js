@@ -46,7 +46,7 @@ define(['models'], function(providers) {
                 };
                 Site.prototype.loadNew = function() {
                     var self = this;
-                    self.uid = UidService.get();
+                    self.guid = UidService.get();
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         SITE_BUSINESSSCOPE

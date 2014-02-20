@@ -19,7 +19,9 @@ define(['models'], function(providers) {
                     WORKDAY = 'Workday',
                     PAYMENT_METHOD = 'PaymentMethod',
                     BILL_SETTLE_TYPE = 'BillSettleType',
-                    IDENTITY_CARD_TYPE = 'identityCardType';
+                    IDENTITY_CARD_TYPE = 'identityCardType',
+                    CONTRACT_TYPE = 'ContractType',
+                    PURCHASE_TYPE = 'PurchaseType';
 
                 function Supplier() {
                     // - Supplier basic fields
@@ -29,7 +31,7 @@ define(['models'], function(providers) {
                     this.title = null; //称谓
                     this.belongTo = null; //所属公司
                     this.keyword = null; //关键字
-                    this.customerFullName = null; //客户全称
+                    this.fullName = null; //客户全称
                     this.name = null; //名称
                     this.number = null; //编码
                     this.remark = null; //备注
@@ -39,7 +41,7 @@ define(['models'], function(providers) {
                     // - Supplier personal fields
                     var person = {};
                     person.realName = null; //真实姓名
-                    person.appellation = null; //称呼
+                    person.title = null; //称呼
                     // person.gender = null; //性别
                     person.birthday = null; //出生日期
                     person.birthplace = null //出生地
@@ -77,7 +79,7 @@ define(['models'], function(providers) {
                     company.staffCount = null; //员工数
                     company.establishYear = null; //建立年度
                     company.ceoName = null; //CEO名称
-                    company.ceoAppellation = null; //CEO称谓
+                    company.ceoTitle = null; //CEO称谓
                     company.organizationCode = null; //组织机构代码
                     company.companyType = null; //类型
                     // company.businessScope = null; //业务范围
@@ -93,9 +95,9 @@ define(['models'], function(providers) {
                     // - Supplier purchase fields
                     var purchase = {};
                     purchase.org = null; //采购组织
-                    purchase.type = null; //类型
-                    purchase.signedSupplier = null; //签约供应商
-                    purchase.signedType = null; //签约类型
+                    purchase.type = []; //类型
+                    purchase.isSignedSupplier = null; //签约供应商
+                    purchase.contractType = null; //签约类型
                     purchase.expiryDateFrom = null; //签约有效期开始
                     purchase.expiryDateTo = null; //签约有效期结束
                     this.purchaseInfo = purchase;
@@ -119,7 +121,7 @@ define(['models'], function(providers) {
                 Supplier.prototype.loadFromJSON = function(json) {};
                 Supplier.prototype.loadNew = function() {
                     var self = this;
-                    self.uid = UidService.get();
+                    self.guid = UidService.get();
                     var q = $q.defer();
                     $q.when(DdsFactory.get([
                         CONTACTINFO_TYPE,
@@ -131,7 +133,9 @@ define(['models'], function(providers) {
                         WORKDAY,
                         PAYMENT_METHOD,
                         BILL_SETTLE_TYPE,
-                        IDENTITY_CARD_TYPE
+                        IDENTITY_CARD_TYPE,
+                        CONTRACT_TYPE,
+                        PURCHASE_TYPE
                     ])).then(function(value) {
                         self.dds = value;
                         self.addContactPoint();
@@ -200,7 +204,7 @@ define(['models'], function(providers) {
                     if (!this.type) {
                         throw Error("供应商类型未选择");
                     }
-                    if (!this.accountName) {
+                    if (!this.name) {
                         throw Error("账户名未填写");
                     }
                 };
@@ -221,8 +225,6 @@ define(['models'], function(providers) {
                     }
                     return q.promise;
                 };
-                Supplier.prototype.create = function() {};
-                Supplier.prototype.update = function() {};
                 Supplier.prototype.clearEmptySite = function() {
                     for (var i = 0; i < this.sites.length;) {
                         var s = this.sites[i];
@@ -243,28 +245,36 @@ define(['models'], function(providers) {
                         }
                     }
                 };
+                Supplier.prototype.save = function() {
+                    var q = $q.defer();
+                    var self = this;
+                    self.validate();
+                    SupplierService.save(self.toPostData(), function(res) {}, function(res) {});
+                    return q.promise;
+                };
                 Supplier.prototype.toPostData = function() {
                     var postData = {};
                     var self = this;
-                    postData.uid = self.guid;
+                    postData.guid = self.guid;
                     postData.supplierInfo = {
-                        guid: self.guid,
                         number: self.number,
                         name: self.name,
                         type: self.type,
+                        fullName: self.fullName,
                         isCustomer: self.accountingInfo.isCustomer,
                         paymentTerm: self.accountingInfo.paymentTerm,
                         settlementType: self.accountingInfo.billSettleType,
                         paymentType: self.accountingInfo.paymentType,
                         finalAccountingDate: null,
                         currency: self.accountingInfo.defaultCurrency,
-                        contractFlag: self.purchase.signedSupplier ? 'Y' : 'N',
-                        contractType: self.purchase.signedType,
-                        contractStartDate: self.purchase.expiryDateFrom,
-                        contractEndDate: self.purchase.expiryDateTo
+                        contractFlag: self.purchaseInfo.isSignedSupplier ? 'Y' : 'N',
+                        contractType: self.purchaseInfo.contractType,
+                        contractStartDate: self.purchaseInfo.expiryDateFrom,
+                        contractEndDate: self.purchaseInfo.expiryDateTo,
+                        remark: self.remark,
+                        keyword: self.keyword
                     };
                     postData.basicInfo = {
-                        guid: null,
                         belongToCompanyId: null,
                         belongToCompanyName: null,
                         remark: self.remark,
@@ -285,8 +295,8 @@ define(['models'], function(providers) {
                     }
                     postData.siteInfos = [];
                     for (var i = 0; i < self.sites.length; i++) {
-                        var s = self.sites[i];
-                        if (s) {
+                        var c = self.sites[i];
+                        if (c) {
                             postData.siteInfos.push(c.toPostData());
                         }
                     }

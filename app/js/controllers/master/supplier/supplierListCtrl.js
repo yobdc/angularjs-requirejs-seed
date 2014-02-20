@@ -44,6 +44,7 @@ define([], function() {
                 });
             };
             $scope.addSupplier = function() {
+                CommandService.setCommand();
                 $location.path('/supplier/create');
             };
             $scope.editSupplier = function() {

@@ -39,7 +39,7 @@
                 <label class="col-md-3 col-sm-3 col-xs-4 control-label">编码</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
                     <label class="form-control-label light-font" ng-if="!$data.supplier.number">自动生成</label>
-                    <label class="form-control-label" ng-if="$data.supplier.number">{{$data.supplier.accountNumber}}</label>
+                    <label class="form-control-label" ng-if="$data.supplier.number">{{$data.supplier.number}}</label>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 col-xs-4 control-label">客户全称</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <input type="text" class="form-control" placeholder="请输入...">
+                    <input type="text" class="form-control" ng-model="$data.supplier.fullName" placeholder="请输入...">
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 col-xs-4 control-label">备注</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <input type="text" class="form-control" placeholder="请输入...">
+                    <input type="text" class="form-control" ng-model="$data.supplier.remark" placeholder="请输入...">
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 col-xs-4 control-label">关键字</label>
                 <div class="col-md-9 col-sm-9 col-xs-8">
-                    <input type="text" class="form-control" placeholder="请输入...">
+                    <input type="text" class="form-control" ng-model="$data.supplier.keyword" placeholder="请输入...">
                 </div>
             </div>
         </div>
@@ -204,14 +204,14 @@
                     <i class="fa fa-plus"></i>
                 </button>
             </tab>
-            <tab>
+            <tab ng-if="$data.supplier.type">
                 <tab-heading>
                     <div class="circle" tooltip="会计">
                         <i class="fa fa-gbp"></i>
                     </div>
                     <div class="bottom-arrow"></div>
                 </tab-heading>
-                <div class="row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/accountingInfo.html'">
+                <div class="nav-circle-tab row panel panel-default form-horizontal" ng-include="'app/views/master/supplier/accountingInfo.html'">
                 </div>
             </tab>
             <tab>
